@@ -39,6 +39,7 @@ $editdata=get_campaign_detail($_GET['id']);
 $editdata['geo_targeting']=$editdata['country_target'];
 $editdata['device_targeting']=$editdata['device_target'];
 $editdata['channel_targeting']=$editdata['channel_target'];
+$editdata['gender_targeting']=$editdata['gender_target'];
 $editdata['publication_targeting']=$editdata['publication_target'];
 $main_cap=get_campaign_cap_detail($_GET['id']);
 $editdata['total_amount']=$main_cap['total_amount'];
@@ -46,6 +47,8 @@ $editdata['cap_type']=$main_cap['cap_type'];
 $editdata['preload_country']=1;
 $editdata['placement_select']=load_campaign_placement_array($_GET['id']);
 $editdata['channel_select']=load_campaign_channel_array($_GET['id']);
+$editdata['gender_select']=load_campaign_gender_array($_GET['id']);
+//var_dump($editdata); //verified here
 if ($editdata['campaign_end']=='2090-12-12'){
 $editdata['end_date_type']=1;
 }
@@ -205,6 +208,13 @@ echo "channel_targeting('on');";
 }
 else {
 echo "channel_targeting('off');";
+}
+
+if ($editdata['gender_targeting']==2){
+	echo "gender_targeting('on');";
+}
+else {
+	echo "gender_targeting('off');";
 }
 
 

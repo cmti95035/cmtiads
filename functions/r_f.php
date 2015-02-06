@@ -1094,6 +1094,15 @@ else {
 $query_part['channel']='';
 }
 
+/* Q ++
+if (isset($request_settings['gender']) && is_numeric($request_settings['gender'])){
+	$query_part['gender']="AND (md_campaigns.gender_target=1 OR (c5.targeting_type='gender' AND c5.targeting_code='".$request_settings['gender']."'))";
+}
+else {
+	$query_part['gender']='';
+}
+*/
+
 $query_part['placement']="AND (md_campaigns.publication_target=1 OR (c3.targeting_type='placement' AND c3.targeting_code='".$zone_detail['entry_id']."'))";
 
 $query_part['misc']="AND md_campaigns.campaign_status=1 AND md_campaigns.campaign_start<='".date("Y-m-d")."' AND md_campaigns.campaign_end>'".date("Y-m-d")."'";

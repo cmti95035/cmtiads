@@ -202,6 +202,12 @@ echo "channel_targeting('on');";
 else {
 echo "channel_targeting('off');";
 }
+if (isset($editdata['gender_targeting']) && $editdata['gender_targeting']==2){
+	echo "gender_targeting('on');";
+}
+else {
+	echo "gender_targeting('off');";
+}
 
 
 if (isset($editdata['start_date_type']) && $editdata['start_date_type']==2){

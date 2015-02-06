@@ -1039,6 +1039,16 @@ array_push($channel_array, $targeting_detail['targeting_code']);
 return $channel_array;
 }
 
+function load_campaign_gender_array($id){
+	global $maindb;
+	$gender_array=array();
+	$usrres=mysql_query("select targeting_code from md_campaign_targeting where campaign_id='$id' and targeting_type='gender'", $maindb);
+	while($targeting_detail=mysql_fetch_array($usrres)){
+		array_push($gender_array, $targeting_detail['targeting_code']);
+	}
+	return $gender_array;
+}
+
 
 function get_creative_detail($id){
 	global $maindb;
@@ -1613,6 +1623,7 @@ return true;
 if (!isset($data['as_values_1'])){$data['as_values_1']='';}
 if (!isset($data['placement_select'])){$data['placement_select']='';}
 if (!isset($data['channel_select'])){$data['channel_select']='';}
+if (!isset($data['gender_select'])){$data['gender_select']='';}
 if (!isset($data['target_iphone'])){$data['target_iphone']='';}
 if (!isset($data['target_ipod'])){$data['target_ipod']='';}
 if (!isset($data['target_ipad'])){$data['target_ipad']='';}
@@ -1657,6 +1668,13 @@ $errormessage='Please select at least one channel you want to target.';
 global $editdata;
 $editdata=$data;
 return false;	
+}
+if ($data['gender_targeting']==2 && count($data['gender_select'])<1){
+	global $errormessage;
+	$errormessage='Please select the gender you want to target.';
+	global $editdata;
+	$editdata=$data;
+	return false;
 }
 
 if ($data['device_targeting']==2 && ($data['target_iphone']!=1 && $data['target_ipod']!=1 && $data['target_ipad']!=1 && $data['target_android']!=1 && $data['target_other']!=1)){
@@ -1789,11 +1807,11 @@ $data['geo_targeting']=sanitize($data['geo_targeting']);
 $data['publication_targeting']=sanitize($data['publication_targeting']);
 $data['channel_targeting']=sanitize($data['channel_targeting']);
 $data['device_targeting']=sanitize($data['device_targeting']);
-
+$data['gender_targeting']=sanitize($data['gender_targeting']);
 
 global $maindb;
 
-mysql_query("UPDATE md_campaigns set campaign_type='$data[campaign_type]', campaign_name='$data[campaign_name]', campaign_desc='$data[campaign_desc]', campaign_start='$data[startdate_value]', campaign_end='$data[enddate_value]', campaign_networkid='$data[campaign_networkid]', campaign_priority='$data[campaign_priority]', target_iphone='$data[target_iphone]', target_ipod='$data[target_ipod]', target_ipad='$data[target_ipad]', target_android='$data[target_android]', target_other='$data[target_other]', ios_version_min='$data[ios_version_min]', ios_version_max='$data[ios_version_max]', android_version_min='$data[android_version_min]', android_version_max='$data[android_version_max]', country_target='$data[geo_targeting]', publication_target='$data[publication_targeting]', channel_target='$data[channel_targeting]', device_target='$data[device_targeting]' where campaign_id='$detail'", $maindb);
+mysql_query("UPDATE md_campaigns set campaign_type='$data[campaign_type]', campaign_name='$data[campaign_name]', campaign_desc='$data[campaign_desc]', campaign_start='$data[startdate_value]', campaign_end='$data[enddate_value]', campaign_networkid='$data[campaign_networkid]', campaign_priority='$data[campaign_priority]', target_iphone='$data[target_iphone]', target_ipod='$data[target_ipod]', target_ipad='$data[target_ipad]', target_android='$data[target_android]', target_other='$data[target_other]', ios_version_min='$data[ios_version_min]', ios_version_max='$data[ios_version_max]', android_version_min='$data[android_version_min]', android_version_max='$data[android_version_max]', country_target='$data[geo_targeting]', publication_target='$data[publication_targeting]', channel_target='$data[channel_targeting]', gender_target='$data[gender_targeting]', device_target='$data[device_targeting]' where campaign_id='$detail'", $maindb);
 
 reset_campaign_targeting($detail);
 
@@ -1818,6 +1836,15 @@ add_campaign_targeting($detail, 'channel', $channel_id);
 
 }
 // End Channel
+
+// Gender
+if ($data['gender_targeting']==2 && is_array($data['gender_select'])){
+	foreach($data['gender_select'] as $gender_id){
+		add_campaign_targeting($detail, 'gender', $gender_id);
+	}
+
+}
+// End Gender
 
 // Placement
 if ($data['publication_targeting']==2 && is_array($data['placement_select'])){
@@ -2526,6 +2553,7 @@ return true;
 if (!isset($data['as_values_1'])){$data['as_values_1']='';}
 if (!isset($data['placement_select'])){$data['placement_select']='';}
 if (!isset($data['channel_select'])){$data['channel_select']='';}
+if (!isset($data['gender_select'])){$data['gender_select']='';}
 if (!isset($data['target_iphone'])){$data['target_iphone']='';}
 if (!isset($data['target_ipod'])){$data['target_ipod']='';}
 if (!isset($data['target_ipad'])){$data['target_ipad']='';}
@@ -2572,6 +2600,13 @@ $editdata=$data;
 return false;	
 }
 
+if ($data['gender_targeting']==2 && count($data['gender_select'])<1){
+	global $errormessage;
+	$errormessage='Please select gender you want to target.';
+	global $editdata;
+	$editdata=$data;
+	return false;
+}
 if ($data['device_targeting']==2 && ($data['target_iphone']!=1 && $data['target_ipod']!=1 && $data['target_ipad']!=1 && $data['target_android']!=1 && $data['target_other']!=1)){
 global $errormessage;
 $errormessage='Please select at least one device type you want to target.';
@@ -2895,10 +2930,10 @@ $data['geo_targeting']=sanitize($data['geo_targeting']);
 $data['publication_targeting']=sanitize($data['publication_targeting']);
 $data['channel_targeting']=sanitize($data['channel_targeting']);
 $data['device_targeting']=sanitize($data['device_targeting']);
-
+$data['gender_targeting']=sanitize($data['gender_targeting']);
 // Insert Campaign into DB
-mysql_query("INSERT INTO md_campaigns (campaign_owner, campaign_status, campaign_type, campaign_name, campaign_desc, campaign_start, campaign_end, campaign_creationdate, campaign_networkid, campaign_priority, target_iphone, target_ipod, target_ipad, target_android, target_other, ios_version_min, ios_version_max, android_version_min, android_version_max, country_target, publication_target, channel_target, device_target)
-VALUES ('$user_detail[user_id]', '1', '$data[campaign_type]', '$data[campaign_name]', '$data[campaign_desc]', '$data[startdate_value]', '$data[enddate_value]', '$creation_timestamp', '$data[campaign_networkid]', '$data[campaign_priority]', '$data[target_iphone]', '$data[target_ipod]', '$data[target_ipad]', '$data[target_android]', '$data[target_other]', '$data[ios_version_min]', '$data[ios_version_max]', '$data[android_version_min]', '$data[android_version_max]', '$data[geo_targeting]', '$data[publication_targeting]', $data[channel_targeting], '$data[device_targeting]')", $maindb);
+mysql_query("INSERT INTO md_campaigns (campaign_owner, campaign_status, campaign_type, campaign_name, campaign_desc, campaign_start, campaign_end, campaign_creationdate, campaign_networkid, campaign_priority, target_iphone, target_ipod, target_ipad, target_android, target_other, ios_version_min, ios_version_max, android_version_min, android_version_max, country_target, publication_target, channel_target, device_target, gender_target)
+VALUES ('$user_detail[user_id]', '1', '$data[campaign_type]', '$data[campaign_name]', '$data[campaign_desc]', '$data[startdate_value]', '$data[enddate_value]', '$creation_timestamp', '$data[campaign_networkid]', '$data[campaign_priority]', '$data[target_iphone]', '$data[target_ipod]', '$data[target_ipad]', '$data[target_android]', '$data[target_other]', '$data[ios_version_min]', '$data[ios_version_max]', '$data[android_version_min]', '$data[android_version_max]', '$data[geo_targeting]', '$data[publication_targeting]', $data[channel_targeting], '$data[device_targeting]', '$data[gender_targeting]')", $maindb);
 global $created_campaign_id;
 $created_campaign_id=mysql_insert_id($maindb);
 // END: Insert Campaign into DB 
@@ -2951,6 +2986,14 @@ add_campaign_targeting($created_campaign_id, 'channel', $channel_id);
 
 }
 // End Channel
+// Gender
+if ($data['gender_targeting']==2 && is_array($data['gender_select'])){
+	foreach($data['gender_select'] as $gender_id){
+		add_campaign_targeting($created_campaign_id, 'gender', $gender_id);
+	}
+
+}
+// End Gender
 
 // Placement
 if ($data['publication_targeting']==2 && is_array($data['placement_select'])){
@@ -3375,7 +3418,24 @@ echo '<input '.$selectedhtml.' value="'.$channel_detail['channel_id'].'" name="c
 $x=$x+1; if ($x==2){$x=0;}
 }
 }
+function list_gender_campaign($selected){
+	if (!is_array($selected)){$selected=array();}
+	global $maindb;
+	$x=0;
+	$usrres=mysql_query("select * from md_genders", $maindb);
+	//continue debug here
+	while($gender_detail=mysql_fetch_array($usrres)){
 
+		if ($x==1){ echo '<tr style="background-color:#F2F2F2;">'; } else { echo '<tr>'; }
+		echo '<td width="45%"><div>';
+		if (in_array($gender_detail['gender_id'], $selected)) { $selectedhtml='checked="checked"';} else {$selectedhtml='';}
+		echo '<input '.$selectedhtml.' value="'.$gender_detail['gender_id'].'" name="gender_select[ ]" type="checkbox" /> '.$gender_detail['gender_name'].'';
+		echo '</div></td>';
+		echo '</tr>';
+
+		$x=$x+1; if ($x==2){$x=0;}
+	}
+}
 function get_adnetworks($origin){
 global $maindb;	
 $current_timestamp=time();
@@ -3809,6 +3869,11 @@ foreach ($traffic_request->targeting->channel_targeting->value as $channel_targe
 add_trafficrequest_targeting($created_request_id, 'channel', $channel_targeting_code);
 }
 
+foreach ($traffic_request->targeting->gender_targeting->value as $gender_targeting_code){
+	/*Add Gender Targeting*/
+	add_trafficrequest_targeting($created_request_id, 'gender', $gender_targeting_code);
+}
+
 if ($trafficrequest_autoapprove==1){
 approve_trafficrequest($created_request_id);	
 }
@@ -3904,6 +3969,20 @@ $campaigndata['channel_targeting']=1;
 }
 
 // Channel Targeting End
+
+
+// gender Targeting
+$gender_array=load_tr_gender_array($request_id);
+
+if (count($gender_array)>0){
+	$campaigndata['gender_targeting']=2;
+	$campaigndata['gender_select']=$gender_array;
+}
+else {
+	$campaigndata['gender_targeting']=1;
+}
+
+// gender Targeting End
 
 // Default: All Publications
 $campaigndata['publication_targeting']=1;
@@ -4354,6 +4433,17 @@ array_push($channel_array, $targeting_detail['parameter_value']);
 }
 return $channel_array;
 }
+
+function load_tr_gender_array($id){
+	global $maindb;
+	$gender_array=array();
+	$usrres=mysql_query("select parameter_value from md_trafficrequests_parameters where request_id='$id' and parameter_id='gender'", $maindb);
+	while($targeting_detail=mysql_fetch_array($usrres)){
+		array_push($gender_array, $targeting_detail['parameter_value']);
+	}
+	return $gender_array;
+}
+
 
 function get_actual_tr_id($id){
 global $maindb;	

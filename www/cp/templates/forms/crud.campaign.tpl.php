@@ -70,7 +70,18 @@ document.getElementById('channeltargetingtable').style.display='none';
 	}
 
 }
+function gender_targeting(status){
+	
+	if (status=="off"){
+$("#gender_targeting_all").attr("checked", "true");
+document.getElementById('gendertargetingtable').style.display='none';
+	}
+	if (status=="on"){
+	$("#gender_targeting_co").attr("checked", "true");
+	document.getElementById('gendertargetingtable').style.display='block';
+	}
 
+}
 
 function startdate(status){
 	
@@ -485,7 +496,24 @@ $("input[id=country_targeting]").autoSuggest(data.items, {selectedItemProp: "nam
 									
 						  </div>	
                                 
-                                  
+  <div class="field-group control-group inline">	
+  
+	
+									<div class="field">
+										<input type="radio"   onclick="document.getElementById('gendertargetingtable').style.display='none';" name="gender_targeting" id="gender_targeting_all" value="1" />
+										<label for="gender_targeting_all">All Genders</label>
+									</div>
+			
+									<div id="interstitialoptiobutton" class="field">
+										<input type="radio"  onclick="document.getElementById('gendertargetingtable').style.display='block';" name="gender_targeting" id="gender_targeting_co" value="2" />
+										<label for="gender_targeting_co">Specific Genders</label>
+									</div>
+								
+<table width="584" border="0" cellpadding="6" cellspacing="0" id="gendertargetingtable" style="-moz-border-radius: 5px; border-radius: 5px; margin-top:5px;">
+  <?php if (!isset($editdata['gender_select'])){$editdata['gender_select']='';} list_gender_campaign($editdata['gender_select']); ?>
+ 
+</table>
+	</div>                                             
                    
                             
                             		</div> <!-- .widget-content -->

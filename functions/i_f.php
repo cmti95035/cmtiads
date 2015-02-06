@@ -337,6 +337,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `md_campaigns` (
   `publication_target` varchar(1) NOT NULL,
   `channel_target` varchar(1) NOT NULL,
   `device_target` varchar(1) NOT NULL,
+  `gender_target` varchar(1) NOT NULL,
   PRIMARY KEY  (`campaign_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;", $maindb);
 mysql_query("CREATE TABLE IF NOT EXISTS `md_campaign_limit` (
@@ -376,6 +377,8 @@ mysql_query("CREATE TABLE IF NOT EXISTS `md_channels` (
   `channel_name` varchar(100) NOT NULL,
   PRIMARY KEY  (`channel_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;", $maindb);
+
+
 mysql_query("INSERT INTO `md_channels` (`channel_id`, `channel_type`, `channel_name`) VALUES
 (1, '1', 'Finance'),
 (2, '1', 'IT'),
@@ -387,6 +390,17 @@ mysql_query("INSERT INTO `md_channels` (`channel_id`, `channel_type`, `channel_n
 (9, '1', 'Information'),
 (10, '1', 'Community'),
 (11, '1', 'Women');", $maindb);
+
+mysql_query("CREATE TABLE IF NOT EXISTS `md_genders` (
+  `gender_id` int(11) NOT NULL auto_increment,
+  `gender_name` varchar(100) NOT NULL,
+  PRIMARY KEY  (`gender_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;", $maindb);
+
+mysql_query("INSERT INTO `md_genders` (`gender_id`, `gender_name`) VALUES
+(1, 'male'),
+(2, 'female');", $maindb);
+
 mysql_query("CREATE TABLE IF NOT EXISTS `md_code_snippets` (
   `entry_id` int(11) NOT NULL auto_increment,
   `snippet_name` varchar(100) NOT NULL,
