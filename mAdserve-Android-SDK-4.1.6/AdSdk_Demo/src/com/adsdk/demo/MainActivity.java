@@ -1,26 +1,34 @@
-package com.adsdk.demo;
+    package com.adsdk.demo;
+
+import android.app.Activity;
+import android.content.Context;
+import android.os.Bundle;
+import android.telephony.TelephonyManager;
+import android.view.Menu;
+import android.view.View;
+import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import com.adsdk.sdk.Ad;
 import com.adsdk.sdk.AdListener;
 import com.adsdk.sdk.AdManager;
 import com.adsdk.sdk.banner.AdView;
 
-import android.os.Bundle;
-import android.app.Activity;
-import android.view.Menu;
-import android.view.View;
-import android.widget.RelativeLayout;
-import android.widget.Toast;
-
 public class MainActivity extends Activity implements AdListener {
 	private RelativeLayout layout;
 	private AdView mAdView;
 	private AdManager mManager;
+	private String mPhoneNumber;
+	private static final String CONNECTOR = "+";
 	
-
+	// For debugging
+	private static final boolean APPENDABLE = true;
+	
 	public void onClickShowBanner(View view) {
-	    final String REQUEST_URL_BANNER = "http://10.32.42.221/cmtiads/md.request.php";
-	    final String PUBLISHER_ID_BANNER = "226af592e76f7630018ef0a669ad8b2b";
+	    // An alternative server
+	    //final String REQUEST_URL_BANNER = "http://10.32.42.221/cmtiads/md.request.php";
+	    final String REQUEST_URL_BANNER = "http://192.168.1.100/cmtiads/md.request.php";
+	    final String PUBLISHER_ID_BANNER = "226af592e76f7630018ef0a669ad8b2b" + (APPENDABLE ? CONNECTOR + mPhoneNumber : "");
 		if (mAdView != null) {
 			removeBanner();
 		}
@@ -43,8 +51,10 @@ public class MainActivity extends Activity implements AdListener {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
-        final String REQUEST_URL_FULL = "http://10.32.42.221/cmtiads/md.request.php";
-        final String PUBLISHER_ID_FULL = "b1b47070b4fec8545c56e358bf9194da";
+	    // An alternative server
+	    //final String REQUEST_URL_BANNER = "http://10.32.42.221/cmtiads/md.request.php";
+        final String REQUEST_URL_FULL = "http://192.168.1.100/cmtiads/md.request.php";
+        final String PUBLISHER_ID_FULL = "b1b47070b4fec8545c56e358bf9194da" + (APPENDABLE ? CONNECTOR + mPhoneNumber : "");
 
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
@@ -52,6 +62,13 @@ public class MainActivity extends Activity implements AdListener {
 		mManager = new AdManager(this, REQUEST_URL_FULL ,
 		        PUBLISHER_ID_FULL, true);
 		mManager.setListener(this);
+		try {
+		    mPhoneNumber = ( (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE)).getLine1Number();
+		} finally {
+		    if ( mPhoneNumber == null) {
+		        mPhoneNumber = "00000000000";
+		    }
+		}
 	}
 
 	@Override
