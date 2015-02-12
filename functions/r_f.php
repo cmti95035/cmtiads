@@ -1094,7 +1094,7 @@ else {
 $query_part['channel']='';
 }
 
-$request_settings['gender'] = '1';
+//$request_settings['gender'] = '1';
 if (isset($request_settings['gender']) && is_numeric($request_settings['gender'])){
 	$query_part['gender']="AND (md_campaigns.gender_target=1 OR (c2.targeting_type='gender' AND c2.targeting_code='".$request_settings['gender']."'))";
 }
@@ -1619,12 +1619,14 @@ $errormessage='Invalid IP Address';
 return false;
 }
 
-if (!isset($data['s']) or empty($data['s']) or !validate_md5($data['s'])){
-$errormessage='No valid Integration Placement ID supplied. (Variable "s")';
-return false;
-}
+$pieces = explode("+", $data['s']);
+$request_settings['placement_hash'] = $pieces[0];
+$request_settings['gender'] = $pieces[1];
 
-$request_settings['placement_hash']=$data['s'];
+if (!isset($request_settings['placement_hash']) or empty($request_settings['placement_hash']) or !validate_md5($request_settings['placement_hash'])){
+	$errormessage='No valid Integration Placement ID supplied. (Variable "s")';
+	return false;
+}
 
 prepare_ua($data);
 

@@ -197,7 +197,7 @@
 #pragma mark AdSdk Interstitial Delegate Methods
 
 - (NSString *)publisherIdForAdSdkVideoInterstitialView:(AdSdkVideoInterstitialViewController *)videoInterstitial {
-    return @"b1b47070b4fec8545c56e358bf9194da";
+    return @"b1b47070b4fec8545c56e358bf9194da+2";
 }
 
 - (void)adsdkVideoInterstitialViewDidLoadAdSdkAd:(AdSdkVideoInterstitialViewController *)videoInterstitial advertTypeLoaded:(AdSdkAdType)advertType {
