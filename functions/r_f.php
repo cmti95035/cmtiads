@@ -1094,6 +1094,9 @@ else {
 $query_part['channel']='';
 }
 
+$gender_query="select gender_id from md_mobile_users where phone = '4086803612'";
+$request_settings['gender'] = simple_query_maindb($qender_query, true, 1)['gender_id'];
+
 //$request_settings['gender'] = '1';
 if (isset($request_settings['gender']) && is_numeric($request_settings['gender'])){
 	$query_part['gender']="AND (md_campaigns.gender_target=1 OR (c2.targeting_type='gender' AND c2.targeting_code='".$request_settings['gender']."'))";
