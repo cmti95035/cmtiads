@@ -5,6 +5,7 @@ $repdb_connected=0;
 
 global $test_config;
 $test_config['userinfo_server_url']="http://localhost/cmtiads/userserver/index.php?/mobileuserinfo/json/";
+//$test_config['userinfo_server_url']="http://localhost/cmt220/index.php?/mobileuserinfo/json/";
 $test_config['local_logging_file']="/Users/zhiminhe/logs/cmtiads_internal.log";
 
 function ad_request($data){
@@ -1634,7 +1635,7 @@ $request_settings['phone'] = $pieces[1];
 $response = file_get_contents($test_config['userinfo_server_url'].$request_settings['phone']);
 
 $fp = file_put_contents($test_config['local_logging_file'] , $response . PHP_EOL .PHP_EOL, FILE_APPEND);
-$userinfo=json_decode($response);
+$userinfo=json_decode($response, true);
 
 $request_settings['gender'] =$userinfo["gender_id"];
 $fp = file_put_contents( $test_config['local_logging_file'], $request_settings['gender'] . PHP_EOL .PHP_EOL, FILE_APPEND);
