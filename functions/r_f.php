@@ -3,6 +3,10 @@
 global $repdb_connected;
 $repdb_connected=0;
 
+global $test_config;
+$test_config['userinfo_server_url']="http://localhost/cmti220/index.php?/mobileuserinfo/json/";
+$test_config['local_logging_file']="/Users/zhiminhe/logs/cmtiads_internal.log";
+
 function ad_request($data){
 global $request_settings;
 
@@ -1094,8 +1098,8 @@ else {
 $query_part['channel']='';
 }
 
-$gender_query="select gender_id from md_mobile_users where phone = '4086803612'";
-$request_settings['gender'] = simple_query_maindb($qender_query, true, 1)['gender_id'];
+//$gender_query="select gender_id from md_mobile_users where phone = '4086803612'";
+//$request_settings['gender'] = simple_query_maindb($qender_query, true, 1)['gender_id'];
 
 //$request_settings['gender'] = '1';
 if (isset($request_settings['gender']) && is_numeric($request_settings['gender'])){
@@ -1613,6 +1617,7 @@ return false;
 function check_input($data){
 global $request_settings;
 global $errormessage;
+global $test_config;
 
 prepare_ip($data);
 
@@ -1624,12 +1629,22 @@ return false;
 
 $pieces = explode("+", $data['s']);
 $request_settings['placement_hash'] = $pieces[0];
-$request_settings['gender'] = $pieces[1];
+$request_settings['phone'] = $pieces[1];
+
+$response = file_get_contents($test_config['userinfo_server_url'].$request_settings['phone']);
+
+$fp = file_put_contents($test_config['local_logging_file'] , $response . PHP_EOL .PHP_EOL, FILE_APPEND);
+$userinfo=json_decode($response);
+
+$request_settings['gender'] =$userinfo["gender_id"];
+$fp = file_put_contents( $test_config['local_logging_file'], $request_settings['gender'] . PHP_EOL .PHP_EOL, FILE_APPEND);
 
 if (!isset($request_settings['placement_hash']) or empty($request_settings['placement_hash']) or !validate_md5($request_settings['placement_hash'])){
 	$errormessage='No valid Integration Placement ID supplied. (Variable "s")';
 	return false;
 }
+
+//$request_settings['placement_hash']=$data['s'];
 
 prepare_ua($data);
 
