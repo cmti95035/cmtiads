@@ -1094,9 +1094,6 @@ else {
 $query_part['channel']='';
 }
 
-$gender_query="select gender_id from md_mobile_users where phone = '4086803612'";
-$request_settings['gender'] = simple_query_maindb($qender_query, true, 1)['gender_id'];
-
 //$request_settings['gender'] = '1';
 if (isset($request_settings['gender']) && is_numeric($request_settings['gender'])){
 	$query_part['gender']="AND (md_campaigns.gender_target=1 OR (c2.targeting_type='gender' AND c2.targeting_code='".$request_settings['gender']."'))";
@@ -1533,6 +1530,7 @@ return $result;
 } 
 else 
 {
+	$fp = file_put_contents( '/Users/zhiminhe/logs/cmtiads_internal.log', 'no result');
 return false;
 }
 	
@@ -1621,11 +1619,13 @@ if (!isset($request_settings['ip_address']) or !is_valid_ip($request_settings['i
 $errormessage='Invalid IP Address';
 return false;
 }
-
+// 
 $pieces = explode("+", $data['s']);
 $request_settings['placement_hash'] = $pieces[0];
-$request_settings['gender'] = $pieces[1];
-
+$gender_query="select gender_id from md_mobile_users where phone = " . $pieces[1];
+$fp = file_put_contents( '/Users/zhiminhe/logs/cmtiads_internal.log', $gender_query, FILE_APPEND);
+$request_settings['gender'] = simple_query_maindb($qender_query, true, 1)['gender_id'];
+$fp = file_put_contents( '/Users/zhiminhe/logs/cmtiads_internal.log', implode(' ', $request_settings['gender']),  FILE_APPEND);
 if (!isset($request_settings['placement_hash']) or empty($request_settings['placement_hash']) or !validate_md5($request_settings['placement_hash'])){
 	$errormessage='No valid Integration Placement ID supplied. (Variable "s")';
 	return false;

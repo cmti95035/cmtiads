@@ -51,6 +51,13 @@ public class MainActivity extends Activity implements AdListener {
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
+        try {
+            mPhoneNumber = ( (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE)).getLine1Number();
+        } finally {
+           // if ( mPhoneNumber == null) {
+                mPhoneNumber = "4086803612";
+           // }
+        }
 	    // An alternative server
 	    //final String REQUEST_URL_BANNER = "http://10.32.42.221/cmtiads/md.request.php";
         final String REQUEST_URL_FULL = "http://192.168.1.100/cmtiads/md.request.php";
@@ -62,13 +69,6 @@ public class MainActivity extends Activity implements AdListener {
 		mManager = new AdManager(this, REQUEST_URL_FULL ,
 		        PUBLISHER_ID_FULL, true);
 		mManager.setListener(this);
-		try {
-		    mPhoneNumber = ( (TelephonyManager) getSystemService(Context.TELEPHONY_SERVICE)).getLine1Number();
-		} finally {
-		    if ( mPhoneNumber == null) {
-		        mPhoneNumber = "00000000000";
-		    }
-		}
 	}
 
 	@Override
