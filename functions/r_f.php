@@ -1099,10 +1099,6 @@ else {
 $query_part['channel']='';
 }
 
-//$gender_query="select gender_id from md_mobile_users where phone = '4086803612'";
-//$request_settings['gender'] = simple_query_maindb($qender_query, true, 1)['gender_id'];
-
-//$request_settings['gender'] = '1';
 if (isset($request_settings['gender']) && is_numeric($request_settings['gender'])){
 	$query_part['gender']="AND (md_campaigns.gender_target=1 OR (c2.targeting_type='gender' AND c2.targeting_code='".$request_settings['gender']."'))";
 }
@@ -1544,8 +1540,6 @@ return false;
 }
 	
 
-
-
 function get_placement($data){
 global $request_settings;
 global $errormessage;
@@ -1627,18 +1621,24 @@ if (!isset($request_settings['ip_address']) or !is_valid_ip($request_settings['i
 $errormessage='Invalid IP Address';
 return false;
 }
-
+// 
 $pieces = explode("+", $data['s']);
 $request_settings['placement_hash'] = $pieces[0];
+
 $request_settings['phone'] = $pieces[1];
 
 $response = file_get_contents($test_config['userinfo_server_url'].$request_settings['phone']);
 
-$fp = file_put_contents($test_config['local_logging_file'] , $response . PHP_EOL .PHP_EOL, FILE_APPEND);
-$userinfo=json_decode($response, true);
+$fp = file_put_contents($test_config['local_logging_file'] , 
+		$response . PHP_EOL .PHP_EOL, FILE_APPEND);
+$userinfo = json_decode($response, true);
+$fp = file_put_contents( $test_config['local_logging_file'],
+		'userinfo ' . implode(' ',$userinfo) . PHP_EOL .PHP_EOL, FILE_APPEND);
 
-$request_settings['gender'] =$userinfo["gender_id"];
-$fp = file_put_contents( $test_config['local_logging_file'], $request_settings['gender'] . PHP_EOL .PHP_EOL, FILE_APPEND);
+$request_settings['gender'] = $userinfo["gender_id"];
+
+$fp = file_put_contents( $test_config['local_logging_file'], 
+		'gender is ' . $request_settings['gender'] . PHP_EOL .PHP_EOL, FILE_APPEND);
 
 if (!isset($request_settings['placement_hash']) or empty($request_settings['placement_hash']) or !validate_md5($request_settings['placement_hash'])){
 	$errormessage='No valid Integration Placement ID supplied. (Variable "s")';

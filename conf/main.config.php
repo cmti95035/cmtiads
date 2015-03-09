@@ -14,7 +14,7 @@ installed                           = true
 
 [database]
 type                                = mysql
-host                                = "localhost"
+host                                = "127.0.0.1"
 socket                              =
 port                                =
 username                            = "root"
