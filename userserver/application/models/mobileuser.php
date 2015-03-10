@@ -30,8 +30,6 @@ class Mobileuser extends CI_Model
 	function get_user_by_id($user_id)
 	{
 		$this->db->where('id', $user_id);
-		
-
 		$query = $this->db->get($this->table_name);
 		if ($query->num_rows() == 1) return $query->row();
 		return NULL;
