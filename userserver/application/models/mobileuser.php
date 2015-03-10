@@ -52,5 +52,39 @@ class Mobileuser extends CI_Model
 		$this->db->where('phone', $phonenumber);
 		return $this->db->get($this->table_name);
 	}
+	
+	function add_user($phonenumber, $gender_id){
+		$result=$this->get_all_by_phonenumber($phonenumber);
+		if($result->num_rows() > 0){
+			//already exists
+			return 0;
+		}else{
+		
+			$data = array(
+					'phone' => $phonenumber ,
+					'gender_id' => $gender_id
+			);
+			$this->db->insert($this->table_name, $data);
+			
+			return 1;
+		}
+	}
+	function change_user($phonenumber, $gender_id){
+		$result=$this->get_all_by_phonenumber($phonenumber);
+		if($result->num_rows() > 0){
+			//already exists
+			$data = array(
+					'gender_id' => $gender_id
+			);
+			$this->db->where('phone', $phonenumber);
+			$this->db->update($this->table_name, $data);
+			
+			return 1;
+			
+		}else{
+	        
+			return 0;
+		}
+	}
 }
 ?>
