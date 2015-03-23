@@ -11,7 +11,7 @@ $http = new Http();
 if ($request_type=='banner'){
 $request_url='http://my.mobfox.com/request.php';
 $http->addParam('rt'   , 'api');
-$http->addParam('r_madserve'   , 1);
+$http->addParam('r_cmtiads'   , 1);
 $http->addParam('m'   , 'live');
 $http->addParam('s'   , $network_ids['p_1']);
 $http->addParam('u'   , $request_info['user_agent']);
@@ -51,7 +51,7 @@ $http->addParam('apiset[min_cpm]'   , $zone_detail['min_cpm']);
 else if ($request_type=='interstitial'){
 $request_url='http://my.mobfox.com/vrequest.php';
 $http->addParam('rt'   , 'api');
-$http->addParam('r_madserve'   , 1);
+$http->addParam('r_cmtiads'   , 1);
 $http->addParam('m'   , 'live');
 $http->addParam('s'   , $network_ids['p_1']);
 $http->addParam('u'   , $request_info['user_agent']);

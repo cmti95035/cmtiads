@@ -13,8 +13,8 @@
 					</div>
 				</div>
 	 		</li>
-            		 	<li><a target="_blank" href="http://help.madserve.org">Help</a></li>
-            		 	<li><a target="_blank" href="http://help.madserve.org/reportbug.php">Feedback</a></li>
+            		 	<li><a target="_blank" href="http://help.cmtiads.org">Help</a></li>
+            		 	<li><a target="_blank" href="http://help.cmtiads.org/reportbug.php">Feedback</a></li>
 		 	<li><a href="logout.php">Logout</a></li>
 		 </ul>
 	</div> <!-- #topNav -->
@@ -73,7 +73,7 @@
 	
 </div> <!-- #wrapper -->
 
-<div id="footer"><?php echo getconfig_var('adserver_name'); ?> - mAdserve <?php echo MAD_VERSION; ?> - Server Time: <?php echo date('l jS F Y h:i:s A'); ?>
+<div id="footer"><?php echo getconfig_var('adserver_name'); ?> - cmtiads <?php echo MAD_VERSION; ?> - Server Time: <?php echo date('l jS F Y h:i:s A'); ?>
 </div>
 
 <?php global $jsload; if ($jsload!=1){?>

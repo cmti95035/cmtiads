@@ -214,7 +214,7 @@ require_once MAD_PATH . '/modules/http/class.http.php';
 // Instantiate it
 $http = new Http();
 
-$http->execute('http://api.mobfox.com/createAccount/MADSERVE&email_address='.$data['mf_email'].'&password='.$data['mf_password'].'&first_name='.$data['mf_first_name'].'&last_name='.$data['mf_last_name'].'&phone_number='.$data['mf_phone'].'&portal=MADSERVE');
+$http->execute('http://api.mobfox.com/createAccount/cmtiads&email_address='.$data['mf_email'].'&password='.$data['mf_password'].'&first_name='.$data['mf_first_name'].'&last_name='.$data['mf_last_name'].'&phone_number='.$data['mf_phone'].'&portal=cmtiads');
 
 if ($http->error){
 return false;
@@ -440,8 +440,8 @@ mysql_query("CREATE TABLE IF NOT EXISTS `md_log_types` (
   PRIMARY KEY  (`entry_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;", $maindb);
 mysql_query("INSERT INTO `md_log_types` (`entry_id`, `log_id`, `log_name`, `log_desc`) VALUES
-(1, 'daily_cron', 'mAdserve Daily Cron Job', 'Daily cron job ran successfully.'),
-(2, 'system_install', 'mAdserve Installation', 'mAdserve was installed successfully'),
+(1, 'daily_cron', 'cmtiads Daily Cron Job', 'Daily cron job ran successfully.'),
+(2, 'system_install', 'cmtiads Installation', 'cmtiads was installed successfully'),
 (3, 'campaign_limit_update', 'Campaign Limits Reset', 'Daily Campaign Impression Caps have successfully been reset.');", $maindb);
 mysql_query("CREATE TABLE IF NOT EXISTS `md_networks` (
   `entry_id` int(11) NOT NULL auto_increment,
@@ -518,8 +518,8 @@ mysql_query("CREATE TABLE IF NOT EXISTS `md_publication_types` (
   PRIMARY KEY  (`entry_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;", $maindb);
 mysql_query("INSERT INTO `md_publication_types` (`entry_id`, `pub_identification`, `pub_name`, `pub_description`, `pub_sdk_url`, `pub_info_content`, `pub_icon`, `output_type`, `code_type`) VALUES
-(1, 'ios_app', 'iOS Application', 'iOS Application', 'http://www.madserve.org/ios-latest', '', 'ios.png', 'xml', 'sdk'),
-(2, 'android_app', 'Android Application', 'Android Application', 'http://www.madserve.org/android-latest', '', 'android.png', 'xml', 'sdk'),
+(1, 'ios_app', 'iOS Application', 'iOS Application', 'http://www.cmtiads.org/ios-latest', '', 'ios.png', 'xml', 'sdk'),
+(2, 'android_app', 'Android Application', 'Android Application', 'http://www.cmtiads.org/android-latest', '', 'android.png', 'xml', 'sdk'),
 (3, 'mobileweb', 'Mobile Website', 'Mobile Website', '', '', 'web.png', 'html', 'standard_code');", $maindb);
 mysql_query("CREATE TABLE IF NOT EXISTS `md_regional_targeting` (
   `entry_id` int(11) NOT NULL auto_increment,
@@ -5029,7 +5029,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `md_user_groups` (
   PRIMARY KEY  (`entry_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;", $maindb);
 mysql_query("INSERT INTO `md_user_groups` (`entry_id`, `group_name`, `group_description`, `group_status`) VALUES
-(1, 'Administrators', 'This is the Administrator User Group. Users in this group automatically have full administration permissions on the mAdserve ad server.', '1'),
+(1, 'Administrators', 'This is the Administrator User Group. Users in this group automatically have full administration permissions on the cmtiads ad server.', '1'),
 (2, 'Advertisers', 'This is the main Advertiser group. Users in this group can create & manage their own campaigns and can generate reports for campaigns they have originally created.', '1');", $maindb);
 mysql_query("CREATE TABLE IF NOT EXISTS `md_user_rights` (
   `entry_id` int(11) NOT NULL auto_increment,
@@ -5099,7 +5099,7 @@ $mobfox_uid=$data['mf_email'];
 $mobfox_pass=md5($data['mf_password']);	
 }
 
-$madserve_udid=md5(uniqid(time()));
+$cmtiads_udid=md5(uniqid(time()));
 
 mysql_query("INSERT INTO `md_configuration` (`entry_id`, `var_name`, `var_value`) VALUES
 (1, 'adserver_name', '".$mad_basic_configuration['server_name']."'),
@@ -5113,7 +5113,7 @@ mysql_query("INSERT INTO `md_configuration` (`entry_id`, `var_name`, `var_value`
 (9, 'server_email', '".$mad_basic_configuration['admin_email']."'),
 (10, 'last_mf_check', ''),
 (11, 'allow_statistical_info', '1'),
-(12, 'installation_id', '".$madserve_udid."'),
+(12, 'installation_id', '".$cmtiads_udid."'),
 (13, 'update_check', '1'),
 (14, 'default_creative_server', '1'),
 (15, 'last_pendingactions_exec', ''),
@@ -5126,10 +5126,10 @@ $configfile_content='
 ;<?php exit; ?>
 ;*** DO NOT REMOVE THE LINE ABOVE ***
 ;------------------------------------------------------------------------------------------;
-; General mAdserve    Installation Settings                                                      ;
+; General cmtiads    Installation Settings                                                      ;
 ;------------------------------------------------------------------------------------------;
 
-[madserve]
+[cmtiads]
 installed                           = true
 
 ;------------------------------------------------------------------------------------------;

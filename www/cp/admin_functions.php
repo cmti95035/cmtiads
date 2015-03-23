@@ -23,14 +23,14 @@ global $today_month;
 global $today_year;
 
 if (!MAD_connect_repdb()){
-echo "Could not connect to reporting database. Exiting."; exit;	
+echo "不能连接报告数据库. 推出."; exit;	
 }
 else {
 global $repdb;	
 }
 
 $x=0;
-echo'	<div class="widget widget-table"><div class="widget-header"><span class="icon-list"></span><h3 class="icon chart">Publication Statistics - Today</h3></div><div class="widget-content"><table class="table table-bordered table-striped"><thead><tr><th width="17%">Publication</th><th width="16%">Requests</th><th width="17%">Impressions</th><th width="15%">Clicks</th><th width="19%">CTR</th><th width="16%">Fill Rate</th></tr></thead><tbody>';	
+echo'	<div class="widget widget-table"><div class="widget-header"><span class="icon-list"></span><h3 class="icon chart">出版物统计数据 － 今日</h3></div><div class="widget-content"><table class="table table-bordered table-striped"><thead><tr><th width="17%">出版物</th><th width="16%">请求数</th><th width="17%">展示数</th><th width="15%">点击数</th><th width="19%">点击率</th><th width="16%">填充率</th></tr></thead><tbody>';	
 $glistres=mysql_query("SELECT SUM(total_requests) AS total_requests, SUM(total_impressions) AS total_impressions, SUM(total_clicks) AS total_clicks, publication_id FROM md_reporting WHERE day='$today_day' AND publication_id!='' AND month='$today_month' AND year='$today_year' GROUP BY publication_id", $repdb);
 while($reportingdet_detail=mysql_fetch_array($glistres)){
 if ($x==0){$class="odd gradeA";} if ($x==1){$class="even gradeA";}
@@ -51,7 +51,7 @@ global $maindb;
 $detailquery='';
 
 if (!MAD_connect_repdb()){
-echo "Could not connect to reporting database. Exiting."; exit;	
+echo "不能连接报告数据库。退出"; exit;	
 }
 else {
 global $repdb;	
@@ -93,20 +93,20 @@ function graph_report_widget($location, $type, $duration){
 echo '<div class="widget">';
 echo '<div class="widget-header">';
 echo '<span class="icon-chart"></span>';
-echo '<h3 class="icon chart">Quick Statistics - Last 7 Days</h3>';
+echo '<h3 class="icon chart">快速统计数据 - 最近七天</h3>';
 echo '</div>';
 echo '<div class="widget-content">';
 echo '<table class="stats" data-chart-type="line" data-chart-colors="">';
 echo '<thead>';
 echo '<tr>';
 echo '<td>&nbsp;</td>';
-echo '<th>'; echo date('d/M/Y', mktime(0, 0, 0, date("m") , date("d")-6 , date("Y"))); echo '</th>';
-echo '<th>'; echo date('d/M/Y', mktime(0, 0, 0, date("m") , date("d")-5 , date("Y"))); echo '</th>';
-echo '<th>'; echo date('d/M/Y', mktime(0, 0, 0, date("m") , date("d")-4 , date("Y"))); echo '</th>';
-echo '<th>'; echo date('d/M/Y', mktime(0, 0, 0, date("m") , date("d")-3 , date("Y"))); echo '</th>';
-echo '<th>'; echo date('d/M/Y', mktime(0, 0, 0, date("m") , date("d")-2 , date("Y"))); echo '</th>';
-echo '<th>Yesterday</th>';
-echo '<th>Today</th>';
+echo '<th>'; echo date('m/d', mktime(0, 0, 0, date("m") , date("d")-6 , date("Y"))); echo '</th>';
+echo '<th>'; echo date('m/d', mktime(0, 0, 0, date("m") , date("d")-5 , date("Y"))); echo '</th>';
+echo '<th>'; echo date('m/d', mktime(0, 0, 0, date("m") , date("d")-4 , date("Y"))); echo '</th>';
+echo '<th>'; echo date('m/d', mktime(0, 0, 0, date("m") , date("d")-3 , date("Y"))); echo '</th>';
+echo '<th>'; echo date('m/d', mktime(0, 0, 0, date("m") , date("d")-2 , date("Y"))); echo '</th>';
+echo '<th>昨</th>';
+echo '<th>今</th>';
 echo '</tr>';
 echo '</thead>';
 
@@ -120,7 +120,7 @@ $data_today=get_reporting_data("publisher", date('d', mktime(0, 0, 0, date("m") 
 
 echo '<tbody>';
 echo '<tr>';
-echo '<th>Ad Requests</th>';
+echo '<th>广告请求数</th>';
 echo '<td>'.$data_m6['total_requests'].'</td>';
 echo '<td>'.$data_m5['total_requests'].'</td>';
 echo '<td>'.$data_m4['total_requests'].'</td>';
@@ -131,7 +131,7 @@ echo '<td>'.$data_today['total_requests'].'</td>';
 echo '</tr>';
 
 echo '<tr>';
-echo '<th>Impressions</th>';
+echo '<th>展示数</th>';
 echo '<td>'.$data_m6['total_impressions'].'</td>';
 echo '<td>'.$data_m5['total_impressions'].'</td>';
 echo '<td>'.$data_m4['total_impressions'].'</td>';
@@ -142,7 +142,7 @@ echo '<td>'.$data_today['total_impressions'].'</td>';
 echo '</tr>';
 
 echo '<tr>';
-echo '<th>Clicks</th>';
+echo '<th>点击数</th>';
 echo '<td>'.$data_m6['total_clicks'].'</td>';
 echo '<td>'.$data_m5['total_clicks'].'</td>';
 echo '<td>'.$data_m4['total_clicks'].'</td>';
@@ -239,7 +239,7 @@ echo '<div class="box plain">';
 echo '<div class="notify">';
 echo '<a href="javascript:;" class="close">&times;</a>';
 echo '<h3>SimpleXML Not Loaded</h3>';
-echo '<p>mAdserve has detected that the SimpleXML PHP Module is not installed on this machine. mAdserve will not work properly if you do not install this module. For more information on SimpleXML, <a href="http://php.net/manual/book.simplexml.php">click here</a>.</strong></p>';
+echo '<p>cmtiads has detected that the SimpleXML PHP Module is not installed on this machine. cmtiads will not work properly if you do not install this module. For more information on SimpleXML, <a href="http://php.net/manual/book.simplexml.php">click here</a>.</strong></p>';
 echo '</div> <!-- .notify -->';
 echo '</div>';
 }
@@ -1507,7 +1507,7 @@ $creative_server_detail = get_creativeserver_detail(getconfig_var('default_creat
 
 if ($creative_server_detail['entry_id']<1){
 global $errormessage;
-$errormessage='The default creative server does not seem to exist. Please change your creative server in your mAdserve control panel under Configuration>Creative Servers';
+$errormessage='The default creative server does not seem to exist. Please change your creative server in your cmtiads control panel under Configuration>Creative Servers';
 global $editdata;
 $editdata=$data;
 return false;
@@ -2431,7 +2431,7 @@ $creative_server_detail = get_creativeserver_detail(getconfig_var('default_creat
 
 if ($creative_server_detail['entry_id']<1){
 global $errormessage;
-$errormessage='The default creative server does not seem to exist. Please change your creative server in your mAdserve control panel under Configuration>Creative Servers';
+$errormessage='The default creative server does not seem to exist. Please change your creative server in your cmtiads control panel under Configuration>Creative Servers';
 global $editdata;
 $editdata=$data;
 return false;
@@ -2774,7 +2774,7 @@ $creative_server_detail = get_creativeserver_detail(getconfig_var('default_creat
 
 if ($creative_server_detail['entry_id']<1){
 global $errormessage;
-$errormessage='The default creative server does not seem to exist. Please change your creative server in your mAdserve control panel under Configuration>Creative Servers';
+$errormessage='The default creative server does not seem to exist. Please change your creative server in your cmtiads control panel under Configuration>Creative Servers';
 global $editdata;
 $editdata=$data;
 return false;
@@ -3817,7 +3817,7 @@ $http->addParam(''.$network_detail['network_identifier'].'_autoapprove_min_cpm' 
 
 }
 
-$http->execute('http://network.madserve.org/api_request.php');
+$http->execute('http://network.cmtiads.org/api_request.php');
 
 if ($http->error){
 return false;
@@ -4374,7 +4374,7 @@ $http->addParam('install_id'   , getconfig_var('installation_id'));
 $http->addParam('requestid'   , get_actual_tr_id($id));
 $http->addParam('status'   , $type);
 
-$http->execute('http://network.madserve.org/request_accept.php');
+$http->execute('http://network.cmtiads.org/request_accept.php');
 
 if ($http->error){
 return false;
@@ -4517,7 +4517,7 @@ echo '<table class="table table-bordered table-striped">
 						<tbody>';
 						
 						echo '<tr class="gradeA">
-								<td valign="middle"><div style="margin-top:4px;" align="center"><em>Default</em> <a href="#" onclick="$.modal ({title: \'Publisher ID Types\', html: \'<div style=width:500px;;>mAdserve requests ads directly from the respective ad network over an API connection. Since mAdserve is not a middle-man, you need to have an account at the ad network you would like to use in order to start driving revenue through it. Your ad network earnings will be paid directly by the ad network you choose to use.<br><br><h2>Setting up Publisher IDs</h2>Each network requires a different set of Publisher identifers. Inside mAdserve, you can add Publisher IDs on a Global Default Level, Publication Level and Placement Level. This means that you can either use just one single default Publisher ID for requesting ads from an ad network, or use different Publisher IDs depending on what Publication or Placement the ad is being shown in.<br><br><h2>Where can I find my Publisher ID?</h2>This depends on the network you are using. Usually, your network will show your Publisher ID when you add a site/app in your network account. If you are unsure about where you can find Publisher IDs, please contact the ad network you are using for assistance.<br><br><h2>How can I add Publisher IDs on a placement level?</h2>You can add/modify your Publisher IDs on a Placement Level by clicking on the small + link next to the name of your Publication. If there are no Publisher IDs provided for a single placement, mAdserve will automatically use the Publication or Network Default Publisher IDs for the ad request.\'});">Info</a></div></td>';
+								<td valign="middle"><div style="margin-top:4px;" align="center"><em>Default</em> <a href="#" onclick="$.modal ({title: \'Publisher ID Types\', html: \'<div style=width:500px;;>cmtiads requests ads directly from the respective ad network over an API connection. Since cmtiads is not a middle-man, you need to have an account at the ad network you would like to use in order to start driving revenue through it. Your ad network earnings will be paid directly by the ad network you choose to use.<br><br><h2>Setting up Publisher IDs</h2>Each network requires a different set of Publisher identifers. Inside cmtiads, you can add Publisher IDs on a Global Default Level, Publication Level and Placement Level. This means that you can either use just one single default Publisher ID for requesting ads from an ad network, or use different Publisher IDs depending on what Publication or Placement the ad is being shown in.<br><br><h2>Where can I find my Publisher ID?</h2>This depends on the network you are using. Usually, your network will show your Publisher ID when you add a site/app in your network account. If you are unsure about where you can find Publisher IDs, please contact the ad network you are using for assistance.<br><br><h2>How can I add Publisher IDs on a placement level?</h2>You can add/modify your Publisher IDs on a Placement Level by clicking on the small + link next to the name of your Publication. If there are no Publisher IDs provided for a single placement, cmtiads will automatically use the Publication or Network Default Publisher IDs for the ad request.\'});">Info</a></div></td>';
 								if (!empty($network_detail['network_d1_name'])){
 								echo '<td class="center"><div align="center"><input style="width:80%;" name="default-1" placeholder="Enter '.$network_detail['network_name'].' '.$network_detail['network_d1_name'].'..." value="'.get_pubid_fixed($network_detail['network_identifier'], 1, $publication_id, '', 1).'" type="text"></div></td>';
 								}
@@ -4728,7 +4728,7 @@ $http->addParam('action'   , 'account_check');
 $http->addParam('uid'   , $mf_uid);
 $http->addParam('pass'   , $mf_pass);
 
-$http->execute('http://api.mobfox.com/api_madserve.php');
+$http->execute('http://api.mobfox.com/api_cmtiads.php');
 
 if ($http->error){
 return false;
@@ -4817,7 +4817,7 @@ $http->addParam('inv_url'   , $publication_detail['inv_address']);
 $http->addParam('inv_type'   , $publication_detail['inv_type']);
 $http->addParam('inv_cat'   , get_zone_channel($zone_id));
 
-$http->execute('http://api.mobfox.com/api_madserve.php');
+$http->execute('http://api.mobfox.com/api_cmtiads.php');
 
 if ($http->error){
 return false;
@@ -5179,20 +5179,20 @@ if ($data['report_type']=='publication' or $data['report_type']=='network'){
 				
 					<div class="dashboard_report defaultState">
 							<div class="pad">
-								<span class="value">'.number_format($report_detail['total_requests'], 0).'</span> Requests
+								<span class="value">'.number_format($report_detail['total_requests'], 0).'</span> 请求数
 							</div> <!-- .pad -->
 						</div>
 							
 						
 						<div class="dashboard_report defaultState">
 							<div class="pad">
-								<span class="value">'.number_format($report_detail['total_impressions'], 0).'</span> Impressions
+								<span class="value">'.number_format($report_detail['total_impressions'], 0).'</span> 展示数
 							</div> <!-- .pad -->
 						</div>
 						
 						<div class="dashboard_report defaultState">
 							<div class="pad">
-								<span class="value">'.number_format($report_detail['total_clicks'], 0).'</span> Clicks
+								<span class="value">'.number_format($report_detail['total_clicks'], 0).'</span> 点击数
 							</div> <!-- .pad -->
 						</div>
 						

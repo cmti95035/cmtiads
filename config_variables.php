@@ -4,8 +4,8 @@ function setupConstants()
 {
     // Define this version of Openads's constants
     define('MAD_VERSION', '2.0');
-    define('MAD_PRODUCT_NAME',      'mAdserve');
-    define('MAD_PRODUCT_URL',       'www.madserve.org');
+    define('MAD_PRODUCT_NAME',      'cmtiads');
+    define('MAD_PRODUCT_URL',       'www.cmtiads.org');
     define('MAD_ANDROID_SDK_LOCATION',  'sdk/android_latest.zip');
     define('MAD_IOS_SDK_LOCATION',  'sdk/ios_latest.zip');
 	
@@ -42,13 +42,13 @@ function setupConstants()
     define('MAD_CACHE_CAMPAIGN_QUERIES_SEC', 90);
 	
 	// geo-ip settings
-	define('MAD_MAXMIND_TYPE', 'PHPSOURCE'); // Change to 'NATIVE' if you installed the GeoIP PHP Module (http://www.php.net/manual/en/book.geoip.php) -> Faster! - Please note that mAdserve will crash if this option is enabled but not installed.
+	define('MAD_MAXMIND_TYPE', 'PHPSOURCE'); // Change to 'NATIVE' if you installed the GeoIP PHP Module (http://www.php.net/manual/en/book.geoip.php) -> Faster! - Please note that cmtiads will crash if this option is enabled but not installed.
 	define('MAD_MAXMIND_DATAFILE_LOCATION', 'data/geotargeting/GeoLiteCity.dat');
 	
 	// additional settings
 	define('MAD_SERVE_NOMOBILE', true); // Server Ads to non-mobile users if they are either targeted to all devices or 'Other Devices' in the Campaign Setup
 	define('MAD_INTERSTITIALS_EXACTMATCH', true); // Defines whether an Interstitial Ad Placement can only show ads that are exactly 320x480 in size. If you set this option to FALSE, an Interstitial ad space would also serve e.g. an ad with 320x50 dimenstions if that is the closest size available.
-	define('MAD_IGNORE_DAILYLIMIT_NOCRON', true); // Ignore a campaign's daily impression limit when the mAdserve cron was not executed for more than 24 hours.
+	define('MAD_IGNORE_DAILYLIMIT_NOCRON', true); // Ignore a campaign's daily impression limit when the cmtiads cron was not executed for more than 24 hours.
 
     // Maximum random number
     define('MAD_RAND',     mt_getrandmax());
@@ -60,7 +60,7 @@ function setupConstants()
 
     // Ensure that the initialisation has not been run before
     if (!(isset($GLOBALS['_MAX']['CONF']))) {
-        // Define the mAdserve installation base path if not defined
+        // Define the cmtiads installation base path if not defined
         // since Local mode will pre-define this value
         if (!defined('MAD_PATH')) {
             define('MAD_PATH', dirname(__FILE__));

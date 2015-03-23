@@ -462,10 +462,10 @@ if ($display_ad['main_type']=='display'){
 	case 'hosted':
 	case 'image-url':
 	if ($request_settings['response_type']!='xml'){
-	$final_markup='<a id="mAdserveAdLink" href="'.$display_ad['final_click_url'].'" target="_self"><img id="mAdserveAdImage" src="'.$display_ad['image_url'].'" border="0"/></a><br>';
+	$final_markup='<a id="cmtiadsAdLink" href="'.$display_ad['final_click_url'].'" target="_self"><img id="cmtiadsAdImage" src="'.$display_ad['image_url'].'" border="0"/></a><br>';
 	}
 	else {
-	$final_markup='<body style="text-align:center;margin:0;padding:0;"><div align="center"><a id="mAdserveAdLink" href="'.$display_ad['final_click_url'].'" target="_self"><img id="mAdserveAdImage" src="'.$display_ad['image_url'].'" border="0"/></a></div></body>';
+	$final_markup='<body style="text-align:center;margin:0;padding:0;"><div align="center"><a id="cmtiadsAdLink" href="'.$display_ad['final_click_url'].'" target="_self"><img id="cmtiadsAdImage" src="'.$display_ad['image_url'].'" border="0"/></a></div></body>';
 	}
 	break;	
 
