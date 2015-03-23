@@ -139,7 +139,7 @@ header("Pragma: no-cache");
 					<li><a href="settings_update.php">更新参数</a></li>					
 					<li><a href="user_management.php">用户管理</a></li>					
 					<li><a href="user_group_management.php">用户群管理</a></li>	
-                    <li><a href="channel_management.php">渠道管理</a></li>									
+                    <li><a href="channel_management.php">频道管理</a></li>									
                     <li><a href="creative_servers.php">广告案服务器</a></li>									
 					<li><a href="network_modules.php">网络模块</a></li>					
 					<li><a href="system_log.php">系统日志</a></li>					

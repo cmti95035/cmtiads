@@ -25,21 +25,16 @@ exit;
 <div id="content">		
 		
 		<div id="contentHeader">
-			<h1>Ad Network Management</h1>
+			<h1>广告网络管理</h1>
 		</div> <!-- #contentHeader -->	
 		
 		<div class="container">
-				
 				<div class="grid-24">	
-					
-					
-				
-				
 					<div class="widget widget-table">
 					
 						<div class="widget-header">
 							<span class="icon-list"></span>
-							<h3 class="icon chart">Ad Networks</h3>		
+							<h3 class="icon chart">广告网络</h3>		
 						</div>
 					
 						<div class="widget-content">
@@ -47,13 +42,13 @@ exit;
 							<table class="table table-bordered table-striped">
 						<thead>
 							<tr>
-								<th>Network Name</th>
-								<th><div align="center">Banner support</div></th>
-								<th><div align="center">Interstitial support</div></th>
-								<th><div align="center">Status</div></th>
-								<th><div align="center">Network Info</div></th>
-								<th><div align="center">Sign Up</div></th>
-								<th>Actions</th>
+								<th>网络名称</th>
+								<th><div align="center">条幅支持</div></th>
+								<th><div align="center">全凭支持</div></th>
+								<th><div align="center">状态</div></th>
+								<th><div align="center">网络信息</div></th>
+								<th><div align="center">注册</div></th>
+								<th>动作</th>
 							</tr>
 						</thead>
 						<tbody>

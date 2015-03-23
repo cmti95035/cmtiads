@@ -62,7 +62,7 @@ document.listform.submit();	}
 <div id="content">		
 		
 		<div id="contentHeader">
-			<h1>Campaigns</h1>
+			<h1>广告活动</h1>
 		</div> <!-- #contentHeader -->	
 		
 		<div class="container">

@@ -164,7 +164,7 @@ function checkAll(theForm, cName, status) {
 			
 								<div class="field">
 								<select id="campaign_networkid" name="campaign_networkid">
-<?php if (!isset($editdata['campaign_networkid'])){$editdata['campaign_networkid']='';} get_network_dropdown($editdata['campaign_networkid']); ?>							  </select>		<a class="tooltip" style="font-size:11px;" href="#" onclick="$.modal ({title: 'Network Publisher IDs', html: '<div style=width:500px;;><h3>Ad Networks</h3>In order to start sending mobile traffic to an ad network of your choice, you will have to create an account with the advertising network and then enter the Publisher IDs/Site IDs on the <a href=\'ad_networks.php\' target=\'_blank\'>Network Configuration</a> page in your mAdserve ad server. mAdserve will then automatically send all your traffic to the respective ad network. Revenue and other Reporting metrics will be reported and visible directly in your account with the ad network.</div>'});">Publisher ID Info</a>
+<?php if (!isset($editdata['campaign_networkid'])){$editdata['campaign_networkid']='';} get_network_dropdown($editdata['campaign_networkid']); ?>							  </select>		<a class="tooltip" style="font-size:11px;" href="#" onclick="$.modal ({title: 'Network Publisher IDs', html: '<div style=width:500px;;><h3>Ad Networks</h3>In order to start sending mobile traffic to an ad network of your choice, you will have to create an account with the advertising network and then enter the Publisher IDs/Site IDs on the <a href=\'ad_networks.php\' target=\'_blank\'>Network Configuration</a> page in your cmtiads ad server. cmtiads will then automatically send all your traffic to the respective ad network. Revenue and other Reporting metrics will be reported and visible directly in your account with the ad network.</div>'});">Publisher ID Info</a>
 									<label for="campaign_networkid">广告网络</label>
 								</div>
 							</div> <!-- .field-group -->
@@ -265,7 +265,7 @@ function checkAll(theForm, cName, status) {
 						
 						<div class="widget-header">
 							<span class="icon-article"></span>
-							<h3>Targeting</h3>
+							<h3>投放</h3>
 						</div> <!-- .widget-header -->
 						
 						<div class="widget-content">
@@ -281,12 +281,12 @@ function checkAll(theForm, cName, status) {
 	
 									<div class="field">
 										<input type="radio"   onclick="document.getElementById('country_target').style.display='none';" name="geo_targeting" id="geo_targeting_all" value="1" />
-										<label for="geo_targeting_all">All Countries</label>
+										<label for="geo_targeting_all">所有国家</label>
 									</div>
 			
 									<div id="interstitialoptiobutton" class="field">
 										<input type="radio"  onclick="document.getElementById('country_target').style.display='block';" name="geo_targeting" id="geo_targeting_co" value="2" />
-										<label for="geo_targeting_co">Specific Countries/Regions</label>
+										<label for="geo_targeting_co">特定国家/地区</label>
 									</div>
                                     
 <!--                                    <div style="color:#999; font-size:11px;">Geographic Targeting</div>
@@ -319,22 +319,16 @@ var selecteddata = {items: [
 <?php } ?>
 $("input[id=country_targeting]").autoSuggest(data.items, {selectedItemProp: "name", searchObjProps: "name", asHtmlID: "1", preFill:selecteddata.items, neverSubmit:true});
 </script>
-            
-									
-								</div>	
-                            
-                        
-<div class="field-group control-group inline">	
-  
-	
-									<div class="field">
+  							</div>	
+  <div class="field-group control-group inline">	
+  								<div class="field">
 										<input type="radio"   onclick="document.getElementById('publicationtargetingtable').style.display='none';" name="publication_targeting" id="publication_targeting_all" value="1" />
-										<label for="publication_targeting_all">All Publications</label>
+										<label for="publication_targeting_all">所有出版物</label>
 									</div>
 			
 									<div id="interstitialoptiobutton" class="field">
 										<input type="radio"  onclick="document.getElementById('publicationtargetingtable').style.display='block';" name="publication_targeting" id="publication_targeting_co" value="2" />
-										<label for="publication_targeting_co">Specific Publications & Placements</label>
+										<label for="publication_targeting_co">特定出版物和位置</label>
 									</div>
                                     
 <!--                                    <div style="color:#999; font-size:11px;">Device Targeting</div>
@@ -349,21 +343,16 @@ $("input[id=country_targeting]").autoSuggest(data.items, {selectedItemProp: "nam
     <td>&nbsp;</td>
   </tr> -->
 </table>
- 
-									
 		  </div>	
-          
           <div class="field-group control-group inline">	
-  
-	
 									<div class="field">
 										<input type="radio"   onclick="document.getElementById('channeltargetingtable').style.display='none';" name="channel_targeting" id="channel_targeting_all" value="1" />
-										<label for="channel_targeting_all">All Channels</label>
+										<label for="channel_targeting_all">所有频道</label>
 									</div>
 			
 									<div id="interstitialoptiobutton" class="field">
 										<input type="radio"  onclick="document.getElementById('channeltargetingtable').style.display='block';" name="channel_targeting" id="channel_targeting_co" value="2" />
-										<label for="channel_targeting_co">Specific Channels</label>
+										<label for="channel_targeting_co">特定频道</label>
 									</div>
                                     
 <!--                                    <div style="color:#999; font-size:11px;">Device Targeting</div>
@@ -383,12 +372,12 @@ $("input[id=country_targeting]").autoSuggest(data.items, {selectedItemProp: "nam
 	
 									<div class="field">
 									  <input type="radio"   onclick="document.getElementById('devicetargetingtable').style.display='none';" name="device_targeting" id="device_targeting_all" value="1" />
-										<label for="device_targeting_all">All Devices</label>
+										<label for="device_targeting_all">所有设备</label>
 									</div>
 			
 									<div id="interstitialoptiobutton" class="field">
 									  <input type="radio"  onclick="document.getElementById('devicetargetingtable').style.display='block';" name="device_targeting" id="device_targeting_co" value="2" />
-										<label for="device_targeting_co">Specific Device/OS</label>
+										<label for="device_targeting_co">特定设备/操作系统</label>
 									</div>
                                     
 <!--      <div style="color:#999; font-size:11px;">Device Targeting</div>
@@ -489,21 +478,16 @@ $("input[id=country_targeting]").autoSuggest(data.items, {selectedItemProp: "nam
       </select></div><div>-</div></td>
   </tr>
 </table>
-			
-									
-						  </div>	
-                                
+			  </div>	
   <div class="field-group control-group inline">	
-  
-	
 									<div class="field">
 										<input type="radio"   onclick="document.getElementById('gendertargetingtable').style.display='none';" name="gender_targeting" id="gender_targeting_all" value="1" />
-										<label for="gender_targeting_all">All Genders</label>
+										<label for="gender_targeting_all">所有性别</label>
 									</div>
 			
 									<div id="interstitialoptiobutton" class="field">
 										<input type="radio"  onclick="document.getElementById('gendertargetingtable').style.display='block';" name="gender_targeting" id="gender_targeting_co" value="2" />
-										<label for="gender_targeting_co">Specific Genders</label>
+										<label for="gender_targeting_co">特定性别</label>
 									</div>
 								
 <table width="584" border="0" cellpadding="6" cellspacing="0" id="gendertargetingtable" style="-moz-border-radius: 5px; border-radius: 5px; margin-top:5px;">
@@ -511,35 +495,7 @@ $("input[id=country_targeting]").autoSuggest(data.items, {selectedItemProp: "nam
  
 </table>
 	</div>                                             
-                   
-                            
                             		</div> <!-- .widget-content -->
-						
 					</div> <!-- .widget -->
-                    
-                   
-                                                    
-                                                    
-                                <script src='assets/javascripts/all.js'></script>
+					             <script src='assets/javascripts/all.js'></script>
                                 
-                               
-
-                            
-                        
-
-
-                            
-                            
-                            
-                                                        
-                           
-                             
-                             
-                            
-                          
-                            
-			
-							
-							
-						
-				
