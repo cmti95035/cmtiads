@@ -47,33 +47,21 @@ require_once MAD_PATH . '/www/cp/templates/header.tpl.php';
 <div id="content">		
 		
 		<div id="contentHeader">
-			<h1>SDK / Code Snippet Integration</h1>
+			<h1>SDK /代码集成</h1>
 		</div> <!-- #contentHeader -->	
 		
 		<div class="container">
-			
-				
 			<div class="grid-24">
             <?php if (isset($_GET['added']) && $_GET['added']==1){?>
             <div class="box plain"><div class="notify notify-success"><h3>Success!</h3><p>Zone has successfully been created. Find integration details below:</p></div> <!-- .notify --></div>
             <?php } ?>
-			
-         
-            
-                    
+			              
 				<form method="get" id="publication_integration" name="publication_integration" class="form uniformForm">
 					
 				<?php require_once MAD_PATH . '/www/cp/templates/forms/crud.integrationselect.tpl.php';
 				if ($integration_active==1){ require_once MAD_PATH . '/www/cp/templates/forms/crud.integration.tpl.php'; }
 				?>	
-                    
-                    
-                     
-										
-					
-					
-					
-					</form>
+      		</form>
 					
 				</div> <!-- .grid -->
 			

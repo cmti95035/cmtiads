@@ -662,16 +662,14 @@ else if (($current_timestamp-$publication_detail['md_lastrequest'])<MAD_PUBL_ACT
 else {$publication_status='Inactive';}
 
 echo '<tr class="gradeA">
-								<td>'.$publication_detail['inv_name'].'</td>
-								<td class="center">'.$pub_type_detail['pub_name'].' </td>
-								<td class="center">'.$pub_channel_detail['channel_name'].'</td>
-								<td class="center">'.$publication_status.'</td>
-								<td class="center">'.$total_placements.'</td>';
-								echo '<td class="center"><span class="ticket ticket-info"><a href="edit_publication.php?id='.$publication_detail['inv_id'].'" style="color:#FFF; text-decoration:none;">Edit Publication</a></span>&nbsp;<span class="ticket ticket-warning"><a href="view_placements.php?id='.$publication_detail['inv_id'].'" style="color:#FFF; text-decoration:none;">View Placements</a></span>&nbsp;<span id="pubdel'.$publication_detail['inv_id'].'" class="ticket ticket-important"><a style="color:#FFF; text-decoration:none;" href="#">Delete</a></span></td>';
-	
-								
-							echo '</tr>	';
-}
+								<td>' . $publication_detail ['inv_name'] . '</td>
+								<td class="center">' . $pub_type_detail ['pub_name'] . ' </td>
+								<td class="center">' . $pub_channel_detail ['channel_name'] . '</td>
+								<td class="center">' . $publication_status . '</td>
+								<td class="center">' . $total_placements . '</td>';
+		echo '<td class="center"><span class="ticket ticket-info"><a href="edit_publication.php?id=' . $publication_detail ['inv_id'] . '" style="color:#FFF; text-decoration:none;">编辑出版物</a></span>&nbsp;<span class="ticket ticket-warning"><a href="view_placements.php?id=' . $publication_detail ['inv_id'] . '" style="color:#FFF; text-decoration:none;">查看位置</a></span>&nbsp;<span id="pubdel' . $publication_detail ['inv_id'] . '" class="ticket ticket-important"><a style="color:#FFF; text-decoration:none;" href="#">删除</a></span></td>';
+		echo '</tr>	';
+	}
 }
 
 function print_deletionjs($type){
@@ -1254,7 +1252,7 @@ echo '<option '.$selected_html.' value="'.$group_detail['entry_id'].'">'.$group_
 function get_pubtype_dropdown($selected){
 global $maindb;	
 
-echo "<option value=''>- Select Publication Type -</option>";
+echo "<option value=''>- 选择出版物类型 -</option>";
 
 $usrres=mysql_query("select * from md_publication_types ORDER BY entry_id ASC", $maindb);
 while($pubtype_detail=mysql_fetch_array($usrres)){
@@ -1271,7 +1269,7 @@ echo '<option '.$selected_html.' value="'.$pubtype_detail['entry_id'].'">'.$pubt
 function get_network_dropdown($selected){
 global $maindb;	
 
-echo "<option value=''>- Select Ad Network -</option>";
+echo "<option value=''>- 选择广告网络 -</option>";
 
 $usrres=mysql_query("select * from md_networks ORDER BY network_name ASC", $maindb);
 while($network_detail=mysql_fetch_array($usrres)){
@@ -1280,7 +1278,7 @@ if (check_network_configured($network_detail['network_identifier'])){
 $network_status_text='';	
 }
 else {
-$network_status_text='(Not Configured)';		
+$network_status_text='(没有配置)';		
 }
 if (is_numeric($selected) && $selected==$network_detail['entry_id']){
 $selected_html='selected="selected"';	
@@ -1310,7 +1308,7 @@ echo '<option '.$selected_html.' value="'.$network_detail['entry_id'].'">'.$netw
 function get_publication_dropdown($selected){
 global $maindb;	
 
-echo "<option value=''>- Select Publication -</option>";
+echo "<option value=''>- 选择出版物 -</option>";
 
 $usrres=mysql_query("select * from md_publications ORDER BY inv_id DESC", $maindb);
 while($publication_detail=mysql_fetch_array($usrres)){
@@ -1361,11 +1359,11 @@ function get_placement_integration_dropdown($zoneid, $publicationid){
 global $maindb;	
 
 if (!is_numeric($publicationid) && !is_numeric($zoneid)){
-echo "<option value=''>- Select Publication Above -</option>";
+echo "<option value=''>- 选择上面的出版物 -</option>";
 }
 
 else {
-echo "<option value=''>- Select Placement  -</option>";
+echo "<option value=''>- 选择位置  -</option>";
 }
 
 if (is_numeric($publicationid)){
@@ -1388,7 +1386,7 @@ function do_edit($type, $data, $detail){
 	if ($type=='runninglimit'){
 	if (!isset($detail) or !is_numeric($detail)){
 	global $errormessage;
-$errormessage='Invalid Campaign ID.';
+$errormessage='无效的广告活动ID.';
 global $editdata;
 $editdata=$data;
 return false;	
@@ -1396,7 +1394,7 @@ return false;
 	
 	if (!isset($data['new_limit']) or !is_numeric($data['new_limit'])){
 		global $errormessage;
-$errormessage='Invalid Limit entered.';
+$errormessage='无效的限制.';
 global $editdata;
 $editdata=$data;
 return false;		
@@ -1416,7 +1414,7 @@ return true;
 		
 		if (empty($data['adv_name']) or (!is_numeric($data['custom_creative_width']) or !is_numeric($data['custom_creative_height']))){
 global $errormessage;
-$errormessage='Please fill out all required fields.';
+$errormessage='请填入所有需要的信息.';
 global $editdata;
 $editdata=$data;
 return false;	
@@ -1426,7 +1424,7 @@ if ($data['creative_type']==3){
 
 if (empty($data['html_body'])){
 global $errormessage;
-$errormessage='Please enter a HTML body for your ad.';
+$errormessage='请填入广告的HTML主体.';
 global $editdata;
 $editdata=$data;
 return false;	
@@ -1439,7 +1437,7 @@ if ($data['creative_type']==2){
 
 if (empty($data['creative_url']) or empty($data['click_url'])){
 global $errormessage;
-$errormessage='Please enter a Creative URL and Click URL for your ad.';
+$errormessage='请填入广告案链接和点击链接.';
 global $editdata;
 $editdata=$data;
 return false;	
@@ -1453,7 +1451,7 @@ if ($data['creative_type']==1){
 
 if (empty($data['click_url'])){
 global $errormessage;
-$errormessage='Please enter a Click URL for your ad.';
+$errormessage='请填入广告点击链接.';
 global $editdata;
 $editdata=$data;
 return false;	
@@ -1464,7 +1462,7 @@ $no_creative=1;
 
 if ($current_unit_detail['adv_type']!=1){
 global $errormessage;
-$errormessage='Please upload a creative for your ad.';
+$errormessage='请上传一个广告案.';
 global $editdata;
 $editdata=$data;
 return false;	
@@ -1497,7 +1495,7 @@ list($width, $height, $type, $attr)= getimagesize($_FILES['creative_file']['tmp_
 
 if ($height!=$data['custom_creative_height'] or $width!=$data['custom_creative_width'] or empty($file_extension)){
 global $errormessage;
-$errormessage='The image you uploaded does not appear to be in the right dimensions. Please upload a valid image sized '.$data['custom_creative_width'].'x'.$data['custom_creative_height'].'';
+$errormessage='你上传的图像尺寸不对。 请上传一个正确尺寸的图像 '.$data['custom_creative_width'].'x'.$data['custom_creative_height'].'';
 global $editdata;
 $editdata=$data;
 return false;
@@ -3459,9 +3457,9 @@ echo '<tr class="gradeA">
 								<td class="center"><div align=center><span class="'.$banner_support_icon.'"></span></div></td>
 								<td class="center"><div align=center><span class="'.$interstitial_support_icon.'"></span></div></td>
 								<td class="center"><div align=center>'.$network_status.'</div></td>
-								<td class="center"><div align=center><a href="#" onclick="$.modal ({title: \''.$network_detail['network_name'].'\', html: \'<div style=width:500px;;>'.trim(str_replace(",", "\,", addslashes($network_detail['info_content']))).'</div>\'});">View Info</a></div></td>';
-								echo '<td class="center"><div align=center><a target="_blank" href="'.$network_detail['signup_url'].'">Signup</a></div></td>';
-								echo '<td class="center"><span class="ticket ticket-info"><a href="network_id_setup.php?id='.$network_detail['entry_id'].'" style="color:#FFF; text-decoration:none;">Setup Publisher IDs</a></span>&nbsp;<span class="ticket ticket-warning"><a href="network_settings.php?id='.$network_detail['entry_id'].'" style="color:#FFF; text-decoration:none;">Settings</a></span>&nbsp;</td>';
+								<td class="center"><div align=center><a href="#" onclick="$.modal ({title: \''.$network_detail['network_name'].'\', html: \'<div style=width:500px;;>'.trim(str_replace(",", "\,", addslashes($network_detail['info_content']))).'</div>\'});">查看信息</a></div></td>';
+								echo '<td class="center"><div align=center><a target="_blank" href="'.$network_detail['signup_url'].'">注册</a></div></td>';
+								echo '<td class="center"><span class="ticket ticket-info"><a href="network_id_setup.php?id='.$network_detail['entry_id'].'" style="color:#FFF; text-decoration:none;">设置发布商ID</a></span>&nbsp;<span class="ticket ticket-warning"><a href="network_settings.php?id='.$network_detail['entry_id'].'" style="color:#FFF; text-decoration:none;">参数</a></span>&nbsp;</td>';
 	
 								
 							echo '</tr>	';
@@ -3489,8 +3487,8 @@ $current_timestamp=time();
 $usrres=mysql_query("select * from md_ad_units WHERE campaign_id='$campaignid' ORDER BY adv_id DESC", $maindb);
 while($ad_detail=mysql_fetch_array($usrres)){
 
-if ($ad_detail['adv_status']==2){$ad_status='Paused'; $statuscolor='#FF9900';}
-else if ($ad_detail['adv_status']==1){$ad_status='Active'; $statuscolor='#009900;';}
+if ($ad_detail['adv_status']==2){$ad_status='暂停'; $statuscolor='#FF9900';}
+else if ($ad_detail['adv_status']==1){$ad_status='运行'; $statuscolor='#009900;';}
 
 switch($ad_detail['adv_type']){
 case 1:
