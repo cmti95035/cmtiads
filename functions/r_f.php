@@ -6,7 +6,7 @@ $repdb_connected=0;
 global $test_config;
 $test_config['userinfo_server_url']="http://localhost/cmtiads/userserver/index.php?/mobileuserinfo/json/";
 //$test_config['userinfo_server_url']="http://localhost/cmt220/index.php?/mobileuserinfo/json/";
-$test_config['local_logging_file']="/Users/zhiminhe/logs/cmtiads_internal.log";
+$test_config['local_logging_file']="/tmp/cmtiads_internal.log";
 
 function ad_request($data){
 global $request_settings;
