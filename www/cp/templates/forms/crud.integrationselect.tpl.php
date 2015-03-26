@@ -6,7 +6,7 @@ if (!isset($integration_active)){$integration_active='';}
 						
 						<div class="widget-header">
 							<span class="icon-article"></span>
-							<h3>出版物和位置选择</h3>
+							<h3>出版物和广告位选择</h3>
 						</div> <!-- .widget-header -->
 						<div class="widget-content">
                                     <div class="field-group">
@@ -25,7 +25,7 @@ if (!isset($integration_active)){$integration_active='';}
 								<select onchange="this.form.submit();"  id="publication_id" name="zone">
 								  <?php get_placement_integration_dropdown($_GET['zone'], $_GET['publication']); ?>
 								</select>		
-									<label for="inv_type">选择位置</label>
+									<label for="inv_type">选择广告位</label>
 								</div>
 							</div> <!-- .field-group -->
                             
@@ -34,7 +34,7 @@ if (!isset($integration_active)){$integration_active='';}
 			
 								<div class="field">
 									<span style="margin-left:4px;"><?php echo $zone_detail['zone_hash']; ?></span>
-									<label for="allow_statistical_info">位置集成ID</label>
+									<label for="allow_statistical_info">广告位集成ID</label>
 								</div>
 							</div> <!-- .field-group -->
                             
@@ -52,5 +52,5 @@ if (!isset($integration_active)){$integration_active='';}
                     
                     <?php if (!is_numeric($_GET['zone']) or !is_numeric($_GET['publication'])){ ?>
                                          <div class="box plain"><div class="notify notify-warning">
-                                         <p>请在上方选择你想集成的出版物和位置.</p></div> <!-- .notify --></div>
+                                         <p>请在上方选择你想集成的出版物和广告位.</p></div> <!-- .notify --></div>
                                          <?php } ?>

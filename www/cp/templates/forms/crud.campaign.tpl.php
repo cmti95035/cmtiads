@@ -328,7 +328,7 @@ $("input[id=country_targeting]").autoSuggest(data.items, {selectedItemProp: "nam
 			
 									<div id="interstitialoptiobutton" class="field">
 										<input type="radio"  onclick="document.getElementById('publicationtargetingtable').style.display='block';" name="publication_targeting" id="publication_targeting_co" value="2" />
-										<label for="publication_targeting_co">特定出版物和位置</label>
+										<label for="publication_targeting_co">特定出版物和广告位</label>
 									</div>
                                     
 <!--                                    <div style="color:#999; font-size:11px;">Device Targeting</div>

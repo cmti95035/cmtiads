@@ -54,7 +54,7 @@ if (check_permission_simple ( 'modify_publications', $user_detail ['user_id'] ))
 								<th>类型</th>
 								<th>默认频道</th>
 								<th>状态</th>
-								<th>位置</th>
+								<th>广告位</th>
 								<th>动作</th>
 							</tr>
 						</thead>

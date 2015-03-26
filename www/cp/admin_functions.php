@@ -23,7 +23,7 @@ global $today_month;
 global $today_year;
 
 if (!MAD_connect_repdb()){
-echo "不能连接报告数据库. 推出."; exit;	
+echo "不能连接报表数据库. 推出."; exit;	
 }
 else {
 global $repdb;	
@@ -51,7 +51,7 @@ global $maindb;
 $detailquery='';
 
 if (!MAD_connect_repdb()){
-echo "不能连接报告数据库。退出"; exit;	
+echo "不能连接报表数据库。退出"; exit;	
 }
 else {
 global $repdb;	
@@ -667,7 +667,7 @@ echo '<tr class="gradeA">
 								<td class="center">' . $pub_channel_detail ['channel_name'] . '</td>
 								<td class="center">' . $publication_status . '</td>
 								<td class="center">' . $total_placements . '</td>';
-		echo '<td class="center"><span class="ticket ticket-info"><a href="edit_publication.php?id=' . $publication_detail ['inv_id'] . '" style="color:#FFF; text-decoration:none;">编辑出版物</a></span>&nbsp;<span class="ticket ticket-warning"><a href="view_placements.php?id=' . $publication_detail ['inv_id'] . '" style="color:#FFF; text-decoration:none;">查看位置</a></span>&nbsp;<span id="pubdel' . $publication_detail ['inv_id'] . '" class="ticket ticket-important"><a style="color:#FFF; text-decoration:none;" href="#">删除</a></span></td>';
+		echo '<td class="center"><span class="ticket ticket-info"><a href="edit_publication.php?id=' . $publication_detail ['inv_id'] . '" style="color:#FFF; text-decoration:none;">编辑出版物</a></span>&nbsp;<span class="ticket ticket-warning"><a href="view_placements.php?id=' . $publication_detail ['inv_id'] . '" style="color:#FFF; text-decoration:none;">查看广告位</a></span>&nbsp;<span id="pubdel' . $publication_detail ['inv_id'] . '" class="ticket ticket-important"><a style="color:#FFF; text-decoration:none;" href="#">删除</a></span></td>';
 		echo '</tr>	';
 	}
 }
@@ -1363,7 +1363,7 @@ echo "<option value=''>- 选择上面的出版物 -</option>";
 }
 
 else {
-echo "<option value=''>- 选择位置  -</option>";
+echo "<option value=''>- 选择广告位  -</option>";
 }
 
 if (is_numeric($publicationid)){

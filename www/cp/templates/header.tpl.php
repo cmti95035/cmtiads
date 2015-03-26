@@ -75,12 +75,12 @@ header("Pragma: no-cache");
 			<?php if ($user_detail['account_type']==1 or  ($user_right['view_publications']==1 or $user_right['modify_publications']==1)){?>
 			<li id="navForms" class="nav<?php if ($current_section=="inventory"){echo " active"; } ?>">
 				<span class="icon-iphone"></span>
-				<a href="#">发布库存</a>
+				<a href="#">广告位库存</a>
 				
 				<ul class="subNav">
-					 <?php if ($user_detail['account_type']==1 or  ($user_right['view_publications']==1)){?><li><a href="view_publications.php">查看发布物</a></li><?php } ?>
-					<?php if ($user_detail['account_type']==1 or  ($user_right['modify_publications']==1)){?><li><a href="add_publication.php">+添加发布物</a></li>	<?php } ?>			
-					<?php if ($user_detail['account_type']==1 or  ($user_right['modify_publications']==1)){?><li><a href="add_placement.php">+添加位置</a></li><?php } ?>
+					 <?php if ($user_detail['account_type']==1 or  ($user_right['view_publications']==1)){?><li><a href="view_publications.php">查看出版物</a></li><?php } ?>
+					<?php if ($user_detail['account_type']==1 or  ($user_right['modify_publications']==1)){?><li><a href="add_publication.php">+添加出版物</a></li>	<?php } ?>			
+					<?php if ($user_detail['account_type']==1 or  ($user_right['modify_publications']==1)){?><li><a href="add_placement.php">+添加广告位</a></li><?php } ?>
 					 <?php if ($user_detail['account_type']==1 or  ($user_right['view_publications']==1)){?><li><a href="integration.php">集成</a></li><?php } ?>
 
 				</ul>	
@@ -118,11 +118,11 @@ header("Pragma: no-cache");
 			 <?php if ($user_detail['account_type']==1 or  ($user_right['campaign_reporting']==1 or $user_right['own_campaign_reporting']==1 or $user_right['publication_reporting']==1 or $user_right['network_reporting']==1)){?>
 			<li id="navCharts" class="nav<?php if ($current_section=="reporting"){echo " active"; } ?>">
 				<span class="icon-chart"></span>
-				<a href="#">报告</a>
+				<a href="#">报表</a>
                 <ul class="subNav">
-					<?php if ($user_detail['account_type']==1 or  ($user_right['campaign_reporting']==1 or $user_right['own_campaign_reporting']==1)){?><li><a href="reporting.php?type=campaign">广告活动报告</a></li><?php } ?>				
-					<?php if ($user_detail['account_type']==1 or  ($user_right['publication_reporting']==1)){?><li><a href="reporting.php?type=publication">出版物报告</a></li>	<?php } ?>				
-					<?php if ($user_detail['account_type']==1 or  ($user_right['network_reporting']==1)){?><li><a href="reporting.php?type=network">网络报告</a></li><?php } ?>		
+					<?php if ($user_detail['account_type']==1 or  ($user_right['campaign_reporting']==1 or $user_right['own_campaign_reporting']==1)){?><li><a href="reporting.php?type=campaign">广告活动报表</a></li><?php } ?>				
+					<?php if ($user_detail['account_type']==1 or  ($user_right['publication_reporting']==1)){?><li><a href="reporting.php?type=publication">出版物报表</a></li>	<?php } ?>				
+					<?php if ($user_detail['account_type']==1 or  ($user_right['network_reporting']==1)){?><li><a href="reporting.php?type=network">广告网络报表</a></li><?php } ?>		
 				</ul>	
 			</li>
             <?php } ?>

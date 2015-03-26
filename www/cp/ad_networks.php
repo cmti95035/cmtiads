@@ -44,7 +44,7 @@ exit;
 							<tr>
 								<th>网络名称</th>
 								<th><div align="center">条幅支持</div></th>
-								<th><div align="center">全凭支持</div></th>
+								<th><div align="center">全屏支持</div></th>
 								<th><div align="center">状态</div></th>
 								<th><div align="center">网络信息</div></th>
 								<th><div align="center">注册</div></th>
@@ -61,21 +61,7 @@ exit;
 				</div> <!-- .widget -->
 					
 					<!-- .actions -->
-                            
-								
-					
-				
-				
-				
-				
-				
-				
-				
 			</div> <!-- .grid -->
-			
-			
-				
-			
 			
 		</div> <!-- .container -->
 		

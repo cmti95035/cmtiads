@@ -48,7 +48,7 @@ $publ_detail = get_publication_detail ( $_GET ['id'] );
 
 				<div class="widget-header">
 					<span class="icon-list"></span>
-					<h3 class="icon chart">位置列表: <?php echo $publ_detail['inv_name']; ?></h3>
+					<h3 class="icon chart">广告位列表: <?php echo $publ_detail['inv_name']; ?></h3>
 				</div>
 
 				<div class="widget-content">
@@ -77,7 +77,7 @@ $publ_detail = get_publication_detail ( $_GET ['id'] );
 				<button
 					onclick="window.location='add_placement.php?pubid=<?php echo $_GET['id']; ?>';"
 					class="btn btn-quaternary">
-					<span class="icon-plus"></span>建立新的位置
+					<span class="icon-plus"></span>建立新的广告位
 				</button>
 			</div>
 			<!-- .actions -->

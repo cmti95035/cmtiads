@@ -22,7 +22,7 @@
 
 		<div class="widget-header">
 			<span class="icon-article"></span>
-			<h3>报告详情</h3>
+			<h3>报表详情</h3>
 		</div>
 		<!-- .widget-header -->
 
@@ -78,7 +78,7 @@
 						<option value="1">广告活动</option>
 						<option value="2">广告单位</option>
 						<option value="3">出版物</option>
-						<option value="4">位置</option>
+						<option value="4">广告位</option>
 						<option value="5">月</option>
 						<option value="6">日</option>
 						<option value="7">广告网络</option>
@@ -95,7 +95,7 @@
 						<option value="1">广告活动</option>
 						<option value="2">广告单位</option>
 						<option value="3">出版物</option>
-						<option value="4">位置</option>
+						<option value="4">广告位</option>
 						<option value="5">月</option>
 						<option value="6">日</option>
 						<option value="7">广告网络</option>
@@ -149,7 +149,7 @@
 	<!-- .widget -->
 
 	<div class="actions">
-		<button type="submit" class="btn btn-quaternary btn-large">生成报告</button>
+		<button type="submit" class="btn btn-quaternary btn-large">生成报表</button>
 	</div>
 	<!-- .actions -->
 </form>
