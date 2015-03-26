@@ -37,7 +37,7 @@ document.getElementById('creative_upload_div').style.display='none'; document.ge
 			
 								<div class="field">
 									<input type="text" value="<?php  if (!isset($page_desc)){$page_desc=''; } if ($current_action=="create" && empty($editdata['adv_name']) && $page_desc!='create_adunit'){ echo "Creative 1"; } else if (!empty($editdata['adv_name'])){echo $editdata['adv_name']; }?>"  name="adv_name" id="adv_name" size="28" class="" />			
-									<label for="adv_name">广告案名称</label>
+									<label for="adv_name">广告创意名称</label>
 								</div>
 							</div> <!-- .field-group -->
                         
@@ -57,7 +57,7 @@ document.getElementById('creative_upload_div').style.display='none'; document.ge
 								  <option <?php if (isset($editdata['creative_format']) && $editdata['creative_format']==1){echo 'selected="selected"'; } ?> value="1">320x50 Tablet Banner</option>
                                   <option <?php if (isset($editdata['creative_format']) && $editdata['creative_format']==10){echo 'selected="selected"'; } ?> value="10">Custom Size:</option>
 								</select>					
-									<label for="creative_format">广告案格式</label>
+									<label for="creative_format">广告创意格式</label>
 								</div>
                                 <?php } ?>
                                 <div id="widthzonediv" class="field">
@@ -76,7 +76,7 @@ document.getElementById('creative_upload_div').style.display='none'; document.ge
 	
 									<div class="field">
 										<input type="radio"   onclick="document.getElementById('creative_url_div').style.display='none'; document.getElementById('html_div').style.display='none'; document.getElementById('creative_upload_div').style.display='block'; document.getElementById('creative_upload_div').style.display='block'; document.getElementById('click_url_div').style.display='block';" name="creative_type" id="creative_type_upload" value="1" />
-										<label for="creative_type_upload">广告案上传</label>
+										<label for="creative_type_upload">广告创意上传</label>
 									</div>
 			
 									<div class="field">
@@ -109,7 +109,7 @@ document.getElementById('creative_upload_div').style.display='none'; document.ge
                             
                             <div class="field">
 									<input type="text" value="<?php if (isset($editdata['creative_url'])){echo $editdata['creative_url']; } ?>"  name="creative_url" id="creative_url" size="28" class="" />			
-									<label for="creative_url">广告案图像链接</label>
+									<label for="creative_url">广告创意图像链接</label>
 								</div>
 							</div> <!-- .field-group -->
 								
@@ -123,7 +123,7 @@ document.getElementById('creative_upload_div').style.display='none'; document.ge
 							
 								
 								<div id="creative_upload_div" class="field-group inlineField">	
-									<label for="creative_file">广告案上传: <?php if ($current_action=='edit'){?>(Updates current creative)<?php } ?></label>
+									<label for="creative_file">广告创意上传: <?php if ($current_action=='edit'){?>(Updates current creative)<?php } ?></label>
 			
 									<div class="field">
 										<input type="file" name="creative_file" id="creative_file" />

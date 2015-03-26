@@ -46,7 +46,7 @@ require_once MAD_PATH . '/www/cp/templates/header.tpl.php';
 						
 						<div class="dashboard_report defaultState">
 							<div class="pad">
-								<span class="value"><?php echo number_format($reportingdata_main['total_impressions']); ?></span> 展示数
+								<span class="value"><?php echo number_format($reportingdata_main['total_impressions']); ?></span> 收视数
 							</div> <!-- .pad -->
 						</div>
 						

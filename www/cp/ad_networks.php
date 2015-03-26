@@ -48,7 +48,7 @@ exit;
 								<th><div align="center">状态</div></th>
 								<th><div align="center">网络信息</div></th>
 								<th><div align="center">注册</div></th>
-								<th>动作</th>
+								<th>操作</th>
 							</tr>
 						</thead>
 						<tbody>

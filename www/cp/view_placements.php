@@ -62,7 +62,7 @@ $publ_detail = get_publication_detail ( $_GET ['id'] );
 								<th>频道</th>
 								<th>大小</th>
 								<th>状态</th>
-								<th>动作</th>
+								<th>操作</th>
 							</tr>
 						</thead>
 						<tbody>

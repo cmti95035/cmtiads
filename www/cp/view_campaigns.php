@@ -88,11 +88,11 @@ document.listform.submit();	}
 								<th>类型</th>
 								<th>优先级</th>
 								<th>状态</th>
-								<th>广告单位</th>
+								<th>广告单元</th>
 								<th>请求数</th>
-								<th>展示数</th>
+								<th>收视数</th>
 								<th>点击数</th>
-								<th>动作</th>
+								<th>操作</th>
 							</tr>
 						</thead>
 						<tbody>

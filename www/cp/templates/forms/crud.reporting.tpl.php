@@ -62,9 +62,9 @@
 
 				<div class="field">
 					<select id="reporting_network" name="reporting_network">
-						<option value="0">- 所有的网络 -</option>
+						<option value="0">- 所有的广告网络 -</option>
 <?php  if (!isset($editdata['reporting_network'])){$editdata['reporting_network']='';} get_network_dropdown_report($editdata['reporting_network']); ?>								</select>
-					<label for="reporting_network">网络</label>
+					<label for="reporting_network">广告网络</label>
 				</div>
 			</div>
 			<!-- .field-group -->
@@ -76,7 +76,7 @@
 					<select id="reporting_sort" name="reporting_sort">
 						<option value="0">-</option>
 						<option value="1">广告活动</option>
-						<option value="2">广告单位</option>
+						<option value="2">广告单元</option>
 						<option value="3">出版物</option>
 						<option value="4">广告位</option>
 						<option value="5">月</option>
@@ -93,7 +93,7 @@
 					<select id="reporting_sort2" name="reporting_sort2">
 						<option value="0">-</option>
 						<option value="1">广告活动</option>
-						<option value="2">广告单位</option>
+						<option value="2">广告单元</option>
 						<option value="3">出版物</option>
 						<option value="4">广告位</option>
 						<option value="5">月</option>

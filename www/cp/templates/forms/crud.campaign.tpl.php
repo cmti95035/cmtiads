@@ -155,7 +155,7 @@ function checkAll(theForm, cName, status) {
 								  <option <?php if (isset($editdata['campaign_type']) && $editdata['campaign_type']==2){echo 'selected="selected"'; } ?> value="2">推广</option>
 								  <option <?php if (isset($editdata['campaign_type']) && $editdata['campaign_type']=='network'){echo 'selected="selected"'; } ?> value="network">广告网络</option>
 								  
-							  </select>		<a style="font-size:11px;" href="#" onclick="$.modal ({title: 'Campaign Types', html: '<div style=width:500px;;><h3>直接售出</h3>直接售出的广告活动是固定的，通常优先级较高，展示数量有限.<br><br><h3>推广</h3>推广广告活动相互推广其他应用和产品. 一般优先级较低，在没有合适的直接售出广告或广告网络广告的时候显示.<br><br><h3>广告网络</h3>将请求直接发向特定的广告网络。 如果一个网络无法满足广工请求, 系统会选择下一个更低优先权的广告网络直到广告被找到. 广告网路广告活动一般针对国家投放以取得按地区获得最好收益. </div>'});" title="点击获得更多信息">信息</a>
+							  </select>		<a style="font-size:11px;" href="#" onclick="$.modal ({title: 'Campaign Types', html: '<div style=width:500px;;><h3>直接售出</h3>直接售出的广告活动是固定的，通常优先级较高，收视数量有限.<br><br><h3>推广</h3>推广广告活动相互推广其他应用和产品. 一般优先级较低，在没有合适的直接售出广告或广告网络广告的时候显示.<br><br><h3>广告网络</h3>将请求直接发向特定的广告网络。 如果一个网络无法满足广工请求, 系统会选择下一个更低优先权的广告网络直到广告被找到. 广告网路广告活动一般针对国家投放以取得按地区获得最好收益. </div>'});" title="点击获得更多信息">信息</a>
 									<label for="campaign_type">活动类型</label>
 								</div>
 							</div> <!-- .field-group -->
@@ -174,7 +174,7 @@ function checkAll(theForm, cName, status) {
 								<div class="field">
 								<select id="campaign_priority" name="campaign_priority">
 								  <?php if (!isset($editdata['campaign_priority'])){$editdata['campaign_priority']='';}  get_priority_dropdown($editdata['campaign_priority']); ?>
-							  </select>		<a class="tooltip" style="font-size:11px;" href="#" title="高优先级的活动会在低优先级的活动之前展示. 如果优先级相同，流量会随机分配.">信息</a>
+							  </select>		<a class="tooltip" style="font-size:11px;" href="#" title="高优先级的活动会在低优先级的活动之前收视. 如果优先级相同，流量会随机分配.">信息</a>
 									<label for="campaign_priority">活动优先级</label>
 								</div>
 							</div> <!-- .field-group -->
@@ -248,12 +248,12 @@ function checkAll(theForm, cName, status) {
 								  <label for="textfield"></label>
 								  <input size="10" type="text" value="<?php if (isset($editdata['total_amount'])){ echo $editdata['total_amount']; } ?>" name="total_amount" id="total_amount" />
 								  <select id="cap_type	" name="cap_type">
-								  <option <?php if (isset($editdata['cap_type']) && $editdata['cap_type']==1){echo 'selected="selected"'; } ?> value="1">每日展示数</option>
-								  <option <?php if (isset($editdata['cap_type']) && $editdata['cap_type']==2){echo 'selected="selected"'; } ?> value="2">总展示数</option>
+								  <option <?php if (isset($editdata['cap_type']) && $editdata['cap_type']==1){echo 'selected="selected"'; } ?> value="1">每日收视数</option>
+								  <option <?php if (isset($editdata['cap_type']) && $editdata['cap_type']==2){echo 'selected="selected"'; } ?> value="2">总收视数</option>
 						
 							  </select>		<a class="tooltip" style="font-size:11px;" href="#" 
-							  title="你可以添加每日展示数上限或总展示数上限。对于广告网络没有意义，只是对直接售出和推广活动有用.">信息</a>
-									<label for="total_amount">展示上限 (可选)</label>
+							  title="你可以添加每日收视数上限或总收视数上限。对于广告网络没有意义，只是对直接售出和推广活动有用.">信息</a>
+									<label for="total_amount">收视上限 (可选)</label>
 								</div>
 							</div> <!-- .field-group -->
                             

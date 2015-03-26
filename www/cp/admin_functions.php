@@ -30,7 +30,7 @@ global $repdb;
 }
 
 $x=0;
-echo'	<div class="widget widget-table"><div class="widget-header"><span class="icon-list"></span><h3 class="icon chart">出版物统计数据 － 今日</h3></div><div class="widget-content"><table class="table table-bordered table-striped"><thead><tr><th width="17%">出版物</th><th width="16%">请求数</th><th width="17%">展示数</th><th width="15%">点击数</th><th width="19%">点击率</th><th width="16%">填充率</th></tr></thead><tbody>';	
+echo'	<div class="widget widget-table"><div class="widget-header"><span class="icon-list"></span><h3 class="icon chart">出版物统计数据 － 今日</h3></div><div class="widget-content"><table class="table table-bordered table-striped"><thead><tr><th width="17%">出版物</th><th width="16%">请求数</th><th width="17%">收视数</th><th width="15%">点击数</th><th width="19%">点击率</th><th width="16%">填充率</th></tr></thead><tbody>';	
 $glistres=mysql_query("SELECT SUM(total_requests) AS total_requests, SUM(total_impressions) AS total_impressions, SUM(total_clicks) AS total_clicks, publication_id FROM md_reporting WHERE day='$today_day' AND publication_id!='' AND month='$today_month' AND year='$today_year' GROUP BY publication_id", $repdb);
 while($reportingdet_detail=mysql_fetch_array($glistres)){
 if ($x==0){$class="odd gradeA";} if ($x==1){$class="even gradeA";}
@@ -131,7 +131,7 @@ echo '<td>'.$data_today['total_requests'].'</td>';
 echo '</tr>';
 
 echo '<tr>';
-echo '<th>展示数</th>';
+echo '<th>收视数</th>';
 echo '<td>'.$data_m6['total_impressions'].'</td>';
 echo '<td>'.$data_m5['total_impressions'].'</td>';
 echo '<td>'.$data_m4['total_impressions'].'</td>';
@@ -1437,7 +1437,7 @@ if ($data['creative_type']==2){
 
 if (empty($data['creative_url']) or empty($data['click_url'])){
 global $errormessage;
-$errormessage='请填入广告案链接和点击链接.';
+$errormessage='请填入广告创意链接和点击链接.';
 global $editdata;
 $editdata=$data;
 return false;	
@@ -1462,7 +1462,7 @@ $no_creative=1;
 
 if ($current_unit_detail['adv_type']!=1){
 global $errormessage;
-$errormessage='请上传一个广告案.';
+$errormessage='请上传一个广告创意.';
 global $editdata;
 $editdata=$data;
 return false;	
@@ -5184,7 +5184,7 @@ if ($data['report_type']=='publication' or $data['report_type']=='network'){
 						
 						<div class="dashboard_report defaultState">
 							<div class="pad">
-								<span class="value">'.number_format($report_detail['total_impressions'], 0).'</span> 展示数
+								<span class="value">'.number_format($report_detail['total_impressions'], 0).'</span> 收视数
 							</div> <!-- .pad -->
 						</div>
 						

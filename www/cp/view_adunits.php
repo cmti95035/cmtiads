@@ -95,14 +95,14 @@ document.listform.submit();	}
 							<table class="table table-bordered table-striped">
 						<thead>
 							<tr>
-								<th>Name</th>
-								<th>Type</th>
-								<th>Status</th>
-								<th>Ad Size</th>
-								<th>Creative</th>
-								<th>Impressions</th>
-								<th>Clicks</th>
-								<th>Action</th>
+								<th>名称</th>
+								<th>类型</th>
+								<th>状态</th>
+								<th>广告大小</th>
+								<th>广告创意</th>
+								<th>收视数</th>
+								<th>点击数</th>
+								<th>操作</th>
 							</tr>
 						</thead>
 						<tbody>
