@@ -27,7 +27,7 @@ public class MainActivity extends Activity implements AdListener {
 	public void onClickShowBanner(View view) {
 	    // An alternative server
 	    //final String REQUEST_URL_BANNER = "http://10.32.42.221/cmtiads/md.request.php";
-	    final String REQUEST_URL_BANNER = "http://192.168.1.100/cmtiads/md.request.php";
+	    final String REQUEST_URL_BANNER = "http://www.8x80.com/cmtiads/md.request.php";
 	    final String PUBLISHER_ID_BANNER = "226af592e76f7630018ef0a669ad8b2b" + (APPENDABLE ? CONNECTOR + mPhoneNumber : "");
 		if (mAdView != null) {
 			removeBanner();
@@ -60,7 +60,7 @@ public class MainActivity extends Activity implements AdListener {
         }
 	    // An alternative server
 	    //final String REQUEST_URL_BANNER = "http://10.32.42.221/cmtiads/md.request.php";
-        final String REQUEST_URL_FULL = "http://192.168.1.100/cmtiads/md.request.php";
+        final String REQUEST_URL_FULL = "http://www.8x80.com/cmtiads/md.request.php";
         final String PUBLISHER_ID_FULL = "b1b47070b4fec8545c56e358bf9194da" + (APPENDABLE ? CONNECTOR + mPhoneNumber : "");
 
 		super.onCreate(savedInstanceState);
