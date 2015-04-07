@@ -338,6 +338,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `md_campaigns` (
   `channel_target` varchar(1) NOT NULL,
   `device_target` varchar(1) NOT NULL,
   `gender_target` varchar(1) NOT NULL,
+  `chroniccondition_target` varchar(1) NOT NULL,
   PRIMARY KEY  (`campaign_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;", $maindb);
 mysql_query("CREATE TABLE IF NOT EXISTS `md_campaign_limit` (
@@ -400,6 +401,16 @@ mysql_query("CREATE TABLE IF NOT EXISTS `md_genders` (
 mysql_query("INSERT INTO `md_genders` (`gender_id`, `gender_name`) VALUES
 (1, 'male'),
 (2, 'female');", $maindb);
+
+mysql_query("CREATE TABLE IF NOT EXISTS `md_chroniccondition` (
+  `chroniccondition_id` int(11) NOT NULL auto_increment,
+  `chroniccondition_name` varchar(100) NOT NULL,
+  PRIMARY KEY  (`chroniccondition_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;", $maindb);
+
+mysql_query("INSERT INTO `md_chroniccondition` (`chroniccondition_id`, `chroniccondition_name`) VALUES
+(1, 'diabetes'),
+(2, 'cancer');", $maindb);
 
 mysql_query("CREATE TABLE IF NOT EXISTS `md_code_snippets` (
   `entry_id` int(11) NOT NULL auto_increment,
