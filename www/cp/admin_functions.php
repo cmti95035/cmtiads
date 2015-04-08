@@ -23,14 +23,14 @@ global $today_month;
 global $today_year;
 
 if (!MAD_connect_repdb()){
-echo "Could not connect to reporting database. Exiting."; exit;	
+echo "不能连接报表数据库. 推出."; exit;	
 }
 else {
 global $repdb;	
 }
 
 $x=0;
-echo'	<div class="widget widget-table"><div class="widget-header"><span class="icon-list"></span><h3 class="icon chart">Publication Statistics - Today</h3></div><div class="widget-content"><table class="table table-bordered table-striped"><thead><tr><th width="17%">Publication</th><th width="16%">Requests</th><th width="17%">Impressions</th><th width="15%">Clicks</th><th width="19%">CTR</th><th width="16%">Fill Rate</th></tr></thead><tbody>';	
+echo'	<div class="widget widget-table"><div class="widget-header"><span class="icon-list"></span><h3 class="icon chart">出版物统计数据 － 今日</h3></div><div class="widget-content"><table class="table table-bordered table-striped"><thead><tr><th width="17%">出版物</th><th width="16%">请求数</th><th width="17%">收视数</th><th width="15%">点击数</th><th width="19%">点击率</th><th width="16%">填充率</th></tr></thead><tbody>';	
 $glistres=mysql_query("SELECT SUM(total_requests) AS total_requests, SUM(total_impressions) AS total_impressions, SUM(total_clicks) AS total_clicks, publication_id FROM md_reporting WHERE day='$today_day' AND publication_id!='' AND month='$today_month' AND year='$today_year' GROUP BY publication_id", $repdb);
 while($reportingdet_detail=mysql_fetch_array($glistres)){
 if ($x==0){$class="odd gradeA";} if ($x==1){$class="even gradeA";}
@@ -51,7 +51,7 @@ global $maindb;
 $detailquery='';
 
 if (!MAD_connect_repdb()){
-echo "Could not connect to reporting database. Exiting."; exit;	
+echo "不能连接报表数据库。退出"; exit;	
 }
 else {
 global $repdb;	
@@ -93,20 +93,20 @@ function graph_report_widget($location, $type, $duration){
 echo '<div class="widget">';
 echo '<div class="widget-header">';
 echo '<span class="icon-chart"></span>';
-echo '<h3 class="icon chart">Quick Statistics - Last 7 Days</h3>';
+echo '<h3 class="icon chart">快速统计数据 - 最近七天</h3>';
 echo '</div>';
 echo '<div class="widget-content">';
 echo '<table class="stats" data-chart-type="line" data-chart-colors="">';
 echo '<thead>';
 echo '<tr>';
 echo '<td>&nbsp;</td>';
-echo '<th>'; echo date('d/M/Y', mktime(0, 0, 0, date("m") , date("d")-6 , date("Y"))); echo '</th>';
-echo '<th>'; echo date('d/M/Y', mktime(0, 0, 0, date("m") , date("d")-5 , date("Y"))); echo '</th>';
-echo '<th>'; echo date('d/M/Y', mktime(0, 0, 0, date("m") , date("d")-4 , date("Y"))); echo '</th>';
-echo '<th>'; echo date('d/M/Y', mktime(0, 0, 0, date("m") , date("d")-3 , date("Y"))); echo '</th>';
-echo '<th>'; echo date('d/M/Y', mktime(0, 0, 0, date("m") , date("d")-2 , date("Y"))); echo '</th>';
-echo '<th>Yesterday</th>';
-echo '<th>Today</th>';
+echo '<th>'; echo date('m/d', mktime(0, 0, 0, date("m") , date("d")-6 , date("Y"))); echo '</th>';
+echo '<th>'; echo date('m/d', mktime(0, 0, 0, date("m") , date("d")-5 , date("Y"))); echo '</th>';
+echo '<th>'; echo date('m/d', mktime(0, 0, 0, date("m") , date("d")-4 , date("Y"))); echo '</th>';
+echo '<th>'; echo date('m/d', mktime(0, 0, 0, date("m") , date("d")-3 , date("Y"))); echo '</th>';
+echo '<th>'; echo date('m/d', mktime(0, 0, 0, date("m") , date("d")-2 , date("Y"))); echo '</th>';
+echo '<th>昨</th>';
+echo '<th>今</th>';
 echo '</tr>';
 echo '</thead>';
 
@@ -120,7 +120,7 @@ $data_today=get_reporting_data("publisher", date('d', mktime(0, 0, 0, date("m") 
 
 echo '<tbody>';
 echo '<tr>';
-echo '<th>Ad Requests</th>';
+echo '<th>广告请求数</th>';
 echo '<td>'.$data_m6['total_requests'].'</td>';
 echo '<td>'.$data_m5['total_requests'].'</td>';
 echo '<td>'.$data_m4['total_requests'].'</td>';
@@ -131,7 +131,7 @@ echo '<td>'.$data_today['total_requests'].'</td>';
 echo '</tr>';
 
 echo '<tr>';
-echo '<th>Impressions</th>';
+echo '<th>收视数</th>';
 echo '<td>'.$data_m6['total_impressions'].'</td>';
 echo '<td>'.$data_m5['total_impressions'].'</td>';
 echo '<td>'.$data_m4['total_impressions'].'</td>';
@@ -142,7 +142,7 @@ echo '<td>'.$data_today['total_impressions'].'</td>';
 echo '</tr>';
 
 echo '<tr>';
-echo '<th>Clicks</th>';
+echo '<th>点击数</th>';
 echo '<td>'.$data_m6['total_clicks'].'</td>';
 echo '<td>'.$data_m5['total_clicks'].'</td>';
 echo '<td>'.$data_m4['total_clicks'].'</td>';
@@ -239,7 +239,7 @@ echo '<div class="box plain">';
 echo '<div class="notify">';
 echo '<a href="javascript:;" class="close">&times;</a>';
 echo '<h3>SimpleXML Not Loaded</h3>';
-echo '<p>mAdserve has detected that the SimpleXML PHP Module is not installed on this machine. mAdserve will not work properly if you do not install this module. For more information on SimpleXML, <a href="http://php.net/manual/book.simplexml.php">click here</a>.</strong></p>';
+echo '<p>cmtiads has detected that the SimpleXML PHP Module is not installed on this machine. cmtiads will not work properly if you do not install this module. For more information on SimpleXML, <a href="http://php.net/manual/book.simplexml.php">click here</a>.</strong></p>';
 echo '</div> <!-- .notify -->';
 echo '</div>';
 }
@@ -662,16 +662,14 @@ else if (($current_timestamp-$publication_detail['md_lastrequest'])<MAD_PUBL_ACT
 else {$publication_status='Inactive';}
 
 echo '<tr class="gradeA">
-								<td>'.$publication_detail['inv_name'].'</td>
-								<td class="center">'.$pub_type_detail['pub_name'].' </td>
-								<td class="center">'.$pub_channel_detail['channel_name'].'</td>
-								<td class="center">'.$publication_status.'</td>
-								<td class="center">'.$total_placements.'</td>';
-								echo '<td class="center"><span class="ticket ticket-info"><a href="edit_publication.php?id='.$publication_detail['inv_id'].'" style="color:#FFF; text-decoration:none;">Edit Publication</a></span>&nbsp;<span class="ticket ticket-warning"><a href="view_placements.php?id='.$publication_detail['inv_id'].'" style="color:#FFF; text-decoration:none;">View Placements</a></span>&nbsp;<span id="pubdel'.$publication_detail['inv_id'].'" class="ticket ticket-important"><a style="color:#FFF; text-decoration:none;" href="#">Delete</a></span></td>';
-	
-								
-							echo '</tr>	';
-}
+								<td>' . $publication_detail ['inv_name'] . '</td>
+								<td class="center">' . $pub_type_detail ['pub_name'] . ' </td>
+								<td class="center">' . $pub_channel_detail ['channel_name'] . '</td>
+								<td class="center">' . $publication_status . '</td>
+								<td class="center">' . $total_placements . '</td>';
+		echo '<td class="center"><span class="ticket ticket-info"><a href="edit_publication.php?id=' . $publication_detail ['inv_id'] . '" style="color:#FFF; text-decoration:none;">编辑出版物</a></span>&nbsp;<span class="ticket ticket-warning"><a href="view_placements.php?id=' . $publication_detail ['inv_id'] . '" style="color:#FFF; text-decoration:none;">查看广告位</a></span>&nbsp;<span id="pubdel' . $publication_detail ['inv_id'] . '" class="ticket ticket-important"><a style="color:#FFF; text-decoration:none;" href="#">删除</a></span></td>';
+		echo '</tr>	';
+	}
 }
 
 function print_deletionjs($type){
@@ -1049,6 +1047,16 @@ function load_campaign_gender_array($id){
 	return $gender_array;
 }
 
+function load_campaign_chroniccondition_array($id){
+	global $maindb;
+	$chroniccondition_array=array();
+	$usrres=mysql_query("select targeting_code from md_campaign_targeting where campaign_id='$id' and targeting_type='chroniccondition'", $maindb);
+	while($targeting_detail=mysql_fetch_array($usrres)){
+		array_push($chroniccondition_array, $targeting_detail['targeting_code']);
+	}
+	return $chroniccondition_array;
+}
+
 
 function get_creative_detail($id){
 	global $maindb;
@@ -1254,7 +1262,7 @@ echo '<option '.$selected_html.' value="'.$group_detail['entry_id'].'">'.$group_
 function get_pubtype_dropdown($selected){
 global $maindb;	
 
-echo "<option value=''>- Select Publication Type -</option>";
+echo "<option value=''>- 选择出版物类型 -</option>";
 
 $usrres=mysql_query("select * from md_publication_types ORDER BY entry_id ASC", $maindb);
 while($pubtype_detail=mysql_fetch_array($usrres)){
@@ -1271,7 +1279,7 @@ echo '<option '.$selected_html.' value="'.$pubtype_detail['entry_id'].'">'.$pubt
 function get_network_dropdown($selected){
 global $maindb;	
 
-echo "<option value=''>- Select Ad Network -</option>";
+echo "<option value=''>- 选择广告网络 -</option>";
 
 $usrres=mysql_query("select * from md_networks ORDER BY network_name ASC", $maindb);
 while($network_detail=mysql_fetch_array($usrres)){
@@ -1280,7 +1288,7 @@ if (check_network_configured($network_detail['network_identifier'])){
 $network_status_text='';	
 }
 else {
-$network_status_text='(Not Configured)';		
+$network_status_text='(没有配置)';		
 }
 if (is_numeric($selected) && $selected==$network_detail['entry_id']){
 $selected_html='selected="selected"';	
@@ -1310,7 +1318,7 @@ echo '<option '.$selected_html.' value="'.$network_detail['entry_id'].'">'.$netw
 function get_publication_dropdown($selected){
 global $maindb;	
 
-echo "<option value=''>- Select Publication -</option>";
+echo "<option value=''>- 选择出版物 -</option>";
 
 $usrres=mysql_query("select * from md_publications ORDER BY inv_id DESC", $maindb);
 while($publication_detail=mysql_fetch_array($usrres)){
@@ -1361,11 +1369,11 @@ function get_placement_integration_dropdown($zoneid, $publicationid){
 global $maindb;	
 
 if (!is_numeric($publicationid) && !is_numeric($zoneid)){
-echo "<option value=''>- Select Publication Above -</option>";
+echo "<option value=''>- 选择上面的出版物 -</option>";
 }
 
 else {
-echo "<option value=''>- Select Placement  -</option>";
+echo "<option value=''>- 选择广告位  -</option>";
 }
 
 if (is_numeric($publicationid)){
@@ -1388,7 +1396,7 @@ function do_edit($type, $data, $detail){
 	if ($type=='runninglimit'){
 	if (!isset($detail) or !is_numeric($detail)){
 	global $errormessage;
-$errormessage='Invalid Campaign ID.';
+$errormessage='无效的广告活动ID.';
 global $editdata;
 $editdata=$data;
 return false;	
@@ -1396,7 +1404,7 @@ return false;
 	
 	if (!isset($data['new_limit']) or !is_numeric($data['new_limit'])){
 		global $errormessage;
-$errormessage='Invalid Limit entered.';
+$errormessage='无效的限制.';
 global $editdata;
 $editdata=$data;
 return false;		
@@ -1416,7 +1424,7 @@ return true;
 		
 		if (empty($data['adv_name']) or (!is_numeric($data['custom_creative_width']) or !is_numeric($data['custom_creative_height']))){
 global $errormessage;
-$errormessage='Please fill out all required fields.';
+$errormessage='请填入所有需要的信息.';
 global $editdata;
 $editdata=$data;
 return false;	
@@ -1426,7 +1434,7 @@ if ($data['creative_type']==3){
 
 if (empty($data['html_body'])){
 global $errormessage;
-$errormessage='Please enter a HTML body for your ad.';
+$errormessage='请填入广告的HTML主体.';
 global $editdata;
 $editdata=$data;
 return false;	
@@ -1439,7 +1447,7 @@ if ($data['creative_type']==2){
 
 if (empty($data['creative_url']) or empty($data['click_url'])){
 global $errormessage;
-$errormessage='Please enter a Creative URL and Click URL for your ad.';
+$errormessage='请填入广告创意链接和点击链接.';
 global $editdata;
 $editdata=$data;
 return false;	
@@ -1453,7 +1461,7 @@ if ($data['creative_type']==1){
 
 if (empty($data['click_url'])){
 global $errormessage;
-$errormessage='Please enter a Click URL for your ad.';
+$errormessage='请填入广告点击链接.';
 global $editdata;
 $editdata=$data;
 return false;	
@@ -1464,7 +1472,7 @@ $no_creative=1;
 
 if ($current_unit_detail['adv_type']!=1){
 global $errormessage;
-$errormessage='Please upload a creative for your ad.';
+$errormessage='请上传一个广告创意.';
 global $editdata;
 $editdata=$data;
 return false;	
@@ -1497,7 +1505,7 @@ list($width, $height, $type, $attr)= getimagesize($_FILES['creative_file']['tmp_
 
 if ($height!=$data['custom_creative_height'] or $width!=$data['custom_creative_width'] or empty($file_extension)){
 global $errormessage;
-$errormessage='The image you uploaded does not appear to be in the right dimensions. Please upload a valid image sized '.$data['custom_creative_width'].'x'.$data['custom_creative_height'].'';
+$errormessage='你上传的图像尺寸不对。 请上传一个正确尺寸的图像 '.$data['custom_creative_width'].'x'.$data['custom_creative_height'].'';
 global $editdata;
 $editdata=$data;
 return false;
@@ -1507,7 +1515,7 @@ $creative_server_detail = get_creativeserver_detail(getconfig_var('default_creat
 
 if ($creative_server_detail['entry_id']<1){
 global $errormessage;
-$errormessage='The default creative server does not seem to exist. Please change your creative server in your mAdserve control panel under Configuration>Creative Servers';
+$errormessage='The default creative server does not seem to exist. Please change your creative server in your cmtiads control panel under Configuration>Creative Servers';
 global $editdata;
 $editdata=$data;
 return false;
@@ -1624,6 +1632,7 @@ if (!isset($data['as_values_1'])){$data['as_values_1']='';}
 if (!isset($data['placement_select'])){$data['placement_select']='';}
 if (!isset($data['channel_select'])){$data['channel_select']='';}
 if (!isset($data['gender_select'])){$data['gender_select']='';}
+if (!isset($data['chroniccondition_select'])){$data['chroniccondition_select']='';}
 if (!isset($data['target_iphone'])){$data['target_iphone']='';}
 if (!isset($data['target_ipod'])){$data['target_ipod']='';}
 if (!isset($data['target_ipad'])){$data['target_ipad']='';}
@@ -1672,6 +1681,13 @@ return false;
 if ($data['gender_targeting']==2 && count($data['gender_select'])<1){
 	global $errormessage;
 	$errormessage='Please select the gender you want to target.';
+	global $editdata;
+	$editdata=$data;
+	return false;
+}
+if ($data['chroniccondition_targeting']==2 && count($data['chroniccondition_select'])<1){
+	global $errormessage;
+	$errormessage='Please select the chronic condition you want to target.';
 	global $editdata;
 	$editdata=$data;
 	return false;
@@ -1808,10 +1824,12 @@ $data['publication_targeting']=sanitize($data['publication_targeting']);
 $data['channel_targeting']=sanitize($data['channel_targeting']);
 $data['device_targeting']=sanitize($data['device_targeting']);
 $data['gender_targeting']=sanitize($data['gender_targeting']);
+$data['chroniccondition_targeting']=sanitize($data['chroniccondition_targeting']);
+
 
 global $maindb;
 
-mysql_query("UPDATE md_campaigns set campaign_type='$data[campaign_type]', campaign_name='$data[campaign_name]', campaign_desc='$data[campaign_desc]', campaign_start='$data[startdate_value]', campaign_end='$data[enddate_value]', campaign_networkid='$data[campaign_networkid]', campaign_priority='$data[campaign_priority]', target_iphone='$data[target_iphone]', target_ipod='$data[target_ipod]', target_ipad='$data[target_ipad]', target_android='$data[target_android]', target_other='$data[target_other]', ios_version_min='$data[ios_version_min]', ios_version_max='$data[ios_version_max]', android_version_min='$data[android_version_min]', android_version_max='$data[android_version_max]', country_target='$data[geo_targeting]', publication_target='$data[publication_targeting]', channel_target='$data[channel_targeting]', gender_target='$data[gender_targeting]', device_target='$data[device_targeting]' where campaign_id='$detail'", $maindb);
+mysql_query("UPDATE md_campaigns set campaign_type='$data[campaign_type]', campaign_name='$data[campaign_name]', campaign_desc='$data[campaign_desc]', campaign_start='$data[startdate_value]', campaign_end='$data[enddate_value]', campaign_networkid='$data[campaign_networkid]', campaign_priority='$data[campaign_priority]', target_iphone='$data[target_iphone]', target_ipod='$data[target_ipod]', target_ipad='$data[target_ipad]', target_android='$data[target_android]', target_other='$data[target_other]', ios_version_min='$data[ios_version_min]', ios_version_max='$data[ios_version_max]', android_version_min='$data[android_version_min]', android_version_max='$data[android_version_max]', country_target='$data[geo_targeting]', publication_target='$data[publication_targeting]', channel_target='$data[channel_targeting]', gender_target='$data[gender_targeting]',chroniccondition_target='$data[chroniccondition_targeting]', device_target='$data[device_targeting]' where campaign_id='$detail'", $maindb);
 
 reset_campaign_targeting($detail);
 
@@ -1845,6 +1863,14 @@ if ($data['gender_targeting']==2 && is_array($data['gender_select'])){
 
 }
 // End Gender
+// Chronic
+if ($data['chroniccondition_targeting']==2 && is_array($data['chroniccondition_select'])){
+	foreach($data['chroniccondition_select'] as $chroniccondition_id){
+		add_campaign_targeting($detail, 'chroniccondition', $chroniccondition_id);
+	}
+
+}
+// End Chronic
 
 // Placement
 if ($data['publication_targeting']==2 && is_array($data['placement_select'])){
@@ -2431,7 +2457,7 @@ $creative_server_detail = get_creativeserver_detail(getconfig_var('default_creat
 
 if ($creative_server_detail['entry_id']<1){
 global $errormessage;
-$errormessage='The default creative server does not seem to exist. Please change your creative server in your mAdserve control panel under Configuration>Creative Servers';
+$errormessage='The default creative server does not seem to exist. Please change your creative server in your cmtiads control panel under Configuration>Creative Servers';
 global $editdata;
 $editdata=$data;
 return false;
@@ -2554,6 +2580,7 @@ if (!isset($data['as_values_1'])){$data['as_values_1']='';}
 if (!isset($data['placement_select'])){$data['placement_select']='';}
 if (!isset($data['channel_select'])){$data['channel_select']='';}
 if (!isset($data['gender_select'])){$data['gender_select']='';}
+if (!isset($data['chroniccondition_select'])){$data['chroniccondition_select']='';}
 if (!isset($data['target_iphone'])){$data['target_iphone']='';}
 if (!isset($data['target_ipod'])){$data['target_ipod']='';}
 if (!isset($data['target_ipad'])){$data['target_ipad']='';}
@@ -2607,6 +2634,15 @@ if ($data['gender_targeting']==2 && count($data['gender_select'])<1){
 	$editdata=$data;
 	return false;
 }
+
+if ($data['chroniccondition_targeting']==2 && count($data['chroniccondition_select'])<1){
+	global $errormessage;
+	$errormessage='Please select chronic condition you want to target.';
+	global $editdata;
+	$editdata=$data;
+	return false;
+}
+
 if ($data['device_targeting']==2 && ($data['target_iphone']!=1 && $data['target_ipod']!=1 && $data['target_ipad']!=1 && $data['target_android']!=1 && $data['target_other']!=1)){
 global $errormessage;
 $errormessage='Please select at least one device type you want to target.';
@@ -2774,7 +2810,7 @@ $creative_server_detail = get_creativeserver_detail(getconfig_var('default_creat
 
 if ($creative_server_detail['entry_id']<1){
 global $errormessage;
-$errormessage='The default creative server does not seem to exist. Please change your creative server in your mAdserve control panel under Configuration>Creative Servers';
+$errormessage='The default creative server does not seem to exist. Please change your creative server in your cmtiads control panel under Configuration>Creative Servers';
 global $editdata;
 $editdata=$data;
 return false;
@@ -2931,9 +2967,11 @@ $data['publication_targeting']=sanitize($data['publication_targeting']);
 $data['channel_targeting']=sanitize($data['channel_targeting']);
 $data['device_targeting']=sanitize($data['device_targeting']);
 $data['gender_targeting']=sanitize($data['gender_targeting']);
+$data['chroniccondition_targeting']=sanitize($data['chroniccondition_targeting']);
+
 // Insert Campaign into DB
-mysql_query("INSERT INTO md_campaigns (campaign_owner, campaign_status, campaign_type, campaign_name, campaign_desc, campaign_start, campaign_end, campaign_creationdate, campaign_networkid, campaign_priority, target_iphone, target_ipod, target_ipad, target_android, target_other, ios_version_min, ios_version_max, android_version_min, android_version_max, country_target, publication_target, channel_target, device_target, gender_target)
-VALUES ('$user_detail[user_id]', '1', '$data[campaign_type]', '$data[campaign_name]', '$data[campaign_desc]', '$data[startdate_value]', '$data[enddate_value]', '$creation_timestamp', '$data[campaign_networkid]', '$data[campaign_priority]', '$data[target_iphone]', '$data[target_ipod]', '$data[target_ipad]', '$data[target_android]', '$data[target_other]', '$data[ios_version_min]', '$data[ios_version_max]', '$data[android_version_min]', '$data[android_version_max]', '$data[geo_targeting]', '$data[publication_targeting]', $data[channel_targeting], '$data[device_targeting]', '$data[gender_targeting]')", $maindb);
+mysql_query("INSERT INTO md_campaigns (campaign_owner, campaign_status, campaign_type, campaign_name, campaign_desc, campaign_start, campaign_end, campaign_creationdate, campaign_networkid, campaign_priority, target_iphone, target_ipod, target_ipad, target_android, target_other, ios_version_min, ios_version_max, android_version_min, android_version_max, country_target, publication_target, channel_target, device_target, gender_target,chroniccondition_target)
+VALUES ('$user_detail[user_id]', '1', '$data[campaign_type]', '$data[campaign_name]', '$data[campaign_desc]', '$data[startdate_value]', '$data[enddate_value]', '$creation_timestamp', '$data[campaign_networkid]', '$data[campaign_priority]', '$data[target_iphone]', '$data[target_ipod]', '$data[target_ipad]', '$data[target_android]', '$data[target_other]', '$data[ios_version_min]', '$data[ios_version_max]', '$data[android_version_min]', '$data[android_version_max]', '$data[geo_targeting]', '$data[publication_targeting]', $data[channel_targeting], '$data[device_targeting]', '$data[gender_targeting]', '$data[chroniccondition_targeting]')", $maindb);
 global $created_campaign_id;
 $created_campaign_id=mysql_insert_id($maindb);
 // END: Insert Campaign into DB 
@@ -2994,6 +3032,14 @@ if ($data['gender_targeting']==2 && is_array($data['gender_select'])){
 
 }
 // End Gender
+// Chronic condition
+if ($data['chroniccondition_targeting']==2 && is_array($data['chroniccondition_select'])){
+	foreach($data['chroniccondition_select'] as $chroniccondition_id){
+		add_campaign_targeting($created_campaign_id, 'chroniccondition', $chroniccondition_id);
+	}
+
+}
+// End Chronic
 
 // Placement
 if ($data['publication_targeting']==2 && is_array($data['placement_select'])){
@@ -3436,6 +3482,27 @@ function list_gender_campaign($selected){
 		$x=$x+1; if ($x==2){$x=0;}
 	}
 }
+
+function list_chroniccondition_campaign($selected){
+	if (!is_array($selected)){$selected=array();}
+	global $maindb;
+	$x=0;
+	
+	mysql_set_charset("utf8");
+	$usrres=mysql_query("select * from md_chroniccondition", $maindb);
+	
+	while($chroniccondition_detail=mysql_fetch_array($usrres)){
+
+		if ($x==1){ echo '<tr style="background-color:#F2F2F2;">'; } else { echo '<tr>'; }
+		echo '<td width="45%"><div>';
+		if (in_array($chroniccondition_detail['chroniccondition_id'], $selected)) { $selectedhtml='checked="checked"';} else {$selectedhtml='';}
+		echo '<input '.$selectedhtml.' value="'.$chroniccondition_detail['chroniccondition_id'].'" name="chroniccondition_select[ ]" type="checkbox" /> '.$chroniccondition_detail['chroniccondition_name'].'';
+		echo '</div></td>';
+		echo '</tr>';
+
+		$x=$x+1; if ($x==2){$x=0;}
+	}
+}
 function get_adnetworks($origin){
 global $maindb;	
 $current_timestamp=time();
@@ -3459,9 +3526,9 @@ echo '<tr class="gradeA">
 								<td class="center"><div align=center><span class="'.$banner_support_icon.'"></span></div></td>
 								<td class="center"><div align=center><span class="'.$interstitial_support_icon.'"></span></div></td>
 								<td class="center"><div align=center>'.$network_status.'</div></td>
-								<td class="center"><div align=center><a href="#" onclick="$.modal ({title: \''.$network_detail['network_name'].'\', html: \'<div style=width:500px;;>'.trim(str_replace(",", "\,", addslashes($network_detail['info_content']))).'</div>\'});">View Info</a></div></td>';
-								echo '<td class="center"><div align=center><a target="_blank" href="'.$network_detail['signup_url'].'">Signup</a></div></td>';
-								echo '<td class="center"><span class="ticket ticket-info"><a href="network_id_setup.php?id='.$network_detail['entry_id'].'" style="color:#FFF; text-decoration:none;">Setup Publisher IDs</a></span>&nbsp;<span class="ticket ticket-warning"><a href="network_settings.php?id='.$network_detail['entry_id'].'" style="color:#FFF; text-decoration:none;">Settings</a></span>&nbsp;</td>';
+								<td class="center"><div align=center><a href="#" onclick="$.modal ({title: \''.$network_detail['network_name'].'\', html: \'<div style=width:500px;;>'.trim(str_replace(",", "\,", addslashes($network_detail['info_content']))).'</div>\'});">查看信息</a></div></td>';
+								echo '<td class="center"><div align=center><a target="_blank" href="'.$network_detail['signup_url'].'">注册</a></div></td>';
+								echo '<td class="center"><span class="ticket ticket-info"><a href="network_id_setup.php?id='.$network_detail['entry_id'].'" style="color:#FFF; text-decoration:none;">设置发布商ID</a></span>&nbsp;<span class="ticket ticket-warning"><a href="network_settings.php?id='.$network_detail['entry_id'].'" style="color:#FFF; text-decoration:none;">参数</a></span>&nbsp;</td>';
 	
 								
 							echo '</tr>	';
@@ -3489,8 +3556,8 @@ $current_timestamp=time();
 $usrres=mysql_query("select * from md_ad_units WHERE campaign_id='$campaignid' ORDER BY adv_id DESC", $maindb);
 while($ad_detail=mysql_fetch_array($usrres)){
 
-if ($ad_detail['adv_status']==2){$ad_status='Paused'; $statuscolor='#FF9900';}
-else if ($ad_detail['adv_status']==1){$ad_status='Active'; $statuscolor='#009900;';}
+if ($ad_detail['adv_status']==2){$ad_status='æš‚å�œ'; $statuscolor='#FF9900';}
+else if ($ad_detail['adv_status']==1){$ad_status='è¿�è¡Œ'; $statuscolor='#009900;';}
 
 switch($ad_detail['adv_type']){
 case 1:
@@ -3817,7 +3884,7 @@ $http->addParam(''.$network_detail['network_identifier'].'_autoapprove_min_cpm' 
 
 }
 
-$http->execute('http://network.madserve.org/api_request.php');
+$http->execute('http://network.cmtiads.org/api_request.php');
 
 if ($http->error){
 return false;
@@ -3872,6 +3939,11 @@ add_trafficrequest_targeting($created_request_id, 'channel', $channel_targeting_
 foreach ($traffic_request->targeting->gender_targeting->value as $gender_targeting_code){
 	/*Add Gender Targeting*/
 	add_trafficrequest_targeting($created_request_id, 'gender', $gender_targeting_code);
+}
+
+foreach ($traffic_request->targeting->chroniccondition_targeting->value as $chroniccondition_targeting_code){
+	/*Add Chronic Condition Targeting*/
+	add_trafficrequest_targeting($created_request_id, 'chroniccondition', $chroniccondition_targeting_code);
 }
 
 if ($trafficrequest_autoapprove==1){
@@ -3983,6 +4055,19 @@ else {
 }
 
 // gender Targeting End
+
+// Chronic condition Targeting
+$chroniccondition_array=load_tr_chroniccondition_array($request_id);
+
+if (count($chroniccondition_array)>0){
+	$campaigndata['chroniccondition_targeting']=2;
+	$campaigndata['chroniccondition_select']=$chroniccondition_array;
+}
+else {
+	$campaigndata['chroniccondition_targeting']=1;
+}
+
+// Chronic Condition Targeting End
 
 // Default: All Publications
 $campaigndata['publication_targeting']=1;
@@ -4374,7 +4459,7 @@ $http->addParam('install_id'   , getconfig_var('installation_id'));
 $http->addParam('requestid'   , get_actual_tr_id($id));
 $http->addParam('status'   , $type);
 
-$http->execute('http://network.madserve.org/request_accept.php');
+$http->execute('http://network.cmtiads.org/request_accept.php');
 
 if ($http->error){
 return false;
@@ -4444,6 +4529,15 @@ function load_tr_gender_array($id){
 	return $gender_array;
 }
 
+function load_tr_chroniccondition_array($id){
+	global $maindb;
+	$chroniccondition_array=array();
+	$usrres=mysql_query("select parameter_value from md_trafficrequests_parameters where request_id='$id' and parameter_id='chroniccondition'", $maindb);
+	while($targeting_detail=mysql_fetch_array($usrres)){
+		array_push($chroniccondition, $targeting_detail['parameter_value']);
+	}
+	return $chroniccondition_array;
+}
 
 function get_actual_tr_id($id){
 global $maindb;	
@@ -4517,7 +4611,7 @@ echo '<table class="table table-bordered table-striped">
 						<tbody>';
 						
 						echo '<tr class="gradeA">
-								<td valign="middle"><div style="margin-top:4px;" align="center"><em>Default</em> <a href="#" onclick="$.modal ({title: \'Publisher ID Types\', html: \'<div style=width:500px;;>mAdserve requests ads directly from the respective ad network over an API connection. Since mAdserve is not a middle-man, you need to have an account at the ad network you would like to use in order to start driving revenue through it. Your ad network earnings will be paid directly by the ad network you choose to use.<br><br><h2>Setting up Publisher IDs</h2>Each network requires a different set of Publisher identifers. Inside mAdserve, you can add Publisher IDs on a Global Default Level, Publication Level and Placement Level. This means that you can either use just one single default Publisher ID for requesting ads from an ad network, or use different Publisher IDs depending on what Publication or Placement the ad is being shown in.<br><br><h2>Where can I find my Publisher ID?</h2>This depends on the network you are using. Usually, your network will show your Publisher ID when you add a site/app in your network account. If you are unsure about where you can find Publisher IDs, please contact the ad network you are using for assistance.<br><br><h2>How can I add Publisher IDs on a placement level?</h2>You can add/modify your Publisher IDs on a Placement Level by clicking on the small + link next to the name of your Publication. If there are no Publisher IDs provided for a single placement, mAdserve will automatically use the Publication or Network Default Publisher IDs for the ad request.\'});">Info</a></div></td>';
+								<td valign="middle"><div style="margin-top:4px;" align="center"><em>Default</em> <a href="#" onclick="$.modal ({title: \'Publisher ID Types\', html: \'<div style=width:500px;;>cmtiads requests ads directly from the respective ad network over an API connection. Since cmtiads is not a middle-man, you need to have an account at the ad network you would like to use in order to start driving revenue through it. Your ad network earnings will be paid directly by the ad network you choose to use.<br><br><h2>Setting up Publisher IDs</h2>Each network requires a different set of Publisher identifers. Inside cmtiads, you can add Publisher IDs on a Global Default Level, Publication Level and Placement Level. This means that you can either use just one single default Publisher ID for requesting ads from an ad network, or use different Publisher IDs depending on what Publication or Placement the ad is being shown in.<br><br><h2>Where can I find my Publisher ID?</h2>This depends on the network you are using. Usually, your network will show your Publisher ID when you add a site/app in your network account. If you are unsure about where you can find Publisher IDs, please contact the ad network you are using for assistance.<br><br><h2>How can I add Publisher IDs on a placement level?</h2>You can add/modify your Publisher IDs on a Placement Level by clicking on the small + link next to the name of your Publication. If there are no Publisher IDs provided for a single placement, cmtiads will automatically use the Publication or Network Default Publisher IDs for the ad request.\'});">Info</a></div></td>';
 								if (!empty($network_detail['network_d1_name'])){
 								echo '<td class="center"><div align="center"><input style="width:80%;" name="default-1" placeholder="Enter '.$network_detail['network_name'].' '.$network_detail['network_d1_name'].'..." value="'.get_pubid_fixed($network_detail['network_identifier'], 1, $publication_id, '', 1).'" type="text"></div></td>';
 								}
@@ -4728,7 +4822,7 @@ $http->addParam('action'   , 'account_check');
 $http->addParam('uid'   , $mf_uid);
 $http->addParam('pass'   , $mf_pass);
 
-$http->execute('http://api.mobfox.com/api_madserve.php');
+$http->execute('http://api.mobfox.com/api_cmtiads.php');
 
 if ($http->error){
 return false;
@@ -4817,7 +4911,7 @@ $http->addParam('inv_url'   , $publication_detail['inv_address']);
 $http->addParam('inv_type'   , $publication_detail['inv_type']);
 $http->addParam('inv_cat'   , get_zone_channel($zone_id));
 
-$http->execute('http://api.mobfox.com/api_madserve.php');
+$http->execute('http://api.mobfox.com/api_cmtiads.php');
 
 if ($http->error){
 return false;
@@ -5179,20 +5273,20 @@ if ($data['report_type']=='publication' or $data['report_type']=='network'){
 				
 					<div class="dashboard_report defaultState">
 							<div class="pad">
-								<span class="value">'.number_format($report_detail['total_requests'], 0).'</span> Requests
+								<span class="value">'.number_format($report_detail['total_requests'], 0).'</span> 请求数
 							</div> <!-- .pad -->
 						</div>
 							
 						
 						<div class="dashboard_report defaultState">
 							<div class="pad">
-								<span class="value">'.number_format($report_detail['total_impressions'], 0).'</span> Impressions
+								<span class="value">'.number_format($report_detail['total_impressions'], 0).'</span> 收视数
 							</div> <!-- .pad -->
 						</div>
 						
 						<div class="dashboard_report defaultState">
 							<div class="pad">
-								<span class="value">'.number_format($report_detail['total_clicks'], 0).'</span> Clicks
+								<span class="value">'.number_format($report_detail['total_clicks'], 0).'</span> 点击数
 							</div> <!-- .pad -->
 						</div>
 						

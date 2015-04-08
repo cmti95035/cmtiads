@@ -12,7 +12,7 @@
 					</div>
 
 					<ul class="bullet secondary">
-                    	<li><a <?php if (check_cron_active()){?>style="text-decoration:line-through;"<?php } ?> target="_blank" href="http://help.madserve.org/cron.php">Set Up Daily Cron Job</a></li>
+                    	<li><a <?php if (check_cron_active()){?>style="text-decoration:line-through;"<?php } ?> target="_blank" href="http://help.cmtiads.org/cron.php">Set Up Daily Cron Job</a></li>
 						<li><a <?php if (check_setup('networks')){?>style="text-decoration:line-through;"<?php } ?> href="ad_networks.php">Setup Ad Networks</a></li>
                         <li><a <?php if (check_setup('publication')){?>style="text-decoration:line-through;"<?php } ?> href="add_publication.php">Add a Publication</a></li>
 						<li><a <?php if (check_setup('campaign')){?>style="text-decoration:line-through;"<?php } ?> href="create_campaign.php">Add a Campaign</a></li>
@@ -21,14 +21,14 @@
                 <?php } ?>
 				
                 <?php if (getconfig_var('update_check')==1){
-					$box_url='http://network.madserve.org/newsbox.php?dv='.urlencode(getconfig_var('db_install_version')).'&cv='.urlencode(MAD_VERSION).''; if (getconfig_var('allow_statistical_info')==1){
+					$box_url='http://network.cmtiads.org/newsbox.php?dv='.urlencode(getconfig_var('db_install_version')).'&cv='.urlencode(MAD_VERSION).''; if (getconfig_var('allow_statistical_info')==1){
 					$data_yesterday=get_reporting_data("publisher", date('d', mktime(0, 0, 0, date("m") , date("d")-1 , date("Y"))), date('m', mktime(0, 0, 0, date("m") , date("d")-1 , date("Y"))), date('Y', mktime(0, 0, 0, date("m") , date("d")-1 , date("Y"))), '');
 					$box_url=$box_url . '&u='.urlencode(getconfig_var('installation_id')).'&d='.urlencode(date('dmy', time()-86400)).'&re='.urlencode($data_yesterday['total_requests']).'&im='.urlencode($data_yesterday['total_impressions']).'&cl='.urlencode($data_yesterday['total_clicks']).'';} ?>
 			  <div class="box">
                 <iframe width="100%" height="350" allowtransparency="1" scrolling="no" frameborder="0" src="<?php echo $box_url; ?>"></iframe>
 				<!--<ul class="bullet secondary">
-						<li><a href="<?php echo "../../sdk/ios_latest.zip"; ?>">mAdserve iOS SDK</a></li>
-						<li><a href="<?php echo "../../sdk/android_latest.zip"; ?>">mAdserve Android SDK</a></li>
+						<li><a href="<?php echo "../../sdk/ios_latest.zip"; ?>">cmtiads iOS SDK</a></li>
+						<li><a href="<?php echo "../../sdk/android_latest.zip"; ?>">cmtiads Android SDK</a></li>
 						<li>Campaign: <a href="#">Motorola Razr</a></li>
 						<li><a href="#">Server Configuration</a></li>
 				</ul> -->

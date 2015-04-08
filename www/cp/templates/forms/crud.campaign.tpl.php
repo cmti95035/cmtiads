@@ -83,6 +83,19 @@ document.getElementById('gendertargetingtable').style.display='none';
 
 }
 
+function chroniccondition_targeting(status){
+	
+	if (status=="off"){
+$("#chroniccondition_targeting_all").attr("checked", "true");
+document.getElementById('chronicconditiontargetingtable').style.display='none';
+	}
+	if (status=="on"){
+	$("#chroniccondition_targeting_co").attr("checked", "true");
+	document.getElementById('chronicconditiontargetingtable').style.display='block';
+	}
+
+}
+
 function startdate(status){
 	
 	if (status=="off"){
@@ -135,7 +148,7 @@ function checkAll(theForm, cName, status) {
 						
 						<div class="widget-header">
 							<span class="icon-article"></span>
-							<h3>Campaign Details</h3>
+							<h3>广告活动详情</h3>
 						</div> <!-- .widget-header -->
 						
 						<div class="widget-content">
@@ -143,7 +156,7 @@ function checkAll(theForm, cName, status) {
                         <?php if ($user_detail['tooltip_setting']==1){ ?>
                          <div class="notify notify-info">						
 						
-                        						<p>Please enter some general details about your campaign below.</p>
+                        						<p>请在下面输入一些关于你的广告活动的细节.</p>
 					</div> <!-- .notify -->
                         <?php } ?>
 
@@ -151,12 +164,12 @@ function checkAll(theForm, cName, status) {
 			
 								<div class="field">
 								<select <?php if ($current_action=='create'){?>onchange="if (this.options[this.selectedIndex].value=='network'){document.getElementById('network_select').style.display='block'; document.getElementById('create_adunit').style.display='none';} else {document.getElementById('network_select').style.display='none'; document.getElementById('create_adunit').style.display='block';}"<?php } ?><?php if ($current_action=='edit'){?>onchange="if (this.options[this.selectedIndex].value=='network'){document.getElementById('network_select').style.display='block';} else {document.getElementById('network_select').style.display='none';}"<?php } ?> id="campaign_type" name="campaign_type">
-								  <option <?php if (isset($editdata['campaign_type']) && $editdata['campaign_type']==1){echo 'selected="selected"'; } ?> value="1">Direct Sold</option>
-								  <option <?php if (isset($editdata['campaign_type']) && $editdata['campaign_type']==2){echo 'selected="selected"'; } ?> value="2">Promotional</option>
-								  <option <?php if (isset($editdata['campaign_type']) && $editdata['campaign_type']=='network'){echo 'selected="selected"'; } ?> value="network">Ad Network</option>
+								  <option <?php if (isset($editdata['campaign_type']) && $editdata['campaign_type']==1){echo 'selected="selected"'; } ?> value="1">直接售出</option>
+								  <option <?php if (isset($editdata['campaign_type']) && $editdata['campaign_type']==2){echo 'selected="selected"'; } ?> value="2">推广</option>
+								  <option <?php if (isset($editdata['campaign_type']) && $editdata['campaign_type']=='network'){echo 'selected="selected"'; } ?> value="network">广告网络</option>
 								  
-							  </select>		<a style="font-size:11px;" href="#" onclick="$.modal ({title: 'Campaign Types', html: '<div style=width:500px;;><h3>Direct Sold</h3>A direct sold campaign is a fixed campaign in the system, typically with a high priority and a limited number of impressions.<br><br><h3>Promotional</h3>A promotional campaign is a campaign cross-promoting other apps or products. Cross promotional campaigns typically have a low priority to only show when an ad space cannot be filled by direct sold campaigns or ad networks.<br><br><h3>Ad Network</h3>An ad network campaign is a campaign sending traffic to a particular network. If a network is unable to fill the ad-request, the system will automatically select the next campaign with a lower priority until an ad has been found. Ad Network campaigns are usually targeted by country in order to select the best-paying partner for a particular geographic.</div>'});" title="Click for more info">Info</a>
-									<label for="campaign_type">Campaign Type</label>
+							  </select>		<a style="font-size:11px;" href="#" onclick="$.modal ({title: 'Campaign Types', html: '<div style=width:500px;;><h3>直接售出</h3>直接售出的广告活动是固定的，通常优先级较高，收视数量有限.<br><br><h3>推广</h3>推广广告活动相互推广其他应用和产品. 一般优先级较低，在没有合适的直接售出广告或广告网络广告的时候显示.<br><br><h3>广告网络</h3>将请求直接发向特定的广告网络。 如果一个网络无法满足广工请求, 系统会选择下一个更低优先权的广告网络直到广告被找到. 广告网路广告活动一般针对国家投放以取得按地区获得最好收益. </div>'});" title="点击获得更多信息">信息</a>
+									<label for="campaign_type">活动类型</label>
 								</div>
 							</div> <!-- .field-group -->
                             
@@ -164,8 +177,8 @@ function checkAll(theForm, cName, status) {
 			
 								<div class="field">
 								<select id="campaign_networkid" name="campaign_networkid">
-<?php if (!isset($editdata['campaign_networkid'])){$editdata['campaign_networkid']='';} get_network_dropdown($editdata['campaign_networkid']); ?>							  </select>		<a class="tooltip" style="font-size:11px;" href="#" onclick="$.modal ({title: 'Network Publisher IDs', html: '<div style=width:500px;;><h3>Ad Networks</h3>In order to start sending mobile traffic to an ad network of your choice, you will have to create an account with the advertising network and then enter the Publisher IDs/Site IDs on the <a href=\'ad_networks.php\' target=\'_blank\'>Network Configuration</a> page in your mAdserve ad server. mAdserve will then automatically send all your traffic to the respective ad network. Revenue and other Reporting metrics will be reported and visible directly in your account with the ad network.</div>'});">Publisher ID Info</a>
-									<label for="campaign_networkid">Ad Network</label>
+<?php if (!isset($editdata['campaign_networkid'])){$editdata['campaign_networkid']='';} get_network_dropdown($editdata['campaign_networkid']); ?>							  </select>		<a class="tooltip" style="font-size:11px;" href="#" onclick="$.modal ({title: 'Network Publisher IDs', html: '<div style=width:500px;;><h3>Ad Networks</h3>In order to start sending mobile traffic to an ad network of your choice, you will have to create an account with the advertising network and then enter the Publisher IDs/Site IDs on the <a href=\'ad_networks.php\' target=\'_blank\'>Network Configuration</a> page in your cmtiads ad server. cmtiads will then automatically send all your traffic to the respective ad network. Revenue and other Reporting metrics will be reported and visible directly in your account with the ad network.</div>'});">Publisher ID Info</a>
+									<label for="campaign_networkid">广告网络</label>
 								</div>
 							</div> <!-- .field-group -->
                             
@@ -174,8 +187,8 @@ function checkAll(theForm, cName, status) {
 								<div class="field">
 								<select id="campaign_priority" name="campaign_priority">
 								  <?php if (!isset($editdata['campaign_priority'])){$editdata['campaign_priority']='';}  get_priority_dropdown($editdata['campaign_priority']); ?>
-							  </select>		<a class="tooltip" style="font-size:11px;" href="#" title="A campaign with higher priority will show before a campaign with lower priority. If there are two campaigns with the same priority, traffic will be allocated randomly between these campaigns.">Info</a>
-									<label for="campaign_priority">Campaign Priority</label>
+							  </select>		<a class="tooltip" style="font-size:11px;" href="#" title="高优先级的活动会在低优先级的活动之前收视. 如果优先级相同，流量会随机分配.">信息</a>
+									<label for="campaign_priority">活动优先级</label>
 								</div>
 							</div> <!-- .field-group -->
                             
@@ -183,7 +196,7 @@ function checkAll(theForm, cName, status) {
 			
 								<div class="field">
 									<input type="text" value="<?php if (isset($editdata['campaign_name'])){ echo $editdata['campaign_name']; } ?>"  name="campaign_name" id="campaign_name" size="28" class="" />			
-									<label for="campaign_name">Campaign Name</label>
+									<label for="campaign_name">活动名称</label>
 								</div>
 							</div> <!-- .field-group -->
                             
@@ -191,7 +204,7 @@ function checkAll(theForm, cName, status) {
 			
 								<div class="field">
 									<textarea name="campaign_desc" id="campaign_desc" rows="3" cols="29"><?php if (isset($editdata['campaign_desc'])){ echo $editdata['campaign_desc']; } ?></textarea>	
-									<label for="campaign_desc">Campaign Notes</label>
+									<label for="campaign_desc">活动注释</label>
 								</div>
 							</div> <!-- .field-group -->
                             
@@ -199,12 +212,12 @@ function checkAll(theForm, cName, status) {
 	
 									<div class="field">
 										<input type="radio"   onclick="document.getElementById('startdate').style.display='none';" name="start_date_type" id="start_date_im" value="1" />
-										<label for="start_date_im">Start Immediately</label>
+										<label for="start_date_im">马上开始</label>
 									</div>
 			
 									<div id="interstitialoptiobutton" class="field">
 										<input type="radio"  onclick="document.getElementById('startdate').style.display='block';" name="start_date_type" id="start_date_co" value="2" />
-										<label for="start_date_co">Custom Start Date</label>
+										<label for="start_date_co">自定义开始日期</label>
 									</div>
                                     
                                     <div style="color:#999; font-size:11px;">Start Date</div>
@@ -224,14 +237,14 @@ function checkAll(theForm, cName, status) {
 	
 									<div class="field">
 										<input type="radio"   onclick="document.getElementById('enddate').style.display='none';" name="end_date_type" id="end_date_no" value="1" />
-										<label for="end_date_no">No End Date</label>
+										<label for="end_date_no">无结束日期</label>
 									</div>
 			
 									<div id="interstitialoptiobutton" class="field">
 										<input type="radio"  onclick="document.getElementById('enddate').style.display='block';" name="end_date_type" id="end_date_co" value="2" />
-										<label for="end_date_co">Custom End Date</label>
+										<label for="end_date_co">自定义结束日期</label>
 									</div>
-                                    <div style="color:#999; font-size:11px;">End Date</div>
+                                    <div style="color:#999; font-size:11px;">结束日期</div>
 			
 									
 								</div>	
@@ -242,21 +255,18 @@ function checkAll(theForm, cName, status) {
 										<div id="enddatepicker"></div>				
 									</div> <!-- .field -->								
 								</div> <!-- .field-group -->
-                                
                                                                 <input type="hidden" name="enddate_value" id="enddate_value" />
-
-                                
                                 <div class="field-group">
-			
 								<div class="field">
 								  <label for="textfield"></label>
 								  <input size="10" type="text" value="<?php if (isset($editdata['total_amount'])){ echo $editdata['total_amount']; } ?>" name="total_amount" id="total_amount" />
 								  <select id="cap_type	" name="cap_type">
-								  <option <?php if (isset($editdata['cap_type']) && $editdata['cap_type']==1){echo 'selected="selected"'; } ?> value="1">impressions / day</option>
-								  <option <?php if (isset($editdata['cap_type']) && $editdata['cap_type']==2){echo 'selected="selected"'; } ?> value="2">total impressions</option>
+								  <option <?php if (isset($editdata['cap_type']) && $editdata['cap_type']==1){echo 'selected="selected"'; } ?> value="1">每日收视数</option>
+								  <option <?php if (isset($editdata['cap_type']) && $editdata['cap_type']==2){echo 'selected="selected"'; } ?> value="2">总收视数</option>
 						
-							  </select>		<a class="tooltip" style="font-size:11px;" href="#" title="You can add either a daily impression cap or a total impression cap to your campaign. This does not make sense for network campaigns, but rather for direct sold and promotional campaigns.">Info</a>
-									<label for="total_amount">Impression Cap (optional)</label>
+							  </select>		<a class="tooltip" style="font-size:11px;" href="#" 
+							  title="你可以添加每日收视数上限或总收视数上限。对于广告网络没有意义，只是对直接售出和推广活动有用.">信息</a>
+									<label for="total_amount">收视上限 (可选)</label>
 								</div>
 							</div> <!-- .field-group -->
                             
@@ -268,7 +278,7 @@ function checkAll(theForm, cName, status) {
 						
 						<div class="widget-header">
 							<span class="icon-article"></span>
-							<h3>Targeting</h3>
+							<h3>投放</h3>
 						</div> <!-- .widget-header -->
 						
 						<div class="widget-content">
@@ -284,12 +294,12 @@ function checkAll(theForm, cName, status) {
 	
 									<div class="field">
 										<input type="radio"   onclick="document.getElementById('country_target').style.display='none';" name="geo_targeting" id="geo_targeting_all" value="1" />
-										<label for="geo_targeting_all">All Countries</label>
+										<label for="geo_targeting_all">所有国家</label>
 									</div>
 			
 									<div id="interstitialoptiobutton" class="field">
 										<input type="radio"  onclick="document.getElementById('country_target').style.display='block';" name="geo_targeting" id="geo_targeting_co" value="2" />
-										<label for="geo_targeting_co">Specific Countries/Regions</label>
+										<label for="geo_targeting_co">特定国家/地区</label>
 									</div>
                                     
 <!--                                    <div style="color:#999; font-size:11px;">Geographic Targeting</div>
@@ -322,22 +332,16 @@ var selecteddata = {items: [
 <?php } ?>
 $("input[id=country_targeting]").autoSuggest(data.items, {selectedItemProp: "name", searchObjProps: "name", asHtmlID: "1", preFill:selecteddata.items, neverSubmit:true});
 </script>
-            
-									
-								</div>	
-                            
-                        
-<div class="field-group control-group inline">	
-  
-	
-									<div class="field">
+  							</div>	
+  <div class="field-group control-group inline">	
+  								<div class="field">
 										<input type="radio"   onclick="document.getElementById('publicationtargetingtable').style.display='none';" name="publication_targeting" id="publication_targeting_all" value="1" />
-										<label for="publication_targeting_all">All Publications</label>
+										<label for="publication_targeting_all">所有出版物</label>
 									</div>
 			
 									<div id="interstitialoptiobutton" class="field">
 										<input type="radio"  onclick="document.getElementById('publicationtargetingtable').style.display='block';" name="publication_targeting" id="publication_targeting_co" value="2" />
-										<label for="publication_targeting_co">Specific Publications & Placements</label>
+										<label for="publication_targeting_co">特定出版物和广告位</label>
 									</div>
                                     
 <!--                                    <div style="color:#999; font-size:11px;">Device Targeting</div>
@@ -352,21 +356,16 @@ $("input[id=country_targeting]").autoSuggest(data.items, {selectedItemProp: "nam
     <td>&nbsp;</td>
   </tr> -->
 </table>
- 
-									
 		  </div>	
-          
           <div class="field-group control-group inline">	
-  
-	
 									<div class="field">
 										<input type="radio"   onclick="document.getElementById('channeltargetingtable').style.display='none';" name="channel_targeting" id="channel_targeting_all" value="1" />
-										<label for="channel_targeting_all">All Channels</label>
+										<label for="channel_targeting_all">所有频道</label>
 									</div>
 			
 									<div id="interstitialoptiobutton" class="field">
 										<input type="radio"  onclick="document.getElementById('channeltargetingtable').style.display='block';" name="channel_targeting" id="channel_targeting_co" value="2" />
-										<label for="channel_targeting_co">Specific Channels</label>
+										<label for="channel_targeting_co">特定频道</label>
 									</div>
                                     
 <!--                                    <div style="color:#999; font-size:11px;">Device Targeting</div>
@@ -386,12 +385,12 @@ $("input[id=country_targeting]").autoSuggest(data.items, {selectedItemProp: "nam
 	
 									<div class="field">
 									  <input type="radio"   onclick="document.getElementById('devicetargetingtable').style.display='none';" name="device_targeting" id="device_targeting_all" value="1" />
-										<label for="device_targeting_all">All Devices</label>
+										<label for="device_targeting_all">所有设备</label>
 									</div>
 			
 									<div id="interstitialoptiobutton" class="field">
 									  <input type="radio"  onclick="document.getElementById('devicetargetingtable').style.display='block';" name="device_targeting" id="device_targeting_co" value="2" />
-										<label for="device_targeting_co">Specific Device/OS</label>
+										<label for="device_targeting_co">特定设备/操作系统</label>
 									</div>
                                     
 <!--      <div style="color:#999; font-size:11px;">Device Targeting</div>
@@ -492,57 +491,41 @@ $("input[id=country_targeting]").autoSuggest(data.items, {selectedItemProp: "nam
       </select></div><div>-</div></td>
   </tr>
 </table>
-			
-									
-						  </div>	
-                                
+			  </div>	
   <div class="field-group control-group inline">	
-  
-	
 									<div class="field">
 										<input type="radio"   onclick="document.getElementById('gendertargetingtable').style.display='none';" name="gender_targeting" id="gender_targeting_all" value="1" />
-										<label for="gender_targeting_all">All Genders</label>
+										<label for="gender_targeting_all">所有性别</label>
 									</div>
 			
 									<div id="interstitialoptiobutton" class="field">
 										<input type="radio"  onclick="document.getElementById('gendertargetingtable').style.display='block';" name="gender_targeting" id="gender_targeting_co" value="2" />
-										<label for="gender_targeting_co">Specific Genders</label>
+										<label for="gender_targeting_co">特定性别</label>
 									</div>
 								
 <table width="584" border="0" cellpadding="6" cellspacing="0" id="gendertargetingtable" style="-moz-border-radius: 5px; border-radius: 5px; margin-top:5px;">
   <?php if (!isset($editdata['gender_select'])){$editdata['gender_select']='';} list_gender_campaign($editdata['gender_select']); ?>
  
 </table>
-	</div>                                             
-                   
-                            
+	</div>      
+<div class ="field-group control-group inline" >   
+                                       <div class ="field" >
+                                        <input type ="radio"    onclick ="document.getElementById('chronicconditiontargetingtable').style.display='none';" name = "chroniccondition_targeting" id ="chroniccondition_targeting_all" value= "1" />
+                                         <label for ="chroniccondition_targeting_all" > 所有的慢性病</ label >
+                                        </div>
+                  
+                                       <div id ="interstitialoptiobutton" class= "field">
+                                         <input type ="radio"   onclick ="document.getElementById('chronicconditiontargetingtable').style.display='block';" name = "chroniccondition_targeting"id ="chroniccondition_targeting_co" value= "2" />
+                                         <label for ="chroniccondition_targeting_co" > 特定的慢性病</ label >
+                                      </div>
+                                                
+<table width ="584" border= "0" cellpadding ="6" cellspacing= "0" id ="chronicconditiontargetingtable" style=" -moz-border-radius : 5px ; border-radius : 5px ; margin-top : 5px;" >
+  <?php if (! isset($editdata[ 'chroniccondition_select' ])){$editdata['chroniccondition_select' ]='' ;} list_chroniccondition_campaign($editdata['chroniccondition_select' ]); ?>
+ 
+</table>
+       </div>  
+	
                             		</div> <!-- .widget-content -->
-						
 					</div> <!-- .widget -->
-                    
-                   
-                                                    
-                                                    
-                                <script src='assets/javascripts/all.js'></script>
+					             <script src='assets/javascripts/all.js'></script>
                                 
-                               
-
-                            
-                        
-
-
-                            
-                            
-                            
-                                                        
-                           
-                             
-                             
-                            
-                          
-                            
-			
-							
-							
-						
-				

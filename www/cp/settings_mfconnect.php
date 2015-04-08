@@ -47,7 +47,7 @@ require_once MAD_PATH . '/www/cp/templates/header.tpl.php';
 			<div class="grid-24">
 			
             <?php if (isset ($_GET['failed']) && $_GET['failed']==1){ ?>
-            <div class="box plain"><div class="notify notify-error"><h3>Error</h3><p>mAdserve was unable to connect to your MobFox Account. A valid MobFox connection is required for mAdserve to function properly. If you have recently updated your MobFox Account password, please update your user credentials below.</p></div> <!-- .notify --></div>
+            <div class="box plain"><div class="notify notify-error"><h3>Error</h3><p>cmtiads was unable to connect to your MobFox Account. A valid MobFox connection is required for cmtiads to function properly. If you have recently updated your MobFox Account password, please update your user credentials below.</p></div> <!-- .notify --></div>
             <?php } ?>
            <?php if ($updated==1){?>	
             <div class="box plain"><div class="notify notify-success"><h3>Successfully Updated</h3><p>Your MobFox:Connect Settings have successfully been updated.</p></div> <!-- .notify --></div>
@@ -92,29 +92,11 @@ require_once MAD_PATH . '/www/cp/templates/header.tpl.php';
 									<label for="db_v">Connection Status</label>
 								</div>
 							</div> <!-- .field-group -->
-                            
-                           
-                            
-                             
-                             
-                            
                             <div class="actions">						
 									<button type="submit" class="btn btn-quaternary btn-large">Save Changes</button>
 								</div> <!-- .actions -->
-                            
-			
-							
-							
-						
-						</div> <!-- .widget-content -->
-						
+ 					</div> <!-- .widget-content -->					
 					</div> <!-- .widget -->
-                    
-                    
-										
-					
-					
-					
 					</form>
 					
 				</div> <!-- .grid -->

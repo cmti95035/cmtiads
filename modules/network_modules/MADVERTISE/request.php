@@ -20,7 +20,7 @@ $request_url='http://ad.madvertise.de/site/'.$network_ids['p_1'].'';
 $http->addParam('ua'   , $request_info['user_agent']);
 $http->addParam('ip'   , $request_info['ip_address']);
 $http->addParam('url'   , $request_info['referer']);
-$http->addParam('requester'   , 'madserve_api');
+$http->addParam('requester'   , 'cmtiads_api');
 $http->addParam('version'   , 'api_2.1');
 $http->addParam('lng'   , $request_info['longitude']);
 $http->addParam('lat'   , $request_info['latitude']);

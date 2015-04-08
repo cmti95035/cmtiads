@@ -1,5 +1,5 @@
 <?php
-/* mAdserve Ad Request */
+/* cmtiads Ad Request */
 
 require_once 'init.php';
 

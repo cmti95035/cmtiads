@@ -19,7 +19,7 @@
         android:layout_below="@+id/textView1"
         android:layout_marginTop="20dp"
         android:onClick="onClickShowBanner"
-        android:text="Show Banner" />
+        android:text="显示条幅广告" />
 
     <Button
         android:id="@+id/show_video"
@@ -29,7 +29,7 @@
         android:layout_centerHorizontal="true"
         android:layout_marginTop="20dp"
         android:onClick="onClickShowVideoInterstitial"
-        android:text="Show Video/Interstitial" />
+        android:text="显示全屏广告" />
 
     <TextView
         android:id="@+id/textView1"
@@ -39,6 +39,6 @@
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="31dp"
         android:gravity="center"
-        android:text="Please set AdServer URL and PublisherID in MainActivity.java first!" />
+        android:text="欢迎使用CMTI移动广告平台Demo。 请点击以下按键显示相应类型广告。 " />
 
 </RelativeLayout>

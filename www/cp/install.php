@@ -84,7 +84,7 @@ require_once MAD_PATH . '/www/cp/templates/header_i.tpl.php';
 <div id="content">		
 		
 		<div id="contentHeader">
-			<h1>mAdserve Installation Wizard - Step <?php echo $mad_install['step']; ?></h1>
+			<h1>cmtiads Installation Wizard - Step <?php echo $mad_install['step']; ?></h1>
 		</div> <!-- #contentHeader -->	
 		
 		<div class="container">
@@ -100,17 +100,17 @@ require_once MAD_PATH . '/www/cp/templates/header_i.tpl.php';
                         <div class="notify notify-info">
 						
 						<a href="javascript:;" class="close">&times;</a>
-						<h3>mAdserve Server Check Failed</h3>
+						<h3>cmtiads Server Check Failed</h3>
 						
-						<p>You are only one step away from running your very own instance of mAdserve, world's most powerful mobile ad server. mAdserve has performed some checks on your server and there are a couple of thing's you'll need to do before mAdserve can be installed properly.</p>
+						<p>You are only one step away from running your very own instance of cmtiads, world's most powerful mobile ad server. cmtiads has performed some checks on your server and there are a couple of thing's you'll need to do before cmtiads can be installed properly.</p>
 					</div> <!-- .notify -->
                     <?php } else { ?>
                     <div class="notify notify-success">
 						
 						<a href="javascript:;" class="close">&times;</a>
-                    <h3>mAdserve Server Check Successful</h3>
+                    <h3>cmtiads Server Check Successful</h3>
 						
-						<p>Congratulations! You are only one step away from running your very own instance of mAdserve, world's most powerful mobile ad server. The Server check has been successful. To continue with installation, please click the button below.</p>
+						<p>Congratulations! You are only one step away from running your very own instance of cmtiads, world's most powerful mobile ad server. The Server check has been successful. To continue with installation, please click the button below.</p>
 					</div> <!-- .notify -->
                     <?php } ?>
 			
@@ -138,7 +138,7 @@ require_once MAD_PATH . '/www/cp/templates/header_i.tpl.php';
 						</div>
 						
 						<div class="widget-content">
-							<p>This is the directory where mAdserve will store creatives for ad-serving. In order to continue with installation, please make sure that the directory <strong><?php echo MAD_PATH; ?>/data/creative/</strong> is writeable. (eg. CHMOD 777)</p>
+							<p>This is the directory where cmtiads will store creatives for ad-serving. In order to continue with installation, please make sure that the directory <strong><?php echo MAD_PATH; ?>/data/creative/</strong> is writeable. (eg. CHMOD 777)</p>
 						</div>
 						
 					</div>	
@@ -153,7 +153,7 @@ require_once MAD_PATH . '/www/cp/templates/header_i.tpl.php';
 						</div>
 						
 						<div class="widget-content">
-							<p>mAdserve has detected that your PHP version is lower than 5.3. If you would like to enable caching to speed up your mAdserve ad server, you'll need to have PHP 5.3 or greater installed.</p>
+							<p>cmtiads has detected that your PHP version is lower than 5.3. If you would like to enable caching to speed up your cmtiads ad server, you'll need to have PHP 5.3 or greater installed.</p>
 						</div>
 						
 					</div>
@@ -168,7 +168,7 @@ require_once MAD_PATH . '/www/cp/templates/header_i.tpl.php';
 						</div>
 						
 						<div class="widget-content">
-							<p>If you'd like to enable File-Based caching to speed up your mAdserve ad server, please make sure that the caching directory <strong><?php echo MAD_PATH; ?>/data/cache/</strong> is writeable. (eg. CHMOD 777)</p>
+							<p>If you'd like to enable File-Based caching to speed up your cmtiads ad server, please make sure that the caching directory <strong><?php echo MAD_PATH; ?>/data/cache/</strong> is writeable. (eg. CHMOD 777)</p>
 						</div>
 						
 					</div>	
@@ -183,7 +183,7 @@ require_once MAD_PATH . '/www/cp/templates/header_i.tpl.php';
 						</div>
 						
 						<div class="widget-content">
-							<p>It seems that the SimpleXML Extension is not loaded in your PHP Installation. mAdserve requires SimpleXML, and you can find instructions on how to install it <a href="http://php.net/manual/en/book.simplexml.php" target="_blank">here.</a></p>
+							<p>It seems that the SimpleXML Extension is not loaded in your PHP Installation. cmtiads requires SimpleXML, and you can find instructions on how to install it <a href="http://php.net/manual/en/book.simplexml.php" target="_blank">here.</a></p>
 						</div> 
                         </div>
                     <?php } ?>		
@@ -197,7 +197,7 @@ require_once MAD_PATH . '/www/cp/templates/header_i.tpl.php';
 						</div>
 						
 						<div class="widget-content">
-							<p>mAdserve requires the PHP mbstring extension to be installed for geo targeting. You can find instructions on how to install it <a href="http://php.net/manual/en/book.mbstring.php" target="_blank">here.</a></p>
+							<p>cmtiads requires the PHP mbstring extension to be installed for geo targeting. You can find instructions on how to install it <a href="http://php.net/manual/en/book.mbstring.php" target="_blank">here.</a></p>
 						</div> 
                         </div>
                     <?php } ?>		
@@ -370,7 +370,7 @@ require_once MAD_PATH . '/www/cp/templates/header_i.tpl.php';
 						<a href="javascript:;" class="close">&times;</a>
 						<h3>MobFox:Connect Information</h3>
 						
-						<p>By adding your MobFox account details to mAdserve, you will be able to easily monetize any un-filled traffic through the MobFox:Connect RTB exchange, get access to real-time traffic requests from over 30 different ad networks, download additional third party ad network modules right through mAdserve.org, and get notified immediately about product & security updates from mAdserve.</p>
+						<p>By adding your MobFox account details to cmtiads, you will be able to easily monetize any un-filled traffic through the MobFox:Connect RTB exchange, get access to real-time traffic requests from over 30 different ad networks, download additional third party ad network modules right through cmtiads.org, and get notified immediately about product & security updates from cmtiads.</p>
 					</div> <!-- .notify -->
                 
                 <div class="widget">
@@ -480,7 +480,7 @@ require_once MAD_PATH . '/www/cp/templates/header_i.tpl.php';
 						<a href="javascript:;" class="close">&times;</a>
 						<h3>Installation Successful!</h3>
 						
-						<p>Congratulations! Your mAdserve installation has completed successfully and mAdserve is now ready for production use. Please click the below button and log-in with the Administrator E-Mail and Password you supplied earlier in the installation process.</p>
+						<p>Congratulations! Your cmtiads installation has completed successfully and cmtiads is now ready for production use. Please click the below button and log-in with the Administrator E-Mail and Password you supplied earlier in the installation process.</p>
 					</div> <!-- .notify -->
 
 <div class="actions">						

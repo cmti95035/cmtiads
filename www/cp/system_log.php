@@ -39,7 +39,7 @@ exit;
 					
 						<div class="widget-header">
 							<span class="icon-list"></span>
-							<h3 class="icon chart">mAdserve System Log</h3>		
+							<h3 class="icon chart">cmtiads System Log</h3>		
 						</div>
 					
 						<div class="widget-content">
