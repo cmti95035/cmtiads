@@ -3487,6 +3487,8 @@ function list_chroniccondition_campaign($selected){
 	if (!is_array($selected)){$selected=array();}
 	global $maindb;
 	$x=0;
+	
+	mysql_set_charset("utf8");
 	$usrres=mysql_query("select * from md_chroniccondition", $maindb);
 	
 	while($chroniccondition_detail=mysql_fetch_array($usrres)){
