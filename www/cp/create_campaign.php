@@ -205,6 +205,12 @@ if (isset ( $editdata ['gender_targeting'] ) && $editdata ['gender_targeting'] =
 	echo "gender_targeting('off');";
 }
 
+if (isset ( $editdata ['chroniccondition_targeting'] ) && $editdata ['chroniccondition_targeting'] == 2) {
+	echo "chroniccondition_targeting('on');";
+} else {
+	echo "chroniccondition_targeting('off');";
+}
+
 if (isset ( $editdata ['start_date_type'] ) && $editdata ['start_date_type'] == 2) {
 	echo "startdate('on');";
 } else {
