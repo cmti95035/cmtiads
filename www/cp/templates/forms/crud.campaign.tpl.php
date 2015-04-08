@@ -511,12 +511,12 @@ $("input[id=country_targeting]").autoSuggest(data.items, {selectedItemProp: "nam
 <div class ="field-group control-group inline" >   
                                        <div class ="field" >
                                         <input type ="radio"    onclick ="document.getElementById('chronicconditiontargetingtable').style.display='none';" name = "chroniccondition_targeting" id ="chroniccondition_targeting_all" value= "1" />
-                                         <label for ="chroniccondition_targeting_all" > All Chronic Conditions</ label >
+                                         <label for ="chroniccondition_targeting_all" > 所有的慢性病</ label >
                                         </div>
                   
                                        <div id ="interstitialoptiobutton" class= "field">
                                          <input type ="radio"   onclick ="document.getElementById('chronicconditiontargetingtable').style.display='block';" name = "chroniccondition_targeting"id ="chroniccondition_targeting_co" value= "2" />
-                                         <label for ="chroniccondition_targeting_co" > Selected Conditions</ label >
+                                         <label for ="chroniccondition_targeting_co" > 特定的慢性病</ label >
                                       </div>
                                                 
 <table width ="584" border= "0" cellpadding ="6" cellspacing= "0" id ="chronicconditiontargetingtable" style=" -moz-border-radius : 5px ; border-radius : 5px ; margin-top : 5px;" >
