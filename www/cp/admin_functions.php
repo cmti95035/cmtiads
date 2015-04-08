@@ -23,14 +23,14 @@ global $today_month;
 global $today_year;
 
 if (!MAD_connect_repdb()){
-echo "ä¸�èƒ½è¿žæŽ¥æŠ¥è¡¨æ•°æ�®åº“. æŽ¨å‡º."; exit;	
+echo "不能连接报表数据库. 推出."; exit;	
 }
 else {
 global $repdb;	
 }
 
 $x=0;
-echo'	<div class="widget widget-table"><div class="widget-header"><span class="icon-list"></span><h3 class="icon chart">å‡ºç‰ˆç‰©ç»Ÿè®¡æ•°æ�® ï¼� ä»Šæ—¥</h3></div><div class="widget-content"><table class="table table-bordered table-striped"><thead><tr><th width="17%">å‡ºç‰ˆç‰©</th><th width="16%">è¯·æ±‚æ•°</th><th width="17%">æ”¶è§†æ•°</th><th width="15%">ç‚¹å‡»æ•°</th><th width="19%">ç‚¹å‡»çŽ‡</th><th width="16%">å¡«å……çŽ‡</th></tr></thead><tbody>';	
+echo'	<div class="widget widget-table"><div class="widget-header"><span class="icon-list"></span><h3 class="icon chart">出版物统计数据 － 今日</h3></div><div class="widget-content"><table class="table table-bordered table-striped"><thead><tr><th width="17%">出版物</th><th width="16%">请求数</th><th width="17%">收视数</th><th width="15%">点击数</th><th width="19%">点击率</th><th width="16%">填充率</th></tr></thead><tbody>';	
 $glistres=mysql_query("SELECT SUM(total_requests) AS total_requests, SUM(total_impressions) AS total_impressions, SUM(total_clicks) AS total_clicks, publication_id FROM md_reporting WHERE day='$today_day' AND publication_id!='' AND month='$today_month' AND year='$today_year' GROUP BY publication_id", $repdb);
 while($reportingdet_detail=mysql_fetch_array($glistres)){
 if ($x==0){$class="odd gradeA";} if ($x==1){$class="even gradeA";}
@@ -51,7 +51,7 @@ global $maindb;
 $detailquery='';
 
 if (!MAD_connect_repdb()){
-echo "ä¸�èƒ½è¿žæŽ¥æŠ¥è¡¨æ•°æ�®åº“ã€‚é€€å‡º"; exit;	
+echo "不能连接报表数据库。退出"; exit;	
 }
 else {
 global $repdb;	
@@ -93,7 +93,7 @@ function graph_report_widget($location, $type, $duration){
 echo '<div class="widget">';
 echo '<div class="widget-header">';
 echo '<span class="icon-chart"></span>';
-echo '<h3 class="icon chart">å¿«é€Ÿç»Ÿè®¡æ•°æ�® - æœ€è¿‘ä¸ƒå¤©</h3>';
+echo '<h3 class="icon chart">快速统计数据 - 最近七天</h3>';
 echo '</div>';
 echo '<div class="widget-content">';
 echo '<table class="stats" data-chart-type="line" data-chart-colors="">';
@@ -105,8 +105,8 @@ echo '<th>'; echo date('m/d', mktime(0, 0, 0, date("m") , date("d")-5 , date("Y"
 echo '<th>'; echo date('m/d', mktime(0, 0, 0, date("m") , date("d")-4 , date("Y"))); echo '</th>';
 echo '<th>'; echo date('m/d', mktime(0, 0, 0, date("m") , date("d")-3 , date("Y"))); echo '</th>';
 echo '<th>'; echo date('m/d', mktime(0, 0, 0, date("m") , date("d")-2 , date("Y"))); echo '</th>';
-echo '<th>æ˜¨</th>';
-echo '<th>ä»Š</th>';
+echo '<th>昨</th>';
+echo '<th>今</th>';
 echo '</tr>';
 echo '</thead>';
 
@@ -120,7 +120,7 @@ $data_today=get_reporting_data("publisher", date('d', mktime(0, 0, 0, date("m") 
 
 echo '<tbody>';
 echo '<tr>';
-echo '<th>å¹¿å‘Šè¯·æ±‚æ•°</th>';
+echo '<th>广告请求数</th>';
 echo '<td>'.$data_m6['total_requests'].'</td>';
 echo '<td>'.$data_m5['total_requests'].'</td>';
 echo '<td>'.$data_m4['total_requests'].'</td>';
@@ -131,7 +131,7 @@ echo '<td>'.$data_today['total_requests'].'</td>';
 echo '</tr>';
 
 echo '<tr>';
-echo '<th>æ”¶è§†æ•°</th>';
+echo '<th>收视数</th>';
 echo '<td>'.$data_m6['total_impressions'].'</td>';
 echo '<td>'.$data_m5['total_impressions'].'</td>';
 echo '<td>'.$data_m4['total_impressions'].'</td>';
@@ -142,7 +142,7 @@ echo '<td>'.$data_today['total_impressions'].'</td>';
 echo '</tr>';
 
 echo '<tr>';
-echo '<th>ç‚¹å‡»æ•°</th>';
+echo '<th>点击数</th>';
 echo '<td>'.$data_m6['total_clicks'].'</td>';
 echo '<td>'.$data_m5['total_clicks'].'</td>';
 echo '<td>'.$data_m4['total_clicks'].'</td>';
@@ -667,7 +667,7 @@ echo '<tr class="gradeA">
 								<td class="center">' . $pub_channel_detail ['channel_name'] . '</td>
 								<td class="center">' . $publication_status . '</td>
 								<td class="center">' . $total_placements . '</td>';
-		echo '<td class="center"><span class="ticket ticket-info"><a href="edit_publication.php?id=' . $publication_detail ['inv_id'] . '" style="color:#FFF; text-decoration:none;">ç¼–è¾‘å‡ºç‰ˆç‰©</a></span>&nbsp;<span class="ticket ticket-warning"><a href="view_placements.php?id=' . $publication_detail ['inv_id'] . '" style="color:#FFF; text-decoration:none;">æŸ¥çœ‹å¹¿å‘Šä½�</a></span>&nbsp;<span id="pubdel' . $publication_detail ['inv_id'] . '" class="ticket ticket-important"><a style="color:#FFF; text-decoration:none;" href="#">åˆ é™¤</a></span></td>';
+		echo '<td class="center"><span class="ticket ticket-info"><a href="edit_publication.php?id=' . $publication_detail ['inv_id'] . '" style="color:#FFF; text-decoration:none;">编辑出版物</a></span>&nbsp;<span class="ticket ticket-warning"><a href="view_placements.php?id=' . $publication_detail ['inv_id'] . '" style="color:#FFF; text-decoration:none;">查看广告位</a></span>&nbsp;<span id="pubdel' . $publication_detail ['inv_id'] . '" class="ticket ticket-important"><a style="color:#FFF; text-decoration:none;" href="#">删除</a></span></td>';
 		echo '</tr>	';
 	}
 }
@@ -1262,7 +1262,7 @@ echo '<option '.$selected_html.' value="'.$group_detail['entry_id'].'">'.$group_
 function get_pubtype_dropdown($selected){
 global $maindb;	
 
-echo "<option value=''>- é€‰æ‹©å‡ºç‰ˆç‰©ç±»åž‹ -</option>";
+echo "<option value=''>- 选择出版物类型 -</option>";
 
 $usrres=mysql_query("select * from md_publication_types ORDER BY entry_id ASC", $maindb);
 while($pubtype_detail=mysql_fetch_array($usrres)){
@@ -1279,7 +1279,7 @@ echo '<option '.$selected_html.' value="'.$pubtype_detail['entry_id'].'">'.$pubt
 function get_network_dropdown($selected){
 global $maindb;	
 
-echo "<option value=''>- é€‰æ‹©å¹¿å‘Šç½‘ç»œ -</option>";
+echo "<option value=''>- 选择广告网络 -</option>";
 
 $usrres=mysql_query("select * from md_networks ORDER BY network_name ASC", $maindb);
 while($network_detail=mysql_fetch_array($usrres)){
@@ -1288,7 +1288,7 @@ if (check_network_configured($network_detail['network_identifier'])){
 $network_status_text='';	
 }
 else {
-$network_status_text='(æ²¡æœ‰é…�ç½®)';		
+$network_status_text='(没有配置)';		
 }
 if (is_numeric($selected) && $selected==$network_detail['entry_id']){
 $selected_html='selected="selected"';	
@@ -1318,7 +1318,7 @@ echo '<option '.$selected_html.' value="'.$network_detail['entry_id'].'">'.$netw
 function get_publication_dropdown($selected){
 global $maindb;	
 
-echo "<option value=''>- é€‰æ‹©å‡ºç‰ˆç‰© -</option>";
+echo "<option value=''>- 选择出版物 -</option>";
 
 $usrres=mysql_query("select * from md_publications ORDER BY inv_id DESC", $maindb);
 while($publication_detail=mysql_fetch_array($usrres)){
@@ -1369,11 +1369,11 @@ function get_placement_integration_dropdown($zoneid, $publicationid){
 global $maindb;	
 
 if (!is_numeric($publicationid) && !is_numeric($zoneid)){
-echo "<option value=''>- é€‰æ‹©ä¸Šé�¢çš„å‡ºç‰ˆç‰© -</option>";
+echo "<option value=''>- 选择上面的出版物 -</option>";
 }
 
 else {
-echo "<option value=''>- é€‰æ‹©å¹¿å‘Šä½�  -</option>";
+echo "<option value=''>- 选择广告位  -</option>";
 }
 
 if (is_numeric($publicationid)){
@@ -1396,7 +1396,7 @@ function do_edit($type, $data, $detail){
 	if ($type=='runninglimit'){
 	if (!isset($detail) or !is_numeric($detail)){
 	global $errormessage;
-$errormessage='æ— æ•ˆçš„å¹¿å‘Šæ´»åŠ¨ID.';
+$errormessage='无效的广告活动ID.';
 global $editdata;
 $editdata=$data;
 return false;	
@@ -1404,7 +1404,7 @@ return false;
 	
 	if (!isset($data['new_limit']) or !is_numeric($data['new_limit'])){
 		global $errormessage;
-$errormessage='æ— æ•ˆçš„é™�åˆ¶.';
+$errormessage='无效的限制.';
 global $editdata;
 $editdata=$data;
 return false;		
@@ -1424,7 +1424,7 @@ return true;
 		
 		if (empty($data['adv_name']) or (!is_numeric($data['custom_creative_width']) or !is_numeric($data['custom_creative_height']))){
 global $errormessage;
-$errormessage='è¯·å¡«å…¥æ‰€æœ‰éœ€è¦�çš„ä¿¡æ�¯.';
+$errormessage='请填入所有需要的信息.';
 global $editdata;
 $editdata=$data;
 return false;	
@@ -1434,7 +1434,7 @@ if ($data['creative_type']==3){
 
 if (empty($data['html_body'])){
 global $errormessage;
-$errormessage='è¯·å¡«å…¥å¹¿å‘Šçš„HTMLä¸»ä½“.';
+$errormessage='请填入广告的HTML主体.';
 global $editdata;
 $editdata=$data;
 return false;	
@@ -1447,7 +1447,7 @@ if ($data['creative_type']==2){
 
 if (empty($data['creative_url']) or empty($data['click_url'])){
 global $errormessage;
-$errormessage='è¯·å¡«å…¥å¹¿å‘Šåˆ›æ„�é“¾æŽ¥å’Œç‚¹å‡»é“¾æŽ¥.';
+$errormessage='请填入广告创意链接和点击链接.';
 global $editdata;
 $editdata=$data;
 return false;	
@@ -1461,7 +1461,7 @@ if ($data['creative_type']==1){
 
 if (empty($data['click_url'])){
 global $errormessage;
-$errormessage='è¯·å¡«å…¥å¹¿å‘Šç‚¹å‡»é“¾æŽ¥.';
+$errormessage='请填入广告点击链接.';
 global $editdata;
 $editdata=$data;
 return false;	
@@ -1472,7 +1472,7 @@ $no_creative=1;
 
 if ($current_unit_detail['adv_type']!=1){
 global $errormessage;
-$errormessage='è¯·ä¸Šä¼ ä¸€ä¸ªå¹¿å‘Šåˆ›æ„�.';
+$errormessage='请上传一个广告创意.';
 global $editdata;
 $editdata=$data;
 return false;	
@@ -1505,7 +1505,7 @@ list($width, $height, $type, $attr)= getimagesize($_FILES['creative_file']['tmp_
 
 if ($height!=$data['custom_creative_height'] or $width!=$data['custom_creative_width'] or empty($file_extension)){
 global $errormessage;
-$errormessage='ä½ ä¸Šä¼ çš„å›¾åƒ�å°ºå¯¸ä¸�å¯¹ã€‚ è¯·ä¸Šä¼ ä¸€ä¸ªæ­£ç¡®å°ºå¯¸çš„å›¾åƒ� '.$data['custom_creative_width'].'x'.$data['custom_creative_height'].'';
+$errormessage='你上传的图像尺寸不对。 请上传一个正确尺寸的图像 '.$data['custom_creative_width'].'x'.$data['custom_creative_height'].'';
 global $editdata;
 $editdata=$data;
 return false;
@@ -3524,9 +3524,9 @@ echo '<tr class="gradeA">
 								<td class="center"><div align=center><span class="'.$banner_support_icon.'"></span></div></td>
 								<td class="center"><div align=center><span class="'.$interstitial_support_icon.'"></span></div></td>
 								<td class="center"><div align=center>'.$network_status.'</div></td>
-								<td class="center"><div align=center><a href="#" onclick="$.modal ({title: \''.$network_detail['network_name'].'\', html: \'<div style=width:500px;;>'.trim(str_replace(",", "\,", addslashes($network_detail['info_content']))).'</div>\'});">æŸ¥çœ‹ä¿¡æ�¯</a></div></td>';
-								echo '<td class="center"><div align=center><a target="_blank" href="'.$network_detail['signup_url'].'">æ³¨å†Œ</a></div></td>';
-								echo '<td class="center"><span class="ticket ticket-info"><a href="network_id_setup.php?id='.$network_detail['entry_id'].'" style="color:#FFF; text-decoration:none;">è®¾ç½®å�‘å¸ƒå•†ID</a></span>&nbsp;<span class="ticket ticket-warning"><a href="network_settings.php?id='.$network_detail['entry_id'].'" style="color:#FFF; text-decoration:none;">å�‚æ•°</a></span>&nbsp;</td>';
+								<td class="center"><div align=center><a href="#" onclick="$.modal ({title: \''.$network_detail['network_name'].'\', html: \'<div style=width:500px;;>'.trim(str_replace(",", "\,", addslashes($network_detail['info_content']))).'</div>\'});">查看信息</a></div></td>';
+								echo '<td class="center"><div align=center><a target="_blank" href="'.$network_detail['signup_url'].'">注册</a></div></td>';
+								echo '<td class="center"><span class="ticket ticket-info"><a href="network_id_setup.php?id='.$network_detail['entry_id'].'" style="color:#FFF; text-decoration:none;">设置发布商ID</a></span>&nbsp;<span class="ticket ticket-warning"><a href="network_settings.php?id='.$network_detail['entry_id'].'" style="color:#FFF; text-decoration:none;">参数</a></span>&nbsp;</td>';
 	
 								
 							echo '</tr>	';
@@ -5271,20 +5271,20 @@ if ($data['report_type']=='publication' or $data['report_type']=='network'){
 				
 					<div class="dashboard_report defaultState">
 							<div class="pad">
-								<span class="value">'.number_format($report_detail['total_requests'], 0).'</span> è¯·æ±‚æ•°
+								<span class="value">'.number_format($report_detail['total_requests'], 0).'</span> 请求数
 							</div> <!-- .pad -->
 						</div>
 							
 						
 						<div class="dashboard_report defaultState">
 							<div class="pad">
-								<span class="value">'.number_format($report_detail['total_impressions'], 0).'</span> æ”¶è§†æ•°
+								<span class="value">'.number_format($report_detail['total_impressions'], 0).'</span> 收视数
 							</div> <!-- .pad -->
 						</div>
 						
 						<div class="dashboard_report defaultState">
 							<div class="pad">
-								<span class="value">'.number_format($report_detail['total_clicks'], 0).'</span> ç‚¹å‡»æ•°
+								<span class="value">'.number_format($report_detail['total_clicks'], 0).'</span> 点击数
 							</div> <!-- .pad -->
 						</div>
 						
