@@ -1,0 +1,20 @@
+<resources>
+
+    <string name="app_name">MobFox Demo</string>
+    <string name="menu_settings">Set Publisher IDs</string>
+    <string name="title_activity_main">MobFox Demo</string>
+    <string name="showNativeAdButtonLabel">Show single native ad</string>
+    <string name="loadNativeAdButtonLabel">Preload native ads</string>
+    <string name="prepareListViewButtonLabel">Show list view with native ads</string>
+    <string name="showBannerButtonLabel">Show Banner</string>
+    <string name="showVideoInterstitialButtonLabel">Show Video/Interstitial</string>
+    <string name="bannerIdInputLabel">Publisher ID for banner ads:</string>
+    <string name="interstitialIdInputLabel">Publisher ID for interstitial ads:</string>
+    <string name="nativeAdIdInputLabel">Publisher ID for native ads:</string>
+    <string name="doneButtonLabel">Done</string>
+    <string name="publisherIdSetterDialogTitle">"Set your Publisher IDs:"</string>
+    <string name="sharedPreferencesBannerIdKey">idForBanners</string>
+    <string name="sharedPreferencesInterstitialIdKey">idForInterstitials</string>
+    <string name="sharedPreferencesNativeAdIdKey">idForNativeAds</string>
+
+</resources>

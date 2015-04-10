@@ -1,0 +1,75 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" >
+
+    <FrameLayout
+        android:id="@+id/adsdkContent"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true" >
+    </FrameLayout>
+
+    <ListView
+        android:id="@+id/listView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/prepareListButton"
+        android:visibility="gone" >
+    </ListView>
+
+    <Button
+        android:id="@+id/loadNativeAdButton"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_below="@+id/showBannerButton"
+        android:textSize="14sp"
+        android:onClick="onLoadNativeAdButtonClick"
+        android:text="@string/loadNativeAdButtonLabel" />
+
+    <Button
+        android:id="@+id/prepareListButton"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_below="@+id/loadNativeAdButton"
+        android:layout_centerHorizontal="true"
+        android:textSize="14sp"
+        android:onClick="onPrepareListButtonClick"
+        android:text="@string/prepareListViewButtonLabel" />
+
+    <Button
+        android:id="@+id/showBannerButton"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignRight="@+id/loadNativeAdButton"
+        android:onClick="onClickShowBanner"
+        android:text="@string/showBannerButtonLabel"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/showVideoInterstitialButton"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:textSize="14sp"
+        android:onClick="onClickShowVideoInterstitial"
+        android:text="@string/showVideoInterstitialButtonLabel" />
+
+    <Button
+        android:id="@+id/showNativeAdButton"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:layout_alignLeft="@+id/showVideoInterstitialButton"
+        android:layout_alignParentRight="true"
+        android:layout_below="@+id/showVideoInterstitialButton"
+        android:onClick="onShowNativeAdButtonClick"
+        android:text="@string/showNativeAdButtonLabel"
+        android:textSize="14sp" />
+
+</RelativeLayout>
