@@ -338,6 +338,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `md_campaigns` (
   `channel_target` varchar(1) NOT NULL,
   `device_target` varchar(1) NOT NULL,
   `gender_target` varchar(1) NOT NULL,
+	`income_target` varchar(1) NOT NULL,
   `chroniccondition_target` varchar(1) NOT NULL,
   PRIMARY KEY  (`campaign_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;", $maindb);
@@ -398,9 +399,26 @@ mysql_query("CREATE TABLE IF NOT EXISTS `md_genders` (
   PRIMARY KEY  (`gender_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;", $maindb);
 
+mysql_query("CREATE TABLE IF NOT EXISTS `md_incomes` (
+  `income_id` int(11) NOT NULL auto_increment,
+  `income_name` varchar(100) NOT NULL,
+  PRIMARY KEY  (`income_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;", $maindb);
+
 mysql_query("INSERT INTO `md_genders` (`gender_id`, `gender_name`) VALUES
 (1, 'male'),
 (2, 'female');", $maindb);
+
+mysql_query("INSERT INTO `md_incomes` (`income_id`, `income_name`) VALUES
+(1, '3百以下'),
+(2, '3百-1千'),
+(3, '1千-3千'),
+(4, '3千-1万'),
+(5, '1万-3万'),
+(6, '3万-10万'),
+(7, '10万－30万'),
+(8, '30万－100万'),
+(9, '100万以上');", $maindb);
 
 mysql_query("CREATE TABLE IF NOT EXISTS `md_chroniccondition` (
   `chroniccondition_id` int(11) NOT NULL auto_increment,

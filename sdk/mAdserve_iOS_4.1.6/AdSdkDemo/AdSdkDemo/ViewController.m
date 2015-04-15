@@ -133,7 +133,7 @@
         [self.view addSubview:self.bannerView];
     }
 
-    self.bannerView.requestURL = @"http://192.168.1.100/cmtiads/md.request.php";
+    self.bannerView.requestURL = @"http://52.4.145.155/cmtiads/md.request.php";
 
     [self.bannerView requestAd]; // Request a Banner Advert
     
@@ -149,7 +149,7 @@
             [self slideOutBannerView:self.bannerView];
         }
         
-        self.videoInterstitialViewController.requestURL = @"http://192.168.1.100/cmtiads/md.request.php";
+        self.videoInterstitialViewController.requestURL = @"http://52.4.145.155/cmtiads/md.request.php";
         
         [self.videoInterstitialViewController requestAd];
     }
@@ -159,7 +159,7 @@
 
 - (NSString *)publisherIdForAdSdkBannerView:(AdSdkBannerView *)banner {
 
-    return @"ENTER_PUBLISHER_ID_HERE";
+    return @"226af592e76f7630018ef0a669ad8b2b+4086803612";
 }
 
 - (void)adsdkBannerViewDidLoadAdSdkAd:(AdSdkBannerView *)banner {
@@ -197,7 +197,7 @@
 #pragma mark AdSdk Interstitial Delegate Methods
 
 - (NSString *)publisherIdForAdSdkVideoInterstitialView:(AdSdkVideoInterstitialViewController *)videoInterstitial {
-    return @"b1b47070b4fec8545c56e358bf9194da+2";
+    return @"b1b47070b4fec8545c56e358bf9194da+4086803612";
 }
 
 - (void)adsdkVideoInterstitialViewDidLoadAdSdkAd:(AdSdkVideoInterstitialViewController *)videoInterstitial advertTypeLoaded:(AdSdkAdType)advertType {
