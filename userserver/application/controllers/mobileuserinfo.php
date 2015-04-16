@@ -28,20 +28,5 @@ class Mobileuserinfo extends CI_Controller
 		$ra=$result->result_array();
 		echo json_encode($ra[0]);
 	}
-	
-	function adduser($phonenumber, $gender_id=2){
-		if($this->mobileuser->add_user($phonenumber, $gender_id)){
-		   echo 1;	
-		}else{
-		   echo 0;
-		}
-	}
-	function changeuser($phonenumber, $gender_id=2){
-		if($this->mobileuser->change_user($phonenumber, $gender_id)){
-			echo 1;
-		}else{
-			echo 0;
-		}
-	}
 }
 ?>
