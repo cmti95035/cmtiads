@@ -1123,7 +1123,7 @@ else {
 }
 
 
-$query_part['placement']="AND (md_campaigns.publication_target=1 OR (c3.targeting_type='placement' AND c3.targeting_code='".$zone_detail['entry_id']."'))";
+$query_part['placement']="AND (md_campaigns.publication_target=1 OR (c6.targeting_type='placement' AND c6.targeting_code='".$zone_detail['entry_id']."'))";
 
 $query_part['misc']="AND md_campaigns.campaign_status=1 AND md_campaigns.campaign_start<='".date("Y-m-d")."' AND md_campaigns.campaign_end>'".date("Y-m-d")."'";
 
@@ -1148,16 +1148,6 @@ break;
 default:
 $query_part['device']='AND (md_campaigns.device_target=1 OR md_campaigns.target_other=1)';
 break;
-}
-
-if (isset($request_settings['income']) && !empty($request_settings['income'])){
-	$query_part['income']="AND ((md_campaigns.income_min<=".
-	$request_settings['income'].
-	" OR md_campaigns.income_min='') AND (md_campaigns.income_max>=".
-	$request_settings['income']." OR md_campaigns.income_max=''))";
-}
-else {
-	$query_part['income']="AND (md_campaigns.income_min='' AND md_campaigns.income_max='')";
 }
 
 if ($request_settings['main_device']!='OTHER' && $request_settings['main_device']!='NOMOBILE'){
@@ -1214,8 +1204,9 @@ $request_settings['campaign_query']="select md_campaigns.campaign_id, md_campaig
 	"LEFT JOIN md_campaign_targeting c1 ON md_campaigns.campaign_id = c1.campaign_id ".
 	"LEFT JOIN md_campaign_targeting c2 ON md_campaigns.campaign_id = c2.campaign_id ".
 	"LEFT JOIN md_campaign_targeting c3 ON md_campaigns.campaign_id = c3.campaign_id ".
-	"LEFT JOIN md_campaign_targeting c3 ON md_campaigns.campaign_id = c4.campaign_id ".
-	"LEFT JOIN md_campaign_targeting c3 ON md_campaigns.campaign_id = c5.campaign_id ".
+	"LEFT JOIN md_campaign_targeting c4 ON md_campaigns.campaign_id = c4.campaign_id ".
+	"LEFT JOIN md_campaign_targeting c5 ON md_campaigns.campaign_id = c5.campaign_id ".
+	"LEFT JOIN md_campaign_targeting c6 ON md_campaigns.campaign_id = c6.campaign_id ".
 	"LEFT JOIN md_ad_units ON md_campaigns.campaign_id = md_ad_units.campaign_id ".
 	"LEFT JOIN md_campaign_limit ON md_campaigns.campaign_id = md_campaign_limit.campaign_id ".
 	"where (md_campaigns.country_target=1".
@@ -1231,6 +1222,8 @@ $request_settings['campaign_query']="select md_campaigns.campaign_id, md_campaig
 	$query_part['adunit']." ".
 	$query_part['limit']." group by md_campaigns.campaign_id";
 
+echo ($request_settings['campaign_query']);
+die();
 return true;	
 	
 }

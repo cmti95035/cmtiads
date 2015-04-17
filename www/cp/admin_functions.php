@@ -3642,8 +3642,8 @@ $current_timestamp=time();
 $usrres=mysql_query("select * from md_ad_units WHERE campaign_id='$campaignid' ORDER BY adv_id DESC", $maindb);
 while($ad_detail=mysql_fetch_array($usrres)){
 
-if ($ad_detail['adv_status']==2){$ad_status='暂停'; $statuscolor='#FF9900';}
-else if ($ad_detail['adv_status']==1){$ad_status='运行'; $statuscolor='#009900;';}
+if ($ad_detail['adv_status']==2){$ad_status='æš‚å�œ'; $statuscolor='#FF9900';}
+else if ($ad_detail['adv_status']==1){$ad_status='è¿�è¡Œ'; $statuscolor='#009900;';}
 
 switch($ad_detail['adv_type']){
 case 1:
@@ -4631,6 +4631,16 @@ function load_tr_gender_array($id){
 		array_push($gender_array, $targeting_detail['parameter_value']);
 	}
 	return $gender_array;
+}
+
+function load_tr_income_array($id){
+	global $maindb;
+	$income_array=array();
+	$usrres=mysql_query("select parameter_value from md_trafficrequests_parameters where request_id='$id' and parameter_id='income'", $maindb);
+	while($targeting_detail=mysql_fetch_array($usrres)){
+		array_push($income_array, $targeting_detail['parameter_value']);
+	}
+	return $income_array;
 }
 
 function load_tr_chroniccondition_array($id){

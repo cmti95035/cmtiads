@@ -5,7 +5,6 @@
  *
  * This model represents mobile user data. It operates the following tables:
  * - md_mobile_users
- * - md_genders
  *
  * @package	Q
  * @author	Qingfeng Huang
