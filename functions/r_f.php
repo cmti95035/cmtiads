@@ -1130,7 +1130,7 @@ else {
 }
 
 
-$query_part['placement']="AND (md_campaigns.publication_target=1 OR (c6.targeting_type='placement' AND c6.targeting_code='".$zone_detail['entry_id']."'))";
+$query_part['placement']="AND (md_campaigns.publication_target=1 OR (c7.targeting_type='placement' AND c7.targeting_code='".$zone_detail['entry_id']."'))";
 
 $query_part['misc']="AND md_campaigns.campaign_status=1 AND md_campaigns.campaign_start<='".date("Y-m-d")."' AND md_campaigns.campaign_end>'".date("Y-m-d")."'";
 
@@ -1214,6 +1214,7 @@ $request_settings['campaign_query']="select md_campaigns.campaign_id, md_campaig
 	"LEFT JOIN md_campaign_targeting c4 ON md_campaigns.campaign_id = c4.campaign_id ".
 	"LEFT JOIN md_campaign_targeting c5 ON md_campaigns.campaign_id = c5.campaign_id ".
 	"LEFT JOIN md_campaign_targeting c6 ON md_campaigns.campaign_id = c6.campaign_id ".
+	"LEFT JOIN md_campaign_targeting c7 ON md_campaigns.campaign_id = c7.campaign_id ".
 	"LEFT JOIN md_ad_units ON md_campaigns.campaign_id = md_ad_units.campaign_id ".
 	"LEFT JOIN md_campaign_limit ON md_campaigns.campaign_id = md_campaign_limit.campaign_id ".
 	"where (md_campaigns.country_target=1".
@@ -1221,6 +1222,7 @@ $request_settings['campaign_query']="select md_campaigns.campaign_id, md_campaig
 	$query_part['channel']." ".
 	$query_part['gender']." ".
 	$query_part['income']." ".
+	$query_part['interest']." ".
 	$query_part['chroniccondition']." ".
 	$query_part['placement']." ".
 	$query_part['misc']." ".
@@ -1228,7 +1230,8 @@ $request_settings['campaign_query']="select md_campaigns.campaign_id, md_campaig
 	$query_part['osversion']." ".
 	$query_part['adunit']." ".
 	$query_part['limit']." group by md_campaigns.campaign_id";
-
+//echo($request_settings['campaign_query']);
+// die();
 return true;	
 	
 }
