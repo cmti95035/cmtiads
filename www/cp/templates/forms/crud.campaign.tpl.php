@@ -35,52 +35,47 @@ document.getElementById('country_target').style.display='none';
 
 
 function device_targeting(status){
-	
 	if (status=="off"){
-$("#device_targeting_all").attr("checked", "true");
-document.getElementById('devicetargetingtable').style.display='none';
+		$("#device_targeting_all").attr("checked", "true");
+		document.getElementById('devicetargetingtable').style.display='none';
 	}
 	if (status=="on"){
-	$("#device_targeting_co").attr("checked", "true");
-	document.getElementById('devicetargetingtable').style.display='block';
+		$("#device_targeting_co").attr("checked", "true");
+		document.getElementById('devicetargetingtable').style.display='block';
 	}
-
 }
 
 function publication_targeting(status){
-	
 	if (status=="off"){
-$("#publication_targeting_all").attr("checked", "true");
-document.getElementById('publicationtargetingtable').style.display='none';
+		$("#publication_targeting_all").attr("checked", "true");
+		document.getElementById('publicationtargetingtable').style.display='none';
 	}
 	if (status=="on"){
-	$("#publication_targeting_co").attr("checked", "true");
-	document.getElementById('publicationtargetingtable').style.display='block';
+		$("#publication_targeting_co").attr("checked", "true");
+		document.getElementById('publicationtargetingtable').style.display='block';
 	}
-
 }
 
 function channel_targeting(status){
-	
 	if (status=="off"){
-$("#channel_targeting_all").attr("checked", "true");
-document.getElementById('channeltargetingtable').style.display='none';
+		$("#channel_targeting_all").attr("checked", "true");
+		document.getElementById('channeltargetingtable').style.display='none';
 	}
 	if (status=="on"){
-	$("#channel_targeting_co").attr("checked", "true");
-	document.getElementById('channeltargetingtable').style.display='block';
+		$("#channel_targeting_co").attr("checked", "true");
+		document.getElementById('channeltargetingtable').style.display='block';
 	}
-
 }
+
 function gender_targeting(status){
 	
 	if (status=="off"){
-$("#gender_targeting_all").attr("checked", "true");
-document.getElementById('gendertargetingtable').style.display='none';
+		$("#gender_targeting_all").attr("checked", "true");
+		document.getElementById('gendertargetingtable').style.display='none';
 	}
 	if (status=="on"){
-	$("#gender_targeting_co").attr("checked", "true");
-	document.getElementById('gendertargetingtable').style.display='block';
+		$("#gender_targeting_co").attr("checked", "true");
+		document.getElementById('gendertargetingtable').style.display='block';
 	}
 
 }
@@ -96,17 +91,27 @@ function income_targeting(status){
 	}
 }
 
+function interest_targeting(status){
+	if (status=="off"){
+		$("#interest_targeting_all").attr("checked", "true");
+		document.getElementById('interesttargetingtable').style.display='none';
+	}
+	if (status=="on"){
+		$("#interest_targeting_co").attr("checked", "true");
+		document.getElementById('interesttargetingtable').style.display='block';
+	}
+}
+
 function chroniccondition_targeting(status){
 	
 	if (status=="off"){
-$("#chroniccondition_targeting_all").attr("checked", "true");
-document.getElementById('chronicconditiontargetingtable').style.display='none';
+		$("#chroniccondition_targeting_all").attr("checked", "true");
+		document.getElementById('chronicconditiontargetingtable').style.display='none';
 	}
 	if (status=="on"){
-	$("#chroniccondition_targeting_co").attr("checked", "true");
-	document.getElementById('chronicconditiontargetingtable').style.display='block';
+		$("#chroniccondition_targeting_co").attr("checked", "true");
+		document.getElementById('chronicconditiontargetingtable').style.display='block';
 	}
-
 }
 
 function startdate(status){
@@ -200,6 +205,8 @@ function checkAll(theForm, cName, status) {
 					
 					
 					
+					
+					
 					style=width:500px;;><h3>直接售出</h3>直接售出的广告活动是固定的，通常优先级较高，收视数量有限.<br>
 					<br>
 					<h3>推广</h3>推广广告活动相互推广其他应用和产品. 一般优先级较低，在没有合适的直接售出广告或广告网络广告的时候显示.<br>
@@ -220,6 +227,8 @@ function checkAll(theForm, cName, status) {
 <?php if (!isset($editdata['campaign_networkid'])){$editdata['campaign_networkid']='';} get_network_dropdown($editdata['campaign_networkid']); ?>							  </select>
 			<a class="tooltip" style="font-size: 11px;" href="#"
 				onclick="$.modal ({title: 'Network Publisher IDs', html: '<div 
+				
+				
 				
 				
 				
@@ -687,10 +696,11 @@ $("input[id=country_targeting]").autoSuggest(data.items, {selectedItemProp: "nam
 			<table width="584" border="0" cellpadding="6" cellspacing="0"
 				id="gendertargetingtable"
 				style="-moz-border-radius: 5px; border-radius: 5px; margin-top: 5px;">
-  <?php if (!isset($editdata['gender_select'])){$editdata['gender_select']='';} list_gender_campaign($editdata['gender_select']); ?>
+ 				 <?php if (!isset($editdata['gender_select'])){$editdata['gender_select']='';} list_gender_campaign($editdata['gender_select']); ?>
  
-</table>
+			</table>
 		</div>
+
 		<div class="field-group control-group inline">
 			<div class="field">
 				<input type="radio"
@@ -709,9 +719,31 @@ $("input[id=country_targeting]").autoSuggest(data.items, {selectedItemProp: "nam
 			<table width="584" border="0" cellpadding="6" cellspacing="0"
 				id="incometargetingtable"
 				style="-moz-border-radius: 5px; border-radius: 5px; margin-top: 5px;">
-  <?php if (!isset($editdata['income_select'])){$editdata['income_select']='';} list_income_campaign($editdata['income_select']); ?>
- 
-</table>
+  			<?php if (!isset($editdata['income_select'])){$editdata['income_select']='';} list_income_campaign($editdata['income_select']); ?>
+
+				</table>
+		</div>
+		
+		<div class="field-group control-group inline">
+			<div class="field">
+				<input type="radio"
+					onclick="document.getElementById('interesttargetingtable').style.display='none';"
+					name="interest_targeting" id="interest_targeting_all" value="1" /> <label
+					for="interest_targeting_all">所有兴趣</label>
+			</div>
+
+			<div id="interstitialoptiobutton" class="field">
+				<input type="radio"
+					onclick="document.getElementById('interesttargetingtable').style.display='block';"
+					name="interest_targeting" id="interest_targeting_co" value="2" /> <label
+					for="interest_targeting_co">特定兴趣</label>
+			</div>
+
+			<table width="584" border="0" cellpadding="6" cellspacing="0"
+				id="interesttargetingtable"
+				style="-moz-border-radius: 5px; border-radius: 5px; margin-top: 5px;">
+  			<?php if (!isset($editdata['interest_select'])){$editdata['interest_select']='';} list_interest_campaign($editdata['interest_select']); ?>
+				</table>
 		</div>
 		<div class="field-group control-group inline">
 			<div class="field">

@@ -205,10 +205,17 @@ if (isset ( $editdata ['gender_targeting'] ) && $editdata ['gender_targeting'] =
 } else {
 	echo "gender_targeting('off');";
 }
+
 if (isset ( $editdata ['income_targeting'] ) && $editdata ['income_targeting'] == 2) {
 	echo "income_targeting('on');";
 } else {
 	echo "income_targeting('off');";
+}
+
+if (isset ( $editdata ['interest_targeting'] ) && $editdata ['interest_targeting'] == 2) {
+	echo "interest_targeting('on');";
+} else {
+	echo "interest_targeting('off');";
 }
 
 if (isset ( $editdata ['chroniccondition_targeting'] ) && $editdata ['chroniccondition_targeting'] == 2) {

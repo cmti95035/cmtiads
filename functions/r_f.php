@@ -1114,9 +1114,16 @@ else {
 	$query_part['income']='';
 }
 
+if (isset($request_settings['interest']) && is_numeric($request_settings['interest'])){
+	$query_part['interest']="AND (md_campaigns.interest_target=1 OR (c5.targeting_type='interest' AND c5.targeting_code='".$request_settings['interest']."'))";
+}
+else {
+	$query_part['interest']='';
+}
+
 
 if (isset($request_settings['chroniccondition']) && is_numeric($request_settings['chroniccondition'])){
-	$query_part['chroniccondition']="AND (md_campaigns.chroniccondition_target=1 OR (c5.targeting_type='chroniccondition' AND c5.targeting_code='".$request_settings['chroniccondition']."'))";
+	$query_part['chroniccondition']="AND (md_campaigns.chroniccondition_target=1 OR (c6.targeting_type='chroniccondition' AND c6.targeting_code='".$request_settings['chroniccondition']."'))";
 }
 else {
 	$query_part['chroniccondition']='';
@@ -1222,8 +1229,6 @@ $request_settings['campaign_query']="select md_campaigns.campaign_id, md_campaig
 	$query_part['adunit']." ".
 	$query_part['limit']." group by md_campaigns.campaign_id";
 
-echo ($request_settings['campaign_query']);
-die();
 return true;	
 	
 }
@@ -1674,11 +1679,15 @@ $request_settings['gender'] = $userinfo["gender_id"];
 
 $request_settings['income'] = $userinfo["income_id"];
 
+$request_settings['interest'] = $userinfo["interest_id"];
+
 $request_settings['chroniccondition'] = $userinfo["chroniccondition_id"];
 
 file_put_contents( $test_config['local_logging_file'],
 ' phone:'.$pieces[1].' response:'.$response.' userinfo:'.implode(' ',$userinfo) .
-' gender:' .$request_settings['gender'] .' income' .$request_settings['income']. ' chronic condition:' .$request_settings['chroniccondition'] .PHP_EOL .PHP_EOL, FILE_APPEND);
+' gender:' .$request_settings['gender'] .' income' .$request_settings['income']. 
+' interest' . $request_settings['interest']. ' chronic condition:' .$request_settings['chroniccondition'] .
+PHP_EOL .PHP_EOL, FILE_APPEND);
 
 if (!isset($request_settings['placement_hash']) or empty($request_settings['placement_hash']) or !validate_md5($request_settings['placement_hash'])){
 	$errormessage='No valid Integration Placement ID supplied. (Variable "s")';

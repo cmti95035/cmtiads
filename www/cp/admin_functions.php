@@ -1057,6 +1057,16 @@ function load_campaign_income_array($id){
 	return $income_array;
 }
 
+function load_campaign_interest_array($id){
+	global $maindb;
+	$interest_array=array();
+	$usrres=mysql_query("select targeting_code from md_campaign_targeting where campaign_id='$id' and targeting_type='interest'", $maindb);
+	while($targeting_detail=mysql_fetch_array($usrres)){
+		array_push($interest_array, $targeting_detail['targeting_code']);
+	}
+	return $interest_array;
+}
+
 
 function load_campaign_chroniccondition_array($id){
 	global $maindb;
@@ -1644,6 +1654,7 @@ if (!isset($data['placement_select'])){$data['placement_select']='';}
 if (!isset($data['channel_select'])){$data['channel_select']='';}
 if (!isset($data['gender_select'])){$data['gender_select']='';}
 if (!isset($data['income_select'])){$data['income_select']='';}
+if (!isset($data['interest_select'])){$data['interest_select']='';}
 if (!isset($data['chroniccondition_select'])){$data['chroniccondition_select']='';}
 if (!isset($data['target_iphone'])){$data['target_iphone']='';}
 if (!isset($data['target_ipod'])){$data['target_ipod']='';}
@@ -1654,42 +1665,43 @@ if (!isset($data['target_other'])){$data['target_other']='';}
 $countries_active=0;
 $separate_countries=explode(',', $data['as_values_1']);
 foreach($separate_countries as $my_tag) {
-if (!empty($my_tag)){
-$countries_active=1;	
-} }
-
-			
-			
-if (!is_numeric($data['campaign_priority']) or empty($data['campaign_name'])){
-global $errormessage;
-$errormessage='Please fill out all required fields.';
-global $editdata;
-$editdata=$data;
-return false;	
+	if (!empty($my_tag)){
+		$countries_active=1;	
+	} 
 }
+		
+if (!is_numeric($data['campaign_priority']) or empty($data['campaign_name'])){
+	global $errormessage;
+	$errormessage='Please fill out all required fields.';
+	global $editdata;
+	$editdata=$data;
+	return false;	
+}
+
 if ($data['geo_targeting']==2 && $countries_active!=1){
-global $errormessage;
-$errormessage='Please select at least one country you want to target.';
-global $editdata;
-$editdata=$data;
-return false;	
+	global $errormessage;
+	$errormessage='Please select at least one country you want to target.';
+	global $editdata;
+	$editdata=$data;
+	return false;	
 }
 
 if ($data['publication_targeting']==2 && count($data['placement_select'])<1){
-global $errormessage;
-$errormessage='Please select at least one placement you want to target.';
-global $editdata;
-$editdata=$data;
-return false;	
+	global $errormessage;
+	$errormessage='Please select at least one placement you want to target.';
+	global $editdata;
+	$editdata=$data;
+	return false;	
 }
 
-if ($data['channel_targeting']==2 && count($data['channel_select'])<1){
-global $errormessage;
-$errormessage='Please select at least one channel you want to target.';
-global $editdata;
-$editdata=$data;
-return false;	
+if ($data ['channel_targeting'] == 2 && count ( $data ['channel_select'] ) < 1) {
+	global $errormessage;
+	$errormessage = 'Please select at least one channel you want to target.';
+	global $editdata;
+	$editdata = $data;
+	return false;
 }
+
 if ($data['gender_targeting']==2 && count($data['gender_select'])<1){
 	global $errormessage;
 	$errormessage='Please select the gender you want to target.';
@@ -1697,6 +1709,7 @@ if ($data['gender_targeting']==2 && count($data['gender_select'])<1){
 	$editdata=$data;
 	return false;
 }
+
 if ($data['income_targeting']==2 && count($data['income_select'])<1){
 	global $errormessage;
 	$errormessage='Please select the income you want to target.';
@@ -1704,6 +1717,15 @@ if ($data['income_targeting']==2 && count($data['income_select'])<1){
 	$editdata=$data;
 	return false;
 }
+
+if ($data['interest_targeting']==2 && count($data['interest_select'])<1){
+	global $errormessage;
+	$errormessage='Please select the interest you want to target.';
+	global $editdata;
+	$editdata=$data;
+	return false;
+}
+
 if ($data['chroniccondition_targeting']==2 && count($data['chroniccondition_select'])<1){
 	global $errormessage;
 	$errormessage='Please select the chronic condition you want to target.';
@@ -1844,6 +1866,7 @@ $data['channel_targeting']=sanitize($data['channel_targeting']);
 $data['device_targeting']=sanitize($data['device_targeting']);
 $data['gender_targeting']=sanitize($data['gender_targeting']);
 $data['income_targeting']=sanitize($data['income_targeting']);
+$data['interest_targeting']=sanitize($data['interest_targeting']);
 $data['chroniccondition_targeting']=sanitize($data['chroniccondition_targeting']);
 
 
@@ -1856,7 +1879,7 @@ mysql_query("UPDATE md_campaigns set campaign_type='$data[campaign_type]', campa
 	"ios_version_min='$data[ios_version_min]', ios_version_max='$data[ios_version_max]', ".
 	"android_version_min='$data[android_version_min]', android_version_max='$data[android_version_max]', ".
 	"country_target='$data[geo_targeting]', publication_target='$data[publication_targeting]', channel_target='$data[channel_targeting]', ".
-	"gender_target='$data[gender_targeting]', income_target='$data[income_targeting]', chroniccondition_target='$data[chroniccondition_targeting]', ".
+	"gender_target='$data[gender_targeting]', income_target='$data[income_targeting]', interest_target='$data[interest_targeting]', chroniccondition_target='$data[chroniccondition_targeting]', ".
 	"device_target='$data[device_targeting]' where campaign_id='$detail'", $maindb);
 
 reset_campaign_targeting($detail);
@@ -1899,6 +1922,14 @@ if ($data['income_targeting']==2 && is_array($data['income_select'])){
 	}
 }
 // End income
+
+// interest
+if ($data['interest_targeting']==2 && is_array($data['interest_select'])){
+	foreach($data['interest_select'] as $interest_id){
+		add_campaign_targeting($detail, 'interest', $interest_id);
+	}
+}
+// End interest
 
 // Chronic
 if ($data['chroniccondition_targeting']==2 && is_array($data['chroniccondition_select'])){
@@ -2618,6 +2649,7 @@ if (!isset($data['placement_select'])){$data['placement_select']='';}
 if (!isset($data['channel_select'])){$data['channel_select']='';}
 if (!isset($data['gender_select'])){$data['gender_select']='';}
 if (!isset($data['income_select'])){$data['income_select']='';}
+if (!isset($data['interest_select'])){$data['interest_select']='';}
 if (!isset($data['chroniccondition_select'])){$data['chroniccondition_select']='';}
 if (!isset($data['target_iphone'])){$data['target_iphone']='';}
 if (!isset($data['target_ipod'])){$data['target_ipod']='';}
@@ -2681,6 +2713,13 @@ if ($data['income_targeting']==2 && count($data['income_select'])<1){
 	return false;
 }
 
+if ($data['interest_targeting']==2 && count($data['interest_select'])<1){
+	global $errormessage;
+	$errormessage='Please select interest you want to target.';
+	global $editdata;
+	$editdata=$data;
+	return false;
+}
 
 if ($data['chroniccondition_targeting']==2 && count($data['chroniccondition_select'])<1){
 	global $errormessage;
@@ -3015,6 +3054,7 @@ $data['channel_targeting']=sanitize($data['channel_targeting']);
 $data['device_targeting']=sanitize($data['device_targeting']);
 $data['gender_targeting']=sanitize($data['gender_targeting']);
 $data['income_targeting']=sanitize($data['income_targeting']);
+$data['interest_targeting']=sanitize($data['interest_targeting']);
 $data['chroniccondition_targeting']=sanitize($data['chroniccondition_targeting']);
 
 // Insert Campaign into DB
@@ -3022,13 +3062,13 @@ mysql_query("INSERT INTO md_campaigns (campaign_owner, campaign_status, campaign
 	"campaign_start, campaign_end, campaign_creationdate, campaign_networkid, campaign_priority, ".
 	"target_iphone, target_ipod, target_ipad, target_android, target_other, ".
 	"ios_version_min, ios_version_max, android_version_min, android_version_max, ".
-	"country_target, publication_target, channel_target, device_target, gender_target, income_target, chroniccondition_target) ".
+	"country_target, publication_target, channel_target, device_target, gender_target, income_target, interest_target, chroniccondition_target) ".
 	"VALUES ('$user_detail[user_id]', '1', '$data[campaign_type]', '$data[campaign_name]', '$data[campaign_desc]', ".
 	"'$data[startdate_value]', '$data[enddate_value]', '$creation_timestamp', '$data[campaign_networkid]', '$data[campaign_priority]', ".
 	"'$data[target_iphone]', '$data[target_ipod]', '$data[target_ipad]', '$data[target_android]', '$data[target_other]', ".
 	"'$data[ios_version_min]', '$data[ios_version_max]', '$data[android_version_min]', '$data[android_version_max]', ".
 	"'$data[geo_targeting]', '$data[publication_targeting]', $data[channel_targeting], '$data[device_targeting]', ".
-	"'$data[gender_targeting]', '$data[income_targeting]', '$data[chroniccondition_targeting]')", $maindb);
+	"'$data[gender_targeting]', '$data[income_targeting]', '$data[interest_targeting]', '$data[chroniccondition_targeting]')", $maindb);
 
 global $created_campaign_id;
 $created_campaign_id=mysql_insert_id($maindb);
@@ -3099,6 +3139,15 @@ if ($data['income_targeting']==2 && is_array($data['income_select'])){
 
 }
 // End income
+
+// interest
+if ($data['interest_targeting']==2 && is_array($data['interest_select'])){
+	foreach($data['interest_select'] as $interest_id){
+		add_campaign_targeting($created_campaign_id, 'interest', $interest_id);
+	}
+}
+// End interest
+
 // Chronic condition
 if ($data['chroniccondition_targeting']==2 && is_array($data['chroniccondition_select'])){
 	foreach($data['chroniccondition_select'] as $chroniccondition_id){
@@ -3569,6 +3618,26 @@ function list_income_campaign($selected){
 	}
 }
 
+function list_interest_campaign($selected){
+	if (!is_array($selected)){$selected=array();}
+	global $maindb;
+	$x=0;
+	$usrres=mysql_query("select * from md_interests", $maindb);
+	//continue debug here
+	while($interest_detail=mysql_fetch_array($usrres)){
+
+		if ($x==1){ echo '<tr style="background-color:#F2F2F2;">'; } else { echo '<tr>'; }
+		echo '<td width="45%"><div>';
+		if (in_array($interest_detail['interest_id'], $selected)) { $selectedhtml='checked="checked"';} else {$selectedhtml='';}
+		echo '<input '.$selectedhtml.' value="'.$interest_detail['interest_id'].'" name="interest_select[ ]" type="checkbox" /> '.$interest_detail['interest_name'].'';
+		echo '</div></td>';
+		echo '</tr>';
+
+		$x=$x+1; if ($x==2){$x=0;}
+	}
+}
+
+
 function list_chroniccondition_campaign($selected){
 	if (!is_array($selected)){$selected=array();}
 	global $maindb;
@@ -4032,6 +4101,11 @@ foreach ($traffic_request->targeting->income_targeting->value as $income_targeti
 	add_trafficrequest_targeting($created_request_id, 'income', $income_targeting_code);
 }
 
+foreach ($traffic_request->targeting->interest_targeting->value as $interest_targeting_code){
+	/*Add interest Targeting*/
+	add_trafficrequest_targeting($created_request_id, 'interest', $interest_targeting_code);
+}
+
 foreach ($traffic_request->targeting->chroniccondition_targeting->value as $chroniccondition_targeting_code){
 	/*Add Chronic Condition Targeting*/
 	add_trafficrequest_targeting($created_request_id, 'chroniccondition', $chroniccondition_targeting_code);
@@ -4159,6 +4233,19 @@ else {
 }
 
 // income Targeting End
+
+// interest Targeting
+$interest_array=load_tr_interest_array($request_id);
+
+if (count($interest_array)>0){
+	$campaigndata['interest_targeting']=2;
+	$campaigndata['interest_select']=$interest_array;
+}
+else {
+	$campaigndata['interest_targeting']=1;
+}
+
+// interest Targeting End
 
 // Chronic condition Targeting
 $chroniccondition_array=load_tr_chroniccondition_array($request_id);
@@ -4641,6 +4728,16 @@ function load_tr_income_array($id){
 		array_push($income_array, $targeting_detail['parameter_value']);
 	}
 	return $income_array;
+}
+
+function load_tr_interest_array($id){
+	global $maindb;
+	$interest_array=array();
+	$usrres=mysql_query("select parameter_value from md_trafficrequests_parameters where request_id='$id' and parameter_id='interest'", $maindb);
+	while($targeting_detail=mysql_fetch_array($usrres)){
+		array_push($interest_array, $targeting_detail['parameter_value']);
+	}
+	return $interest_array;
 }
 
 function load_tr_chroniccondition_array($id){

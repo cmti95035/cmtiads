@@ -339,6 +339,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `md_campaigns` (
   `device_target` varchar(1) NOT NULL,
   `gender_target` varchar(1) NOT NULL,
 	`income_target` varchar(1) NOT NULL,
+	`interest_target` varchar(1) NOT NULL,		
   `chroniccondition_target` varchar(1) NOT NULL,
   PRIMARY KEY  (`campaign_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;", $maindb);
@@ -379,8 +380,6 @@ mysql_query("CREATE TABLE IF NOT EXISTS `md_channels` (
   `channel_name` varchar(100) NOT NULL,
   PRIMARY KEY  (`channel_id`)
 ) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;", $maindb);
-
-
 mysql_query("INSERT INTO `md_channels` (`channel_id`, `channel_type`, `channel_name`) VALUES
 (1, '1', 'Finance'),
 (2, '1', 'IT'),
@@ -419,6 +418,23 @@ mysql_query("INSERT INTO `md_incomes` (`income_id`, `income_name`) VALUES
 (7, '10万－30万'),
 (8, '30万－100万'),
 (9, '100万以上');", $maindb);
+
+mysql_query("CREATE TABLE IF NOT EXISTS `md_interests` (
+  `interest_id` int(11) NOT NULL auto_increment,
+  `interest_name` varchar(100) NOT NULL,
+  PRIMARY KEY  (`interest_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;", $maindb);
+
+mysql_query("INSERT INTO `md_interests` (`interest_id`, `interest_name`) VALUES
+(1, '户外'),
+(2, '游戏'),
+(3, '健身'),
+(4, '美容'),
+(5, '时尚'),
+(6, '汽车'),
+(7, '电影'),
+(8, '阅读'),
+(9, '唱歌');", $maindb);
 
 mysql_query("CREATE TABLE IF NOT EXISTS `md_chroniccondition` (
   `chroniccondition_id` int(11) NOT NULL auto_increment,
@@ -5036,9 +5052,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `md_uaccounts` (
   `company_name` varchar(100) NOT NULL,
   `first_name` varchar(100) NOT NULL,
   `last_name` varchar(100) NOT NULL,
-  `gender` varchar(100) NOT NULL,
-	`income` varchar(100) NOT NULL,
-  `phone_number` varchar(100) NOT NULL,
+ 	`phone_number` varchar(100) NOT NULL,
   `fax_number` varchar(100) NOT NULL,
   `company_address` varchar(100) NOT NULL,
   `company_city` varchar(100) NOT NULL,
