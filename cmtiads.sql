@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.6.21)
 # Database: cmtiads
-# Generation Time: 2015-04-17 22:21:16 +0000
+# Generation Time: 2015-04-24 23:05:22 +0000
 # ************************************************************
 
 
@@ -188,6 +188,7 @@ CREATE TABLE `md_campaigns` (
   `device_target` varchar(1) NOT NULL,
   `gender_target` varchar(1) NOT NULL,
   `income_target` varchar(1) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `interest_target` varchar(1) NOT NULL DEFAULT '',
   `chroniccondition_target` varchar(1) NOT NULL,
   PRIMARY KEY (`campaign_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -195,14 +196,14 @@ CREATE TABLE `md_campaigns` (
 LOCK TABLES `md_campaigns` WRITE;
 /*!40000 ALTER TABLE `md_campaigns` DISABLE KEYS */;
 
-INSERT INTO `md_campaigns` (`campaign_id`, `campaign_owner`, `campaign_status`, `campaign_type`, `campaign_name`, `campaign_desc`, `campaign_start`, `campaign_end`, `campaign_creationdate`, `campaign_networkid`, `campaign_priority`, `campaign_rate_type`, `campaign_rate`, `target_iphone`, `target_ipod`, `target_ipad`, `target_android`, `target_other`, `ios_version_min`, `ios_version_max`, `android_version_min`, `android_version_max`, `country_target`, `publication_target`, `channel_target`, `device_target`, `gender_target`, `income_target`, `chroniccondition_target`)
+INSERT INTO `md_campaigns` (`campaign_id`, `campaign_owner`, `campaign_status`, `campaign_type`, `campaign_name`, `campaign_desc`, `campaign_start`, `campaign_end`, `campaign_creationdate`, `campaign_networkid`, `campaign_priority`, `campaign_rate_type`, `campaign_rate`, `target_iphone`, `target_ipod`, `target_ipad`, `target_android`, `target_other`, `ios_version_min`, `ios_version_max`, `android_version_min`, `android_version_max`, `country_target`, `publication_target`, `channel_target`, `device_target`, `gender_target`, `income_target`, `interest_target`, `chroniccondition_target`)
 VALUES
-	(12,'2','1','1','all_banner','','2015-03-26','2090-12-12','1425666750','','5','','','','','','','','','','','','1','1','1','1','1','1','1'),
-	(13,'2','1','1','male_banner','','2015-03-07','2090-12-12','1425683714','','5','','','','','','','','','','','','1','1','1','1','2','1','1'),
-	(11,'2','1','1','female_fullpage','','2015-02-10','2090-12-12','1423529532','','5','','','','','','','','','','','','1','1','1','1','2','1','1'),
-	(10,'2','1','1','male_fullpage','','2015-03-26','2090-12-12','1423529377','','5','','','','','','','','','','','','1','1','1','1','2','2','1'),
-	(14,'2','1','1','female_banner','','2015-03-07','2090-12-12','1425684466','','5','','','','','','','','','','','','1','1','1','1','2','1','1'),
-	(19,'1','1','1','Diabetes Ads','','2015-04-09','2090-12-12','1428535626','','5','','','','','','','','','','','','1','1','1','1','1','1','2');
+	(12,'2','1','1','all_banner','','2015-03-26','2090-12-12','1425666750','','5','','','','','','','','','','','','1','1','1','1','1','1','','1'),
+	(13,'2','1','1','male_banner','','2015-03-07','2090-12-12','1425683714','','5','','','','','','','','','','','','1','1','1','1','2','1','','1'),
+	(11,'2','1','1','female_fullpage','','2015-02-10','2090-12-12','1423529532','','5','','','','','','','','','','','','1','1','1','1','2','1','','1'),
+	(10,'2','1','1','male_fullpage','','2015-03-26','2090-12-12','1423529377','','5','','','','','','','','','','','','1','1','1','1','2','2','','1'),
+	(14,'2','1','1','female_banner','','2015-03-07','2090-12-12','1425684466','','5','','','','','','','','','','','','1','1','1','1','2','1','','1'),
+	(19,'1','1','1','Diabetes Ads','','2015-04-09','2090-12-12','1428535626','','5','','','','','','','','','','','','1','1','1','1','1','1','','2');
 
 /*!40000 ALTER TABLE `md_campaigns` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -319,12 +320,12 @@ VALUES
 	(7,'last_trafficrequest_update','1427150180'),
 	(8,'last_limit_update',''),
 	(9,'server_email','qingfenghuang@chinamobile.com'),
-	(10,'last_mf_check','1429295766'),
+	(10,'last_mf_check','1429899638'),
 	(11,'allow_statistical_info','1'),
 	(12,'installation_id','bc6d64f849fbf3704806c4e1c3e949d0'),
 	(13,'update_check','1'),
 	(14,'default_creative_server','1'),
-	(15,'last_pendingactions_exec','1429307483'),
+	(15,'last_pendingactions_exec','1429916175'),
 	(16,'last_cron_job','');
 
 /*!40000 ALTER TABLE `md_configuration` ENABLE KEYS */;
@@ -411,6 +412,36 @@ VALUES
 	(9,'100万以上');
 
 /*!40000 ALTER TABLE `md_incomes` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table md_interests
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `md_interests`;
+
+CREATE TABLE `md_interests` (
+  `interest_id` int(11) NOT NULL AUTO_INCREMENT,
+  `interest_name` varchar(100) NOT NULL,
+  PRIMARY KEY (`interest_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+LOCK TABLES `md_interests` WRITE;
+/*!40000 ALTER TABLE `md_interests` DISABLE KEYS */;
+
+INSERT INTO `md_interests` (`interest_id`, `interest_name`)
+VALUES
+	(1,'户外'),
+	(2,'游戏'),
+	(3,'健身'),
+	(4,'美容'),
+	(5,'时尚'),
+	(6,'汽车'),
+	(7,'电影'),
+	(8,'阅读'),
+	(9,'唱歌');
+
+/*!40000 ALTER TABLE `md_interests` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
@@ -679,7 +710,7 @@ LOCK TABLES `md_publications` WRITE;
 
 INSERT INTO `md_publications` (`inv_id`, `creator_id`, `inv_status`, `inv_type`, `inv_name`, `inv_description`, `inv_address`, `inv_defaultchannel`, `md_lastrequest`)
 VALUES
-	(1,'2','1','1','Demo','','http://','1','1429296585'),
+	(1,'2','1','1','Demo','','http://','1','1429815061'),
 	(2,'11','1','2','test--4.15','test-example','http://www.baidu.com','2','');
 
 /*!40000 ALTER TABLE `md_publications` ENABLE KEYS */;
@@ -5245,7 +5276,8 @@ VALUES
 	(103,'1','','2015-04-15','15','04','2015','1','3','10','10','','23','0','23','0',''),
 	(104,'1','','2015-04-15','15','04','2015','1','1','13','13','','42','0','42','5',''),
 	(105,'1','','2015-04-17','17','04','2015','1','3','','','18','19','19','19','0',''),
-	(106,'1','','2015-04-17','17','04','2015','1','3','10','10','','1','0','1','0','');
+	(106,'1','','2015-04-17','17','04','2015','1','3','10','10','','1','0','1','0',''),
+	(107,'1','','2015-04-23','23','04','2015','1','3','10','10','','1','0','1','0','');
 
 /*!40000 ALTER TABLE `md_reporting` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -5342,7 +5374,6 @@ CREATE TABLE `md_uaccounts` (
   `company_name` varchar(100) NOT NULL,
   `first_name` varchar(100) NOT NULL,
   `last_name` varchar(100) NOT NULL,
-  `gender` varchar(100) NOT NULL,
   `phone_number` varchar(100) NOT NULL,
   `fax_number` varchar(100) NOT NULL,
   `company_address` varchar(100) NOT NULL,
@@ -5359,20 +5390,20 @@ CREATE TABLE `md_uaccounts` (
 LOCK TABLES `md_uaccounts` WRITE;
 /*!40000 ALTER TABLE `md_uaccounts` DISABLE KEYS */;
 
-INSERT INTO `md_uaccounts` (`user_id`, `email_address`, `pass_word`, `account_status`, `account_type`, `company_name`, `first_name`, `last_name`, `gender`, `phone_number`, `fax_number`, `company_address`, `company_city`, `company_state`, `company_zip`, `company_country`, `tax_id`, `tooltip_setting`, `creation_date`)
+INSERT INTO `md_uaccounts` (`user_id`, `email_address`, `pass_word`, `account_status`, `account_type`, `company_name`, `first_name`, `last_name`, `phone_number`, `fax_number`, `company_address`, `company_city`, `company_state`, `company_zip`, `company_country`, `tax_id`, `tooltip_setting`, `creation_date`)
 VALUES
-	(1,'qingfenghuang@chinamobile.com','fcea920f7412b5da7be0cf42b8c93759','1','1','','Qingfeng','Huang','','','','','','','','','','','1421176205'),
-	(2,'zhiminhe@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','1','ChinaMobile Technology USA','Zhimin','He','','','','','','','','','','','1421176651'),
-	(3,'lijianyj@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','1','ChinaMobile Technology USA','Jian','Li','','','','','','','','','','','1421176815'),
-	(4,'robertchen@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','2','ChinaMobile USRC','Robert','Chen','','','','1525 McCarthy Blvd','Milpitas','California','95035','','','','1421176863'),
-	(5,'lisagao@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','2','ChinaMobile USRC','Lisa','Gao','','','','1525 McCarthy Blvd','Milpitas','California','95035','','','','1421176901'),
-	(6,'charliehan@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','1','China Mobile','Charlie','Han','','','','','','','','','','','1422481257'),
-	(7,'xuzhide@chinamobile.com','6ffe613e2919f074e477a0a80f95d6a1','1','2','','Zhide','Xu','','','','','','','','','','','1427409902'),
-	(8,'liujinxin@chinamobile.com','48d3b93a9b9cea338ce48482e218fef8','1','1','','Jinxin','Liu','','','','','','','','','','','1427409938'),
-	(9,'fondawong@hk.chinamobile.com','6ffe613e2919f074e477a0a80f95d6a1','1','1','','Fonda','Wong','','','','','','','','','','','1427853082'),
-	(10,'joannelau@hk.chinamobile.com','8051059bd5752d0a41c60c37f4288e8e','1','2','','joanne','lau','','','','','','','','','','','1427853295'),
-	(11,'zhouqianghz@chinamobile.com','6ffe613e2919f074e477a0a80f95d6a1','1','1','','Qiang','Zhou','','','','','','','','','','','1428365116'),
-	(12,'xudahu@chinamobile.com','8051059bd5752d0a41c60c37f4288e8e','1','2','','dahu','xu','','','','','','','','','','','1428365154');
+	(1,'qingfenghuang@chinamobile.com','fcea920f7412b5da7be0cf42b8c93759','1','1','','Qingfeng','Huang','','','','','','','','','','1421176205'),
+	(2,'zhiminhe@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','1','ChinaMobile Technology USA','Zhimin','He','','','','','','','','','','1421176651'),
+	(3,'lijianyj@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','1','ChinaMobile Technology USA','Jian','Li','','','','','','','','','','1421176815'),
+	(4,'robertchen@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','2','ChinaMobile USRC','Robert','Chen','','','1525 McCarthy Blvd','Milpitas','California','95035','','','','1421176863'),
+	(5,'lisagao@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','2','ChinaMobile USRC','Lisa','Gao','','','1525 McCarthy Blvd','Milpitas','California','95035','','','','1421176901'),
+	(6,'charliehan@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','1','China Mobile','Charlie','Han','','','','','','','','','','1422481257'),
+	(7,'xuzhide@chinamobile.com','6ffe613e2919f074e477a0a80f95d6a1','1','2','','Zhide','Xu','','','','','','','','','','1427409902'),
+	(8,'liujinxin@chinamobile.com','48d3b93a9b9cea338ce48482e218fef8','1','1','','Jinxin','Liu','','','','','','','','','','1427409938'),
+	(9,'fondawong@hk.chinamobile.com','6ffe613e2919f074e477a0a80f95d6a1','1','1','','Fonda','Wong','','','','','','','','','','1427853082'),
+	(10,'joannelau@hk.chinamobile.com','8051059bd5752d0a41c60c37f4288e8e','1','2','','joanne','lau','','','','','','','','','','1427853295'),
+	(11,'zhouqianghz@chinamobile.com','6ffe613e2919f074e477a0a80f95d6a1','1','1','','Qiang','Zhou','','','','','','','','','','1428365116'),
+	(12,'xudahu@chinamobile.com','8051059bd5752d0a41c60c37f4288e8e','1','2','','dahu','xu','','','','','','','','','','1428365154');
 
 /*!40000 ALTER TABLE `md_uaccounts` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -5555,7 +5586,10 @@ VALUES
 	(79,'1ed9dbe356b305811e1a16926a0923c7','1429145820','1','qingfenghuang@chinamobile.com','fcea920f7412b5da7be0cf42b8c93759','1','','1429140129'),
 	(80,'f162c83fdebafb738e775894778de152','1429149058','1','zhiminhe@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','','1429145304'),
 	(81,'d5ba33a79d1b172daa042750a57bec5d','1429300827','1','zhiminhe@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','','1429295766'),
-	(82,'20d957526ca52914d26af530fd0be179','1429311106','1','zhiminhe@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','','1429307496');
+	(82,'20d957526ca52914d26af530fd0be179','1429311106','1','zhiminhe@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','','1429307496'),
+	(83,'8ad9e9ec2cc29ac71916a5cc9022878d','1429315895','1','zhiminhe@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','','1429312173'),
+	(84,'00ccbe25a129acb7287930e110fce40f','1429903282','1','zhiminhe@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','','1429899638'),
+	(85,'26024c09930a362851488f0040e4d3f8','1429920213','1','zhiminhe@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','','1429916188');
 
 /*!40000 ALTER TABLE `md_usessions` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -5595,7 +5629,7 @@ LOCK TABLES `md_zones` WRITE;
 INSERT INTO `md_zones` (`entry_id`, `publication_id`, `zone_hash`, `zone_name`, `zone_type`, `zone_width`, `zone_height`, `zone_refresh`, `zone_channel`, `zone_lastrequest`, `zone_description`, `mobfox_backfill_active`, `mobfox_min_cpc_active`, `min_cpc`, `min_cpm`, `backfill_alt_1`, `backfill_alt_2`, `backfill_alt_3`)
 VALUES
 	(1,'1','226af592e76f7630018ef0a669ad8b2b','Banner','banner','320','50','30','1','1429125227','','1','',0.100,2.500,'','',''),
-	(3,'1','b1b47070b4fec8545c56e358bf9194da','FullPage','interstitial','','','30','1','1429296585','','1','0',0.100,2.500,'','',''),
+	(3,'1','b1b47070b4fec8545c56e358bf9194da','FullPage','interstitial','','','30','1','1429815061','','1','0',0.100,2.500,'','',''),
 	(4,'2','6946048cd2f8c5979d7bc6cc8bc9e167','Main Placement','interstitial','','','30','2','','test-AD Unit','1','0',0.100,2.500,'','','');
 
 /*!40000 ALTER TABLE `md_zones` ENABLE KEYS */;
