@@ -1230,10 +1230,7 @@ $request_settings['campaign_query']="select md_campaigns.campaign_id, md_campaig
 	$query_part['osversion']." ".
 	$query_part['adunit']." ".
 	$query_part['limit']." group by md_campaigns.campaign_id";
-//echo($request_settings['campaign_query']);
-// die();
-return true;	
-	
+return true;		
 }
 
 function check_cron_active(){
