@@ -218,6 +218,12 @@ if (isset ( $editdata ['interest_targeting'] ) && $editdata ['interest_targeting
 	echo "interest_targeting('off');";
 }
 
+if (isset ( $editdata ['location_targeting'] ) && $editdata ['location_targeting'] == 2) {
+	echo "location_targeting('on');";
+} else {
+	echo "location_targeting('off');";
+}
+
 if (isset ( $editdata ['chroniccondition_targeting'] ) && $editdata ['chroniccondition_targeting'] == 2) {
 	echo "chroniccondition_targeting('on');";
 } else {

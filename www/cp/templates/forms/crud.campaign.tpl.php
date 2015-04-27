@@ -102,6 +102,17 @@ function interest_targeting(status){
 	}
 }
 
+function location_targeting(status){
+	if (status=="off"){
+		$("#location_targeting_all").attr("checked", "true");
+		document.getElementById('locationtargetingtable').style.display='none';
+	}
+	if (status=="on"){
+		$("#location_targeting_co").attr("checked", "true");
+		document.getElementById('locationtargetingtable').style.display='block';
+	}
+}
+
 function chroniccondition_targeting(status){
 	
 	if (status=="off"){
@@ -697,7 +708,6 @@ $("input[id=country_targeting]").autoSuggest(data.items, {selectedItemProp: "nam
 				id="gendertargetingtable"
 				style="-moz-border-radius: 5px; border-radius: 5px; margin-top: 5px;">
  				 <?php if (!isset($editdata['gender_select'])){$editdata['gender_select']='';} list_gender_campaign($editdata['gender_select']); ?>
- 
 			</table>
 		</div>
 
@@ -720,7 +730,6 @@ $("input[id=country_targeting]").autoSuggest(data.items, {selectedItemProp: "nam
 				id="incometargetingtable"
 				style="-moz-border-radius: 5px; border-radius: 5px; margin-top: 5px;">
   			<?php if (!isset($editdata['income_select'])){$editdata['income_select']='';} list_income_campaign($editdata['income_select']); ?>
-
 				</table>
 		</div>
 		
@@ -745,13 +754,37 @@ $("input[id=country_targeting]").autoSuggest(data.items, {selectedItemProp: "nam
   			<?php if (!isset($editdata['interest_select'])){$editdata['interest_select']='';} list_interest_campaign($editdata['interest_select']); ?>
 				</table>
 		</div>
+		
+		<div class="field-group control-group inline">
+			<div class="field">
+				<input type="radio"
+					onclick="document.getElementById('locationtargetingtable').style.display='none';"
+					name="location_targeting" id="location_targeting_all" value="1" /> <label
+					for="location_targeting_all">所有位置</label>
+			</div>
+
+			<div id="interstitialoptiobutton" class="field">
+				<input type="radio"
+					onclick="document.getElementById('locationtargetingtable').style.display='block';"
+					name="location_targeting" id="location_targeting_co" value="2" /> <label
+					for="location_targeting_co">特定位置</label>
+			</div>
+
+			<table width="584" border="0" cellpadding="6" cellspacing="0"
+				id="locationtargetingtable"
+				style="-moz-border-radius: 5px; border-radius: 5px; margin-top: 5px;">
+  			<?php if (!isset($editdata['location_select'])){$editdata['location_select']='';} list_location_campaign($editdata['location_select']); ?>
+				</table>
+		</div>
+
+		
 		<div class="field-group control-group inline">
 			<div class="field">
 				<input type="radio"
 					onclick="document.getElementById('chronicconditiontargetingtable').style.display='none';"
 					name="chroniccondition_targeting"
 					id="chroniccondition_targeting_all" value="1" /> <label
-					for="chroniccondition_targeting_all"> 所有的慢性病</ label > 
+					for="chroniccondition_targeting_all"> 所有的慢性病</label> 
 			
 			</div>
 
@@ -760,16 +793,15 @@ $("input[id=country_targeting]").autoSuggest(data.items, {selectedItemProp: "nam
 					onclick="document.getElementById('chronicconditiontargetingtable').style.display='block';"
 					name="chroniccondition_targeting"
 					id="chroniccondition_targeting_co" value="2" /> <label
-					for="chroniccondition_targeting_co"> 特定的慢性病</ label > 
+					for="chroniccondition_targeting_co"> 特定的慢性病</label> 
 			
 			</div>
 
 			<table width="584" border="0" cellpadding="6" cellspacing="0"
 				id="chronicconditiontargetingtable"
 				style="-moz-border-radius: 5px; border-radius: 5px; margin-top: 5px;">
-  <?php if (! isset($editdata[ 'chroniccondition_select' ])){$editdata['chroniccondition_select' ]='' ;} list_chroniccondition_campaign($editdata['chroniccondition_select' ]); ?>
- 
-</table>
+ 			 <?php if (! isset($editdata[ 'chroniccondition_select' ])){$editdata['chroniccondition_select' ]='' ;} list_chroniccondition_campaign($editdata['chroniccondition_select' ]); ?>
+ 			</table>
 		</div>
 
 	</div>

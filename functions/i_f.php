@@ -340,6 +340,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `md_campaigns` (
   `gender_target` varchar(1) NOT NULL,
 	`income_target` varchar(1) NOT NULL,
 	`interest_target` varchar(1) NOT NULL,		
+	`location_target` varchar(1) NOT NULL, 	
   `chroniccondition_target` varchar(1) NOT NULL,
   PRIMARY KEY  (`campaign_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;", $maindb);
@@ -435,6 +436,23 @@ mysql_query("INSERT INTO `md_interests` (`interest_id`, `interest_name`) VALUES
 (7, '电影'),
 (8, '阅读'),
 (9, '唱歌');", $maindb);
+
+mysql_query("CREATE TABLE IF NOT EXISTS `md_locations` (
+  `location_id` int(11) NOT NULL auto_increment,
+  `location_name` varchar(100) NOT NULL,
+  PRIMARY KEY  (`location_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;", $maindb);
+
+mysql_query("INSERT INTO `md_locations` (`location_id`, `location_name`) VALUES
+(1, '北京'),
+(2, '上海'),
+(3, '杭州'),
+(4, '广州'),
+(5, '天津'),
+(6, '深圳'),
+(7, '香港'),
+(8, '成都'),
+(9, '重庆');", $maindb);
 
 mysql_query("CREATE TABLE IF NOT EXISTS `md_chroniccondition` (
   `chroniccondition_id` int(11) NOT NULL auto_increment,
