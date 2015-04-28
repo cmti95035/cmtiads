@@ -43,6 +43,7 @@ $editdata['gender_targeting']=$editdata['gender_target'];
 $editdata['income_targeting']=$editdata['income_target'];
 $editdata['interest_targeting']=$editdata['interest_target'];
 $editdata['location_targeting']=$editdata['location_target'];
+$editdata['age_targeting']=$editdata['age_target'];
 $editdata['chroniccondition_targeting']=$editdata['chroniccondition_target'];
 $editdata['publication_targeting']=$editdata['publication_target'];
 $main_cap=get_campaign_cap_detail($_GET['id']);
@@ -55,6 +56,7 @@ $editdata['gender_select']=load_campaign_gender_array($_GET['id']);
 $editdata['income_select']=load_campaign_income_array($_GET['id']);
 $editdata['interest_select']=load_campaign_interest_array($_GET['id']);
 $editdata['location_select']=load_campaign_location_array($_GET['id']);
+$editdata['age_select']=load_campaign_age_array($_GET['id']);
 $editdata['chroniccondition_select']=load_campaign_chroniccondition_array($_GET['id']);
 //var_dump($editdata); //verified here
 if ($editdata['campaign_end']=='2090-12-12'){
@@ -245,6 +247,13 @@ if ($editdata['location_targeting']==2){
 }
 else {
 	echo "location_targeting('off');";
+}
+
+if ($editdata['age_targeting']==2){
+	echo "age_targeting('on');";
+}
+else {
+	echo "age_targeting('off');";
 }
 
 if ($editdata['chroniccondition_targeting']==2){

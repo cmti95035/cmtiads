@@ -1093,13 +1093,19 @@ function build_query() {
 		$query_part ['location'] = '';
 	}
 	
+	if (isset ( $request_settings ['age'] ) && is_numeric ( $request_settings ['age'] )) {
+		$query_part ['age'] = "AND (md_campaigns.age_target=1 OR (c7.targeting_type='age' AND c7.targeting_code='" . $request_settings ['age'] . "'))";
+	} else {
+		$query_part ['age'] = '';
+	}
+	
 	if (isset ( $request_settings ['chroniccondition'] ) && is_numeric ( $request_settings ['chroniccondition'] )) {
-		$query_part ['chroniccondition'] = "AND (md_campaigns.chroniccondition_target=1 OR (c7.targeting_type='chroniccondition' AND c7.targeting_code='" . $request_settings ['chroniccondition'] . "'))";
+		$query_part ['chroniccondition'] = "AND (md_campaigns.chroniccondition_target=1 OR (c8.targeting_type='chroniccondition' AND c8.targeting_code='" . $request_settings ['chroniccondition'] . "'))";
 	} else {
 		$query_part ['chroniccondition'] = '';
 	}
 	
-	$query_part ['placement'] = "AND (md_campaigns.publication_target=1 OR (c8.targeting_type='placement' AND c8.targeting_code='" . $zone_detail ['entry_id'] . "'))";
+	$query_part ['placement'] = "AND (md_campaigns.publication_target=1 OR (c9.targeting_type='placement' AND c9.targeting_code='" . $zone_detail ['entry_id'] . "'))";
 	
 	$query_part ['misc'] = "AND md_campaigns.campaign_status=1 AND md_campaigns.campaign_start<='" . date ( "Y-m-d" ) . "' AND md_campaigns.campaign_end>'" . date ( "Y-m-d" ) . "'";
 	
@@ -1171,7 +1177,26 @@ function build_query() {
 		$query_part ['limit'] = "AND ((md_campaign_limit.total_amount_left='' OR md_campaign_limit.total_amount_left>=1) OR (md_campaign_limit.cap_type=1))";
 	}
 	
-	$request_settings ['campaign_query'] = "select md_campaigns.campaign_id, md_campaigns.campaign_priority, " . "md_campaigns.campaign_type, md_campaigns.campaign_networkid from md_campaigns " . "LEFT JOIN md_campaign_targeting c1 ON md_campaigns.campaign_id = c1.campaign_id " . "LEFT JOIN md_campaign_targeting c2 ON md_campaigns.campaign_id = c2.campaign_id " . "LEFT JOIN md_campaign_targeting c3 ON md_campaigns.campaign_id = c3.campaign_id " . "LEFT JOIN md_campaign_targeting c4 ON md_campaigns.campaign_id = c4.campaign_id " . "LEFT JOIN md_campaign_targeting c5 ON md_campaigns.campaign_id = c5.campaign_id " . "LEFT JOIN md_campaign_targeting c6 ON md_campaigns.campaign_id = c6.campaign_id " . "LEFT JOIN md_campaign_targeting c7 ON md_campaigns.campaign_id = c7.campaign_id " . "LEFT JOIN md_campaign_targeting c8 ON md_campaigns.campaign_id = c8.campaign_id " . "LEFT JOIN md_ad_units ON md_campaigns.campaign_id = md_ad_units.campaign_id " . "LEFT JOIN md_campaign_limit ON md_campaigns.campaign_id = md_campaign_limit.campaign_id " . "where (md_campaigns.country_target=1" . $query_part ['geo'] . " " . $query_part ['channel'] . " " . $query_part ['gender'] . " " . $query_part ['income'] . " " . $query_part ['interest'] . " " . $query_part ['location'] . " " . $query_part ['chroniccondition'] . " " . $query_part ['placement'] . " " . $query_part ['misc'] . " " . $query_part ['device'] . " " . $query_part ['osversion'] . " " . $query_part ['adunit'] . " " . $query_part ['limit'] . " group by md_campaigns.campaign_id";
+	$request_settings ['campaign_query'] = "select md_campaigns.campaign_id, md_campaigns.campaign_priority, " . 
+	"md_campaigns.campaign_type, md_campaigns.campaign_networkid from md_campaigns " . 
+	"LEFT JOIN md_campaign_targeting c1 ON md_campaigns.campaign_id = c1.campaign_id " . 
+	"LEFT JOIN md_campaign_targeting c2 ON md_campaigns.campaign_id = c2.campaign_id " . 
+	"LEFT JOIN md_campaign_targeting c3 ON md_campaigns.campaign_id = c3.campaign_id " . 
+	"LEFT JOIN md_campaign_targeting c4 ON md_campaigns.campaign_id = c4.campaign_id " . 
+	"LEFT JOIN md_campaign_targeting c5 ON md_campaigns.campaign_id = c5.campaign_id " . 
+	"LEFT JOIN md_campaign_targeting c6 ON md_campaigns.campaign_id = c6.campaign_id " . 
+	"LEFT JOIN md_campaign_targeting c7 ON md_campaigns.campaign_id = c7.campaign_id " . 
+	"LEFT JOIN md_campaign_targeting c8 ON md_campaigns.campaign_id = c8.campaign_id " . 
+	"LEFT JOIN md_campaign_targeting c9 ON md_campaigns.campaign_id = c9.campaign_id " .
+	"LEFT JOIN md_ad_units ON md_campaigns.campaign_id = md_ad_units.campaign_id " . 
+	"LEFT JOIN md_campaign_limit ON md_campaigns.campaign_id = md_campaign_limit.campaign_id " . 
+	"where (md_campaigns.country_target=1" .
+	$query_part ['geo'] . " " . $query_part ['channel'] . " " . 
+	$query_part ['gender'] . " " . $query_part ['income'] . " " . $query_part ['interest'] . " " . 
+	$query_part ['location'] . " " . $query_part['age']. " " . $query_part ['chroniccondition'] . " " . 
+	$query_part ['placement'] . " " . $query_part ['misc'] . " " . $query_part ['device'] . " " . 
+	$query_part ['osversion'] . " " . $query_part ['adunit'] . " " . $query_part ['limit'] . " group by md_campaigns.campaign_id";
+
 	return true;
 }
 function check_cron_active() {
@@ -1564,9 +1589,16 @@ function check_input($data) {
 	
 	$request_settings ['location'] = $userinfo ["location_id"];
 	
+	$request_settings ['age'] = $userinfo ["age_id"];
+	
 	$request_settings ['chroniccondition'] = $userinfo ["chroniccondition_id"];
 	
-	file_put_contents ( $test_config ['local_logging_file'], ' phone:' . $pieces [1] . ' response:' . $response . ' userinfo:' . implode ( ' ', $userinfo ) . ' gender:' . $request_settings ['gender'] . ' income' . $request_settings ['income'] . ' interest' . $request_settings ['interest'] . ' location' . $request_settings ['location'] . ' chronic condition:' . $request_settings ['chroniccondition'] . PHP_EOL . PHP_EOL, FILE_APPEND );
+	file_put_contents ( $test_config ['local_logging_file'], 
+	' phone:' . $pieces [1] . ' response:' . $response . 
+	' userinfo:' . implode ( ' ', $userinfo ) . ' gender:' . $request_settings ['gender'] . 
+	' income' . $request_settings ['income'] . ' interest' . $request_settings ['interest'] . 
+	' location' . $request_settings ['location'] . 	' age' . $request_settings ['age'] . 
+	' chronic condition:' . $request_settings ['chroniccondition'] . PHP_EOL . PHP_EOL, FILE_APPEND );
 	
 	if (! isset ( $request_settings ['placement_hash'] ) or empty ( $request_settings ['placement_hash'] ) or ! validate_md5 ( $request_settings ['placement_hash'] )) {
 		$errormessage = 'No valid Integration Placement ID supplied. (Variable "s")';

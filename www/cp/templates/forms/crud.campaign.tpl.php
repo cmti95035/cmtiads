@@ -113,6 +113,17 @@ function location_targeting(status){
 	}
 }
 
+function age_targeting(status){
+	if (status=="off"){
+		$("#age_targeting_all").attr("checked", "true");
+		document.getElementById('agetargetingtable').style.display='none';
+	}
+	if (status=="on"){
+		$("#age_targeting_co").attr("checked", "true");
+		document.getElementById('agetargetingtable').style.display='block';
+	}
+}
+
 function chroniccondition_targeting(status){
 	
 	if (status=="off"){
@@ -774,6 +785,28 @@ $("input[id=country_targeting]").autoSuggest(data.items, {selectedItemProp: "nam
 				id="locationtargetingtable"
 				style="-moz-border-radius: 5px; border-radius: 5px; margin-top: 5px;">
   			<?php if (!isset($editdata['location_select'])){$editdata['location_select']='';} list_location_campaign($editdata['location_select']); ?>
+				</table>
+		</div>
+		
+		<div class="field-group control-group inline">
+			<div class="field">
+				<input type="radio"
+					onclick="document.getElementById('agetargetingtable').style.display='none';"
+					name="age_targeting" id="age_targeting_all" value="1" /> <label
+					for="age_targeting_all">所有年龄</label>
+			</div>
+
+			<div id="interstitialoptiobutton" class="field">
+				<input type="radio"
+					onclick="document.getElementById('agetargetingtable').style.display='block';"
+					name="age_targeting" id="age_targeting_co" value="2" /> <label
+					for="age_targeting_co">特定年龄</label>
+			</div>
+
+			<table width="584" border="0" cellpadding="6" cellspacing="0"
+				id="agetargetingtable"
+				style="-moz-border-radius: 5px; border-radius: 5px; margin-top: 5px;">
+  			<?php if (!isset($editdata['age_select'])){$editdata['age_select']='';} list_age_campaign($editdata['age_select']); ?>
 				</table>
 		</div>
 

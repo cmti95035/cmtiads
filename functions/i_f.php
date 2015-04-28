@@ -341,6 +341,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `md_campaigns` (
 	`income_target` varchar(1) NOT NULL,
 	`interest_target` varchar(1) NOT NULL,		
 	`location_target` varchar(1) NOT NULL, 	
+	`age_target` varchar(1) NOT NULL, 	
   `chroniccondition_target` varchar(1) NOT NULL,
   PRIMARY KEY  (`campaign_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;", $maindb);
@@ -446,13 +447,30 @@ mysql_query("CREATE TABLE IF NOT EXISTS `md_locations` (
 mysql_query("INSERT INTO `md_locations` (`location_id`, `location_name`) VALUES
 (1, '北京'),
 (2, '上海'),
-(3, '杭州'),
-(4, '广州'),
-(5, '天津'),
-(6, '深圳'),
-(7, '香港'),
-(8, '成都'),
-(9, '重庆');", $maindb);
+(3, '重庆'),
+(4, '天津'),
+(5, '浙江'),
+(6, '江苏'),
+(7, '广东'),
+(8, '四川'),
+(9, '河北');", $maindb);
+
+mysql_query("CREATE TABLE IF NOT EXISTS `md_ages` (
+  `age_id` int(11) NOT NULL auto_increment,
+  `age_name` varchar(100) NOT NULL,
+  PRIMARY KEY  (`age_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;", $maindb);
+
+mysql_query("INSERT INTO `md_ages` (`age_id`, `age_name`) VALUES
+(1, '10以下'),
+(2, '10-20'),
+(3, '20-30'),
+(4, '30-40'),
+(5, '40-50'),
+(6, '50-60'),
+(7, '60-70'),
+(8, '70-80'),
+(9, '80以上');", $maindb);
 
 mysql_query("CREATE TABLE IF NOT EXISTS `md_chroniccondition` (
   `chroniccondition_id` int(11) NOT NULL auto_increment,
