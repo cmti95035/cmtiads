@@ -7,7 +7,7 @@
 #
 # Host: 127.0.0.1 (MySQL 5.6.21)
 # Database: cmtiads
-# Generation Time: 2015-04-24 23:05:22 +0000
+# Generation Time: 2015-04-28 21:48:03 +0000
 # ************************************************************
 
 
@@ -60,6 +60,36 @@ VALUES
 	(16,'19','6782eb8f5d6a38059a32584d8c28c591','1','1','http://www.10086.cn','','','','','','Creative 1 Diabetes','','jpg','50','320','1');
 
 /*!40000 ALTER TABLE `md_ad_units` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
+# Dump of table md_ages
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `md_ages`;
+
+CREATE TABLE `md_ages` (
+  `age_id` int(11) NOT NULL AUTO_INCREMENT,
+  `age_name` varchar(100) NOT NULL,
+  PRIMARY KEY (`age_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+LOCK TABLES `md_ages` WRITE;
+/*!40000 ALTER TABLE `md_ages` DISABLE KEYS */;
+
+INSERT INTO `md_ages` (`age_id`, `age_name`)
+VALUES
+	(9,'80以上'),
+	(8,'70-80'),
+	(7,'60-70'),
+	(6,'50-60'),
+	(5,'40-50'),
+	(4,'30-40'),
+	(3,'20-30'),
+	(2,'10-20'),
+	(1,'10以下');
+
+/*!40000 ALTER TABLE `md_ages` ENABLE KEYS */;
 UNLOCK TABLES;
 
 
@@ -143,12 +173,10 @@ LOCK TABLES `md_campaign_targeting` WRITE;
 INSERT INTO `md_campaign_targeting` (`entry_id`, `campaign_id`, `targeting_type`, `targeting_code`)
 VALUES
 	(26,11,'gender','2'),
-	(47,10,'income','1'),
 	(29,14,'gender','2'),
 	(31,19,'chroniccondition','3'),
-	(46,10,'gender','1'),
 	(41,13,'gender','1'),
-	(48,10,'income','9');
+	(316,10,'gender','1');
 
 /*!40000 ALTER TABLE `md_campaign_targeting` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -189,6 +217,8 @@ CREATE TABLE `md_campaigns` (
   `gender_target` varchar(1) NOT NULL,
   `income_target` varchar(1) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `interest_target` varchar(1) NOT NULL DEFAULT '',
+  `location_target` varchar(1) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
+  `age_target` varchar(1) CHARACTER SET utf8 COLLATE utf8_unicode_ci NOT NULL DEFAULT '',
   `chroniccondition_target` varchar(1) NOT NULL,
   PRIMARY KEY (`campaign_id`)
 ) ENGINE=MyISAM DEFAULT CHARSET=utf8;
@@ -196,14 +226,14 @@ CREATE TABLE `md_campaigns` (
 LOCK TABLES `md_campaigns` WRITE;
 /*!40000 ALTER TABLE `md_campaigns` DISABLE KEYS */;
 
-INSERT INTO `md_campaigns` (`campaign_id`, `campaign_owner`, `campaign_status`, `campaign_type`, `campaign_name`, `campaign_desc`, `campaign_start`, `campaign_end`, `campaign_creationdate`, `campaign_networkid`, `campaign_priority`, `campaign_rate_type`, `campaign_rate`, `target_iphone`, `target_ipod`, `target_ipad`, `target_android`, `target_other`, `ios_version_min`, `ios_version_max`, `android_version_min`, `android_version_max`, `country_target`, `publication_target`, `channel_target`, `device_target`, `gender_target`, `income_target`, `interest_target`, `chroniccondition_target`)
+INSERT INTO `md_campaigns` (`campaign_id`, `campaign_owner`, `campaign_status`, `campaign_type`, `campaign_name`, `campaign_desc`, `campaign_start`, `campaign_end`, `campaign_creationdate`, `campaign_networkid`, `campaign_priority`, `campaign_rate_type`, `campaign_rate`, `target_iphone`, `target_ipod`, `target_ipad`, `target_android`, `target_other`, `ios_version_min`, `ios_version_max`, `android_version_min`, `android_version_max`, `country_target`, `publication_target`, `channel_target`, `device_target`, `gender_target`, `income_target`, `interest_target`, `location_target`, `age_target`, `chroniccondition_target`)
 VALUES
-	(12,'2','1','1','all_banner','','2015-03-26','2090-12-12','1425666750','','5','','','','','','','','','','','','1','1','1','1','1','1','','1'),
-	(13,'2','1','1','male_banner','','2015-03-07','2090-12-12','1425683714','','5','','','','','','','','','','','','1','1','1','1','2','1','','1'),
-	(11,'2','1','1','female_fullpage','','2015-02-10','2090-12-12','1423529532','','5','','','','','','','','','','','','1','1','1','1','2','1','','1'),
-	(10,'2','1','1','male_fullpage','','2015-03-26','2090-12-12','1423529377','','5','','','','','','','','','','','','1','1','1','1','2','2','','1'),
-	(14,'2','1','1','female_banner','','2015-03-07','2090-12-12','1425684466','','5','','','','','','','','','','','','1','1','1','1','2','1','','1'),
-	(19,'1','1','1','Diabetes Ads','','2015-04-09','2090-12-12','1428535626','','5','','','','','','','','','','','','1','1','1','1','1','1','','2');
+	(12,'2','1','1','all_banner','','2015-03-26','2090-12-12','1425666750','','5','','','','','','','','','','','','1','1','1','1','1','1','','','','1'),
+	(13,'2','1','1','male_banner','','2015-03-07','2090-12-12','1425683714','','5','','','','','','','','','','','','1','1','1','1','2','1','','','','1'),
+	(11,'2','1','1','female_fullpage','','2015-02-10','2090-12-12','1423529532','','5','','','','','','','','','','','','1','1','1','1','2','1','','','','1'),
+	(10,'2','1','1','male_fullpage','','2015-03-26','2090-12-12','1423529377','','5','','','','','','','','','','','','1','1','1','1','2','1','1','1','1','1'),
+	(14,'2','1','1','female_banner','','2015-03-07','2090-12-12','1425684466','','5','','','','','','','','','','','','1','1','1','1','2','1','','','','1'),
+	(19,'1','1','1','Diabetes Ads','','2015-04-09','2090-12-12','1428535626','','5','','','','','','','','','','','','1','1','1','1','1','1','','','','2');
 
 /*!40000 ALTER TABLE `md_campaigns` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -320,12 +350,12 @@ VALUES
 	(7,'last_trafficrequest_update','1427150180'),
 	(8,'last_limit_update',''),
 	(9,'server_email','qingfenghuang@chinamobile.com'),
-	(10,'last_mf_check','1429899638'),
+	(10,'last_mf_check','1430245041'),
 	(11,'allow_statistical_info','1'),
 	(12,'installation_id','bc6d64f849fbf3704806c4e1c3e949d0'),
 	(13,'update_check','1'),
 	(14,'default_creative_server','1'),
-	(15,'last_pendingactions_exec','1429916175'),
+	(15,'last_pendingactions_exec','1430245027'),
 	(16,'last_cron_job','');
 
 /*!40000 ALTER TABLE `md_configuration` ENABLE KEYS */;
@@ -445,6 +475,36 @@ VALUES
 UNLOCK TABLES;
 
 
+# Dump of table md_locations
+# ------------------------------------------------------------
+
+DROP TABLE IF EXISTS `md_locations`;
+
+CREATE TABLE `md_locations` (
+  `location_id` int(11) NOT NULL AUTO_INCREMENT,
+  `location_name` varchar(100) NOT NULL,
+  PRIMARY KEY (`location_id`)
+) ENGINE=MyISAM DEFAULT CHARSET=utf8;
+
+LOCK TABLES `md_locations` WRITE;
+/*!40000 ALTER TABLE `md_locations` DISABLE KEYS */;
+
+INSERT INTO `md_locations` (`location_id`, `location_name`)
+VALUES
+	(1,'北京'),
+	(2,'上海'),
+	(3,'杭州'),
+	(4,'广州'),
+	(5,'天津'),
+	(6,'深圳'),
+	(7,'香港'),
+	(8,'成都'),
+	(9,'重庆');
+
+/*!40000 ALTER TABLE `md_locations` ENABLE KEYS */;
+UNLOCK TABLES;
+
+
 # Dump of table md_log_types
 # ------------------------------------------------------------
 
@@ -482,22 +542,25 @@ CREATE TABLE `md_mobile_users` (
   `phone` varchar(16) NOT NULL,
   `gender_id` smallint(4) NOT NULL,
   `chroniccondition_id` smallint(4) NOT NULL,
-  `income_id` smallint(11) DEFAULT NULL,
+  `income_id` smallint(11) NOT NULL,
+  `interest_id` smallint(11) NOT NULL,
+  `location_id` int(11) NOT NULL,
+  `age_id` int(11) NOT NULL,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 LOCK TABLES `md_mobile_users` WRITE;
 /*!40000 ALTER TABLE `md_mobile_users` DISABLE KEYS */;
 
-INSERT INTO `md_mobile_users` (`id`, `name`, `phone`, `gender_id`, `chroniccondition_id`, `income_id`)
+INSERT INTO `md_mobile_users` (`id`, `name`, `phone`, `gender_id`, `chroniccondition_id`, `income_id`, `interest_id`, `location_id`, `age_id`)
 VALUES
-	(1,'zhimin','14086803612',2,0,1),
-	(2,'oneplus','14086801111',1,0,NULL),
-	(3,'emulator','15555215554',1,0,NULL),
-	(4,'verizon','14084380883',2,0,NULL),
-	(5,'tmobile','16508899498',2,0,NULL),
-	(6,'verizon','4084380882',1,0,NULL),
-	(7,'zhimin','4086803612',1,3,1);
+	(1,'zhimin','14086803612',2,0,1,1,1,1),
+	(2,'oneplus','14086801111',1,0,0,1,0,0),
+	(3,'emulator','15555215554',1,0,0,1,0,0),
+	(4,'verizon','14084380883',2,0,0,1,0,0),
+	(5,'tmobile','16508899498',2,0,0,1,0,0),
+	(6,'verizon','4084380882',1,0,0,1,0,0),
+	(7,'zhimin','4086803612',1,3,1,1,1,1);
 
 /*!40000 ALTER TABLE `md_mobile_users` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -710,8 +773,8 @@ LOCK TABLES `md_publications` WRITE;
 
 INSERT INTO `md_publications` (`inv_id`, `creator_id`, `inv_status`, `inv_type`, `inv_name`, `inv_description`, `inv_address`, `inv_defaultchannel`, `md_lastrequest`)
 VALUES
-	(1,'2','1','1','Demo','','http://','1','1429815061'),
-	(2,'11','1','2','test--4.15','test-example','http://www.baidu.com','2','');
+	(1,'2','1','1','Demo','','http://','1','1430257634'),
+	(2,'11','1','2','Test','test-example','http://www.baidu.com','2','');
 
 /*!40000 ALTER TABLE `md_publications` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -5277,7 +5340,12 @@ VALUES
 	(104,'1','','2015-04-15','15','04','2015','1','1','13','13','','42','0','42','5',''),
 	(105,'1','','2015-04-17','17','04','2015','1','3','','','18','19','19','19','0',''),
 	(106,'1','','2015-04-17','17','04','2015','1','3','10','10','','1','0','1','0',''),
-	(107,'1','','2015-04-23','23','04','2015','1','3','10','10','','1','0','1','0','');
+	(107,'1','','2015-04-23','23','04','2015','1','3','10','10','','1','0','1','0',''),
+	(108,'1','','2015-04-25','25','04','2015','1','3','10','10','','12','0','12','0',''),
+	(109,'1','','2015-04-25','25','04','2015','1','3','','','18','7','7','7','0',''),
+	(110,'1','','2015-04-27','27','04','2015','1','3','10','10','','2','0','2','0',''),
+	(111,'1','','2015-04-28','28','04','2015','1','3','10','10','','16','0','16','0',''),
+	(112,'1','','2015-04-28','28','04','2015','1','3','','','18','7','7','7','0','');
 
 /*!40000 ALTER TABLE `md_reporting` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -5589,7 +5657,11 @@ VALUES
 	(82,'20d957526ca52914d26af530fd0be179','1429311106','1','zhiminhe@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','','1429307496'),
 	(83,'8ad9e9ec2cc29ac71916a5cc9022878d','1429315895','1','zhiminhe@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','','1429312173'),
 	(84,'00ccbe25a129acb7287930e110fce40f','1429903282','1','zhiminhe@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','','1429899638'),
-	(85,'26024c09930a362851488f0040e4d3f8','1429920213','1','zhiminhe@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','','1429916188');
+	(85,'26024c09930a362851488f0040e4d3f8','1429930561','1','zhiminhe@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','','1429916188'),
+	(86,'5149738a5007298fef865eba2f3e9576','1430163623','1','zhiminhe@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','','1430156807'),
+	(87,'ad1082045294409cbb6138263ebe207f','1430179778','1','zhiminhe@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','','1430174853'),
+	(88,'6da5597bba86af5525294db27785073a','1430185034','1','zhiminhe@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','','1430180746'),
+	(89,'6ac1d15cf9d4a5cf405e5d87c46502e1','1430248641','1','zhiminhe@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','','1430245041');
 
 /*!40000 ALTER TABLE `md_usessions` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -5629,7 +5701,7 @@ LOCK TABLES `md_zones` WRITE;
 INSERT INTO `md_zones` (`entry_id`, `publication_id`, `zone_hash`, `zone_name`, `zone_type`, `zone_width`, `zone_height`, `zone_refresh`, `zone_channel`, `zone_lastrequest`, `zone_description`, `mobfox_backfill_active`, `mobfox_min_cpc_active`, `min_cpc`, `min_cpm`, `backfill_alt_1`, `backfill_alt_2`, `backfill_alt_3`)
 VALUES
 	(1,'1','226af592e76f7630018ef0a669ad8b2b','Banner','banner','320','50','30','1','1429125227','','1','',0.100,2.500,'','',''),
-	(3,'1','b1b47070b4fec8545c56e358bf9194da','FullPage','interstitial','','','30','1','1429815061','','1','0',0.100,2.500,'','',''),
+	(3,'1','b1b47070b4fec8545c56e358bf9194da','FullPage','interstitial','','','30','1','1430257634','','1','0',0.100,2.500,'','',''),
 	(4,'2','6946048cd2f8c5979d7bc6cc8bc9e167','Main Placement','interstitial','','','30','2','','test-AD Unit','1','0',0.100,2.500,'','','');
 
 /*!40000 ALTER TABLE `md_zones` ENABLE KEYS */;
