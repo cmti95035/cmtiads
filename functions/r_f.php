@@ -1501,6 +1501,7 @@ function simple_query_maindb($query, $cache, $sec) {
 		return false;
 	}
 }
+
 function get_placement($data) {
 	global $request_settings;
 	global $errormessage;
@@ -1516,6 +1517,7 @@ function get_placement($data) {
 		return $zone_detail;
 	}
 }
+
 function print_error($type, $message, $sdk_type, $e) {
 	prepare_response ();
 	
@@ -1553,6 +1555,7 @@ function print_error($type, $message, $sdk_type, $e) {
 		exit ();
 	}
 }
+
 function validate_md5($hash) {
 	if (! empty ( $hash ) && preg_match ( '/^[a-f0-9]{32}$/', $hash )) {
 		return true;
@@ -1560,6 +1563,7 @@ function validate_md5($hash) {
 		return false;
 	}
 }
+
 function check_input($data) {
 	global $request_settings;
 	global $errormessage;
@@ -1571,12 +1575,24 @@ function check_input($data) {
 		$errormessage = 'Invalid IP Address';
 		return false;
 	}
-	//
+	
 	$pieces = explode ( "+", $data ['s'] );
+	
+	if (count($pieces) < 1) {
+		$errormessage = 'No phone number supplied';
+		return false;
+	}
+	
 	$request_settings ['placement_hash'] = $pieces [0];
 	
 	$request_settings ['phone'] = $pieces [1];
 	
+	if (count($pieces) == 3) { 
+		// location from moible takes precedance 
+		$request_settings ['location'] = get_location_id($pieces[2]);
+	} else {
+		$request_settings ['location'] = $userinfo ["location_id"];
+	}
 	$response = file_get_contents ( $test_config ['userinfo_server_url'] . $request_settings ['phone'] );
 	
 	$userinfo = json_decode ( $response, true );
@@ -1586,8 +1602,6 @@ function check_input($data) {
 	$request_settings ['income'] = $userinfo ["income_id"];
 	
 	$request_settings ['interest'] = $userinfo ["interest_id"];
-	
-	$request_settings ['location'] = $userinfo ["location_id"];
 	
 	$request_settings ['age'] = $userinfo ["age_id"];
 	
@@ -1604,11 +1618,7 @@ function check_input($data) {
 		$errormessage = 'No valid Integration Placement ID supplied. (Variable "s")';
 		return false;
 	}
-	
-	// $request_settings['placement_hash']=$data['s'];
-	
 	prepare_ua ( $data );
-	
 	if (! isset ( $request_settings ['user_agent'] ) or empty ( $request_settings ['user_agent'] )) {
 		$errormessage = 'No User Agent supplied. (Variable "u")';
 		return false;
@@ -1616,21 +1626,27 @@ function check_input($data) {
 	
 	return true;
 }
-function get_mobfox_id() {
-	$query = "select entry_id from md_networks where network_identifier='MOBFOX'";
-	
-	if ($network_detail = simple_query_maindb ( $query, true, 2000 )) {
-		
-		return $network_detail ['entry_id'];
-	} 
 
-	else {
+function get_location_id($location) {
+	$query = "select location_id from md_locations where location_name= '" . $location . "'";
+	if ($location_id = simple_query_maindb ( $query, true, 2000 )) {
+		return $location_id['location_id'];
+	} else {
 		return false;
 	}
 }
+
+function get_mobfox_id() {
+	$query = "select entry_id from md_networks where network_identifier='MOBFOX'";
+	if ($network_detail = simple_query_maindb ( $query, true, 2000 )) {
+		return $network_detail ['entry_id'];
+	} else {
+		return false;
+	}
+}
+
 function prepare_ua($data) {
-	global $request_settings;
-	
+	global $request_settings;	
 	if (isset ( $data ["h[User-Agent]"] ) && ! empty ( $data ["h[User-Agent]"] )) {
 		$request_settings ['user_agent'] = urldecode ( $data ["h[User-Agent]"] );
 	} else if (isset ( $data ['u_wv'] ) && ! empty ( $data ['u_wv'] )) {
@@ -1645,9 +1661,11 @@ function prepare_ua($data) {
 		$request_settings ['user_agent'] = urldecode ( $data ['u'] );
 	}
 }
+
 function is_valid_ip($ip, $include_priv_res = true) {
 	return $include_priv_res ? filter_var ( $ip, FILTER_VALIDATE_IP ) !== false : filter_var ( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE ) !== false;
 }
+
 function check_forwarded_ip($data) {
 	if (isset ( $data ["h[X-Forwarded-For]"] ) && ! empty ( $data ["h[X-Forwarded-For]"] )) {
 		$res_array = explode ( ",", $data ["h[X-Forwarded-For]"] );
@@ -1660,6 +1678,7 @@ function check_forwarded_ip($data) {
 	}
 	return false;
 }
+
 function prepare_ip($data) {
 	global $request_settings;
 	
@@ -1669,32 +1688,25 @@ function prepare_ip($data) {
 				$request_settings ['ip_address'] = $data ['i'];
 			}
 			break;
-		
 		case 'fetch' :
-			
-			$forwarded_ip = check_forwarded_ip ( $data );
-			
+			$forwarded_ip = check_forwarded_ip ( $data );			
 			if ($forwarded_ip) {
 				$request_settings ['ip_address'] = $forwarded_ip;
 			} else {
 				$request_settings ['ip_address'] = $_SERVER ['REMOTE_ADDR'];
 			}
-			
-			/* is_valid_ip */
-			
-			;
 	}
 }
+
 function prepare_r_hash() {
 	global $request_settings;
 	
 	$request_settings ["request_hash"] = md5 ( uniqid ( microtime () ) );
 }
+
 function prepare_response() {
-	global $request_settings;
-	
+	global $request_settings;	
 	switch ($request_settings ['response_type']) {
-		
 		case 'xml' :
 			header ( "Content-Type: text/xml" );
 			echo "<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n";
