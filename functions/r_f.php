@@ -216,12 +216,17 @@ function reporting_db_update($publication_id, $zone_id, $campaign_id, $creative_
 	}
 	
 	if ($repcard_detail ['entry_id'] > 0) {
-		mysql_query ( "UPDATE md_reporting set total_requests=total_requests+" . $add_request . ", total_requests_sec=total_requests_sec+" . $add_request_sec . ", total_impressions=total_impressions+" . $add_impression . ", total_clicks=total_clicks+" . $add_click . " WHERE entry_id='" . $repcard_detail ['entry_id'] . "'", $repdb );
+		mysql_query ( "UPDATE md_reporting set total_requests=total_requests+" . $add_request . 
+		", total_requests_sec=total_requests_sec+" . $add_request_sec . 
+		", total_impressions=total_impressions+" . $add_impression . 
+		", total_clicks=total_clicks+" . $add_click . 
+		" WHERE entry_id='" . $repcard_detail ['entry_id'] . "'", $repdb );
 	} else {
 		mysql_query ( "INSERT INTO md_reporting (type, date, day, month, year, publication_id, zone_id, campaign_id, creative_id, network_id, total_requests, total_requests_sec, total_impressions, total_clicks)
-VALUES ('1', '" . $current_date . "', '" . $current_day . "', '" . $current_month . "', '" . $current_year . "', '" . $publication_id . "', '" . $zone_id . "', '" . $campaign_id . "', '" . $creative_id . "', '" . $network_id . "', '" . $add_request . "', '" . $add_request_sec . "', '" . $add_impression . "', '" . $add_click . "')", $repdb );
+				VALUES ('1', '" . $current_date . "', '" . $current_day . "', '" . $current_month . "', '" . $current_year . "', '" . $publication_id . "', '" . $zone_id . "', '" . $campaign_id . "', '" . $creative_id . "', '" . $network_id . "', '" . $add_request . "', '" . $add_request_sec . "', '" . $add_impression . "', '" . $add_click . "')", $repdb );
 	}
 }
+
 function track_request($impression) {
 	global $request_settings;
 	global $zone_detail;
