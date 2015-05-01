@@ -2,14 +2,14 @@ package com.adsdk.demo;
 
 import android.app.Activity;
 import android.content.Context;
-import android.content.pm.ApplicationInfo;
-import android.content.pm.PackageManager;
+import android.content.Intent;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.ResultReceiver;
 import android.telephony.TelephonyManager;
-import android.util.Log;
 import android.view.Menu;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -29,23 +29,55 @@ public class MainActivity extends Activity implements AdListener {
     private LocationManager mLocationManager;
     private double mLongitude;
     private double mLatitude;
-    private static final String CONNECTOR = "+";
-    private static final int sLOCATION_UPDATE_INTERVAL = 60 * 1000; // 1 minutes
+    public static final String CONNECTOR = "+";
+    private static final int sLOCATION_UPDATE_INTERVAL = 10 * 1000; // 1 minutes
     private static final int sLOCATION_UPDATE_DISTANCE = 10; // 10 meters
-    private static final boolean IS_LOCATION_NEEDED = true; // set false to disable location
+    private boolean mIsLocationNeeded = true; // set false to disable location
+    private String mCurrLocService;
+    private AddressResultReceiver mResultReceiver;
+    private static final String REQUEST_URL_BANNER = "http://52.4.145.155/cmtiads/md.request.php";
+    private static final String REQUEST_URL_FULL = "http://52.4.145.155/cmtiads/md.request.php";
+    private String mPublishIdBanner;
+    private String mPublishIdFull;
+    private boolean mIsBannerRequested = false;
 
-    public void onClickShowBanner(View view) {
-        final String REQUEST_URL_BANNER = "http://52.4.145.155/cmtiads/md.request.php";
-        final String PUBLISHER_ID_BANNER = "226af592e76f7630018ef0a669ad8b2b" + CONNECTOR + mPhoneNumber;
-        if (mAdView != null) {
-            removeBanner();
+
+    private final LocationListener mLocationListener = new LocationListener() {
+        public void onLocationChanged(Location location) {
+            mLongitude = location.getLongitude();
+            mLatitude = location.getLatitude();
         }
 
-        String idPlus = appendLocationIfNeeded(PUBLISHER_ID_BANNER);
-        mAdView = new AdView(this, REQUEST_URL_BANNER,
-                idPlus, true, true);
-        mAdView.setAdListener(this);
-        layout.addView(mAdView);
+        public void onStatusChanged(String str, int i, Bundle bdl) {
+        }
+
+        public void onProviderEnabled(String provider) {
+            resetLocationService();
+        }
+
+        public void onProviderDisabled(String provider) {
+            resetLocationService();
+        }
+    };
+
+    private void resetLocationService() {
+        stopLocationUpdates();
+        setupLocationServiceIfNeeded();
+    }
+
+    public void onClickShowBanner(View view) {
+
+        if (mAdView != null) {
+           removeBanner();
+        }
+
+        mIsBannerRequested = true;
+        if (!appendLocationIfNeeded()) {
+            mAdView = new AdView(this, REQUEST_URL_BANNER,
+                    mPublishIdBanner, true, true);
+            mAdView.setAdListener(this);
+            layout.addView(mAdView);
+        }
     }
 
     private void removeBanner(){
@@ -56,6 +88,7 @@ public class MainActivity extends Activity implements AdListener {
     }
 
     public void onClickShowVideoInterstitial(View v) {
+        mIsBannerRequested = false;
         mManager.requestAd();
     }
 
@@ -69,44 +102,85 @@ public class MainActivity extends Activity implements AdListener {
             }
         }
 
-        final String REQUEST_URL_FULL = "http://52.4.145.155/cmtiads/md.request.php";
-        final String PUBLISHER_ID_FULL = "b1b47070b4fec8545c56e358bf9194da"+ CONNECTOR + mPhoneNumber;
+        mPublishIdFull = "b1b47070b4fec8545c56e358bf9194da"+ CONNECTOR + mPhoneNumber;
+        mPublishIdBanner = "226af592e76f7630018ef0a669ad8b2b" + CONNECTOR + mPhoneNumber;
+        setupLocationServiceIfNeeded();
 
-        mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        final LocationListener locationListener = new LocationListener() {
-            public void onLocationChanged(Location location) {
-                mLongitude = location.getLongitude();
-                mLatitude = location.getLatitude();
-            }
-
-            public void onStatusChanged(String str, int i, Bundle bdl) {}
-            public void onProviderEnabled(String provider) {}
-            public void onProviderDisabled(String provider) {}
-        };
-
-        mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
-                sLOCATION_UPDATE_INTERVAL, sLOCATION_UPDATE_DISTANCE, locationListener);
-
-        String idPlus = appendLocationIfNeeded(PUBLISHER_ID_FULL);
+        //String idPlus = appendLocationIfNeeded(PUBLISHER_ID_FULL);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         layout = (RelativeLayout) findViewById(R.id.adsdkContent);
-        mManager = new AdManager(this, REQUEST_URL_FULL, idPlus, true);
-        mManager.setListener(this);
+        if (!appendLocationIfNeeded()) {
+            mManager = new AdManager(this, REQUEST_URL_FULL, mPublishIdFull, true);
+            mManager.setListener(this);
+        }
     }
 
-    private String appendLocationIfNeeded(String str) {
-        return IS_LOCATION_NEEDED? appendLocation(str):str;
+    private void setupLocationServiceIfNeeded() {
+        if (mIsLocationNeeded) {
+            setupLocationService();
+        }
     }
 
-    private String appendLocation(String str) {
-        Location loc = mLocationManager.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+    /**
+     *  If GPS is not enabled, it will fall back to a coarse GPS location service
+     * i.e., network address, cellular tower etc.. In real production, need consider
+     * flight mode, which does not have any service. For prototyping, we assume, user
+     * has at least wifi or cellular enabled.
+     */
+
+    private void setupLocationService() {
+        mLocationManager = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+
+        if (mLocationManager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+            mLocationManager.requestLocationUpdates(LocationManager.GPS_PROVIDER,
+                    sLOCATION_UPDATE_INTERVAL, sLOCATION_UPDATE_DISTANCE, mLocationListener);
+            mCurrLocService = LocationManager.GPS_PROVIDER;
+        } else {
+            mLocationManager.requestLocationUpdates(LocationManager.NETWORK_PROVIDER,
+                    sLOCATION_UPDATE_INTERVAL, sLOCATION_UPDATE_DISTANCE, mLocationListener);
+            mCurrLocService = LocationManager.NETWORK_PROVIDER;
+        }
+    }
+
+    /**
+     *
+     * @return true if locations is need and location can be retrieved from provider,
+     * false if location is not needed or cannot retrieve from provider
+     */
+    private boolean appendLocationIfNeeded() {
+        return mIsLocationNeeded && appendLocation();
+    }
+
+    private boolean appendLocation() {
+        Location loc = mLocationManager.getLastKnownLocation(mCurrLocService);
         if (loc == null) {
-            return str;
+            return false;
         }
         mLongitude = loc.getLongitude();
         mLatitude = loc.getLatitude();
-        return str + CONNECTOR + mLongitude + CONNECTOR + mLatitude;
+        startIntentService(loc);
+        return true;
+    }
+
+    /**
+     * Creates an intent, adds location data to it as an extra, and starts the intent service for
+     * fetching an address.
+     */
+    protected void startIntentService(Location loc) {
+        // Create an intent for passing to the intent service responsible for fetching the address.
+        Intent intent = new Intent(this, FetchAddressIntentService.class);
+
+        // Pass the result receiver as an extra to the service.
+        intent.putExtra(Constants.RECEIVER, mResultReceiver);
+
+        // Pass the location data as an extra to the service.
+        intent.putExtra(Constants.LOCATION_DATA_EXTRA, loc);
+
+        // Start the service. If the service isn't already running, it is instantiated and started
+        // (creating a process for it if needed); if it is running then it remains running. The
+        // service kills itself automatically once all intents are processed.
+        startService(intent);
     }
 
     @Override
@@ -135,10 +209,80 @@ public class MainActivity extends Activity implements AdListener {
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        stopLocationUpdates();
+    }
+
+    protected void stopLocationUpdates() {
+        mLocationManager.removeUpdates(mLocationListener);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        setupLocationServiceIfNeeded();
+    }
+
+    @Override
     protected void onDestroy() {
         super.onDestroy();
         mManager.release();
         if(mAdView!=null)
             mAdView.release();
+    }
+
+    private void requestWithLocation() {
+        String idPlus = mIsBannerRequested ?
+                mPublishIdBanner + CONNECTOR + "0" + CONNECTOR +
+                        mLongitude + CONNECTOR + mLatitude :
+                mPublishIdFull + CONNECTOR + "0" + CONNECTOR +
+                        mLongitude + CONNECTOR + mLatitude;
+
+        request(idPlus);
+    }
+
+    private void requestWithAddress(String addrInfo) {
+        String idPlus = mIsBannerRequested ?
+                mPublishIdBanner + CONNECTOR + "1" + CONNECTOR + addrInfo:
+                mPublishIdFull + CONNECTOR + "1" + CONNECTOR + addrInfo;
+
+        request(idPlus);
+    }
+
+    private void request(String idPlus) {
+        if ( mIsBannerRequested) {
+            mAdView = new AdView(this, REQUEST_URL_BANNER,
+                    idPlus, true, true);
+            mAdView.setAdListener(this);
+            layout.addView(mAdView);
+        } else {
+            mManager = new AdManager(this, REQUEST_URL_FULL, idPlus, true);
+            mManager.setListener(this);
+        }
+    }
+
+    /**
+     * Receiver for data sent from FetchAddressIntentService.
+     */
+    class AddressResultReceiver extends ResultReceiver {
+        public AddressResultReceiver(Handler handler) {
+            super(handler);
+        }
+
+        /**
+         *  Receives data sent from FetchAddressIntentService and updates the UI in MainActivity.
+         */
+        @Override
+        protected void onReceiveResult(int resultCode, Bundle resultData) {
+
+            // no address info, send in lat/log, let server handle
+            if (resultCode != Constants.SUCCESS_RESULT) {
+                requestWithLocation();
+            } else {
+                String addrInfo = resultData.getString(Constants.RESULT_DATA_KEY);
+                requestWithAddress(addrInfo);
+            }
+        }
     }
 }
