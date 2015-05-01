@@ -41,22 +41,22 @@ exit;
 <div id="login">
 	<h1>Dashboard</h1>
 	<div id="login_panel">
-    <?php if (isset($_GET['failed'])){?><div style="margin-top:14px; font-weight:bold; color:#900;" align="center">Login failed, please try again.</div><?php } ?><?php if (isset($_GET['pwupdate'])){?><div style="margin-top:14px; font-weight:bold; color:#090;" align="center">Password has been reset, you can now log-in.</div><?php } ?>
+    <?php if (isset($_GET['failed'])){?><div style="margin-top:14px; font-weight:bold; color:#900;" align="center">登录失败，请再试一次.</div><?php } ?><?php if (isset($_GET['pwupdate'])){?><div style="margin-top:14px; font-weight:bold; color:#090;" align="center">Password has been reset, you can now log-in.</div><?php } ?>
 		<form action="do_signin.php" method="post" accept-charset="utf-8">		
 			<div class="login_fields">
 				<div class="field">
-					<label for="email">Email</label>
+					<label for="email">用户名（电子邮件）</label>
 					<input type="text" name="md_user" value="" id="email" tabindex="1" placeholder="email@example.com" />		
 				</div>
 				
 				<div class="field">
-					<label for="password">Password <small><a href="reset_password.php">Forgot Password?</a></small></label>
-					<input type="password" name="md_pass" value="" id="password" tabindex="2" placeholder="password" />			
+					<label for="password">密码 <small><a href="reset_password.php">忘记密码?</a></small></label>
+					<input type="password" name="md_pass" value="" id="password" tabindex="2" placeholder="密码" />			
 				</div>
 			</div> <!-- .login_fields -->
 			
 			<div class="login_actions">
-				<button type="submit" class="btn btn-primary" tabindex="3">Login</button>
+				<button type="submit" class="btn btn-primary" tabindex="3">登录</button>
 			</div>
 		</form>
 	</div> <!-- #login_panel -->		

@@ -6,20 +6,16 @@ if (!isset($integration_active)){$integration_active='';}
 						
 						<div class="widget-header">
 							<span class="icon-article"></span>
-							<h3>Publication & Placement Select</h3>
+							<h3>出版物和广告位选择</h3>
 						</div> <!-- .widget-header -->
-						
 						<div class="widget-content">
-                        
-
-                          
-                            <div class="field-group">
+                                    <div class="field-group">
 			
 								<div class="field">
 								<select onchange="this.form.submit();" id="publication_id" name="publication">
 								  <?php get_publication_dropdown($_GET['publication']); ?>
 								</select>		
-									<label for="inv_type">Select Publication</label>
+									<label for="inv_type">选择出版物</label>
 								</div>
 							</div> <!-- .field-group -->
                             
@@ -29,7 +25,7 @@ if (!isset($integration_active)){$integration_active='';}
 								<select onchange="this.form.submit();"  id="publication_id" name="zone">
 								  <?php get_placement_integration_dropdown($_GET['zone'], $_GET['publication']); ?>
 								</select>		
-									<label for="inv_type">Select Placement</label>
+									<label for="inv_type">选择广告位</label>
 								</div>
 							</div> <!-- .field-group -->
                             
@@ -38,7 +34,7 @@ if (!isset($integration_active)){$integration_active='';}
 			
 								<div class="field">
 									<span style="margin-left:4px;"><?php echo $zone_detail['zone_hash']; ?></span>
-									<label for="allow_statistical_info">Placement Integration ID</label>
+									<label for="allow_statistical_info">广告位集成ID</label>
 								</div>
 							</div> <!-- .field-group -->
                             
@@ -46,18 +42,15 @@ if (!isset($integration_active)){$integration_active='';}
 			
 								<div class="field">
 									<span style="margin-left:4px;"><?php echo MAD_ADSERVING_PROTOCOL . $_SERVER['HTTP_HOST']. str_replace('/www/cp', '', dirname($_SERVER['PHP_SELF'])) . "/md.request.php"; ?></span>
-									<label for="allow_statistical_info">Ad-Request URL (required for SDK Integration)</label>
+									<label for="allow_statistical_info">广告请求 URL (SDK集成必须)</label>
 								</div>
 							</div> <!-- .field-group -->
                             <?php } ?>
-                            
-                   
-						
-						</div> <!-- .widget-content -->
+     				</div> <!-- .widget-content -->
 						
 					</div> <!-- .widget -->
                     
                     <?php if (!is_numeric($_GET['zone']) or !is_numeric($_GET['publication'])){ ?>
                                          <div class="box plain"><div class="notify notify-warning">
-                                         <p>Please select the publication and placement you would like to integrate above.</p></div> <!-- .notify --></div>
+                                         <p>请在上方选择你想集成的出版物和广告位.</p></div> <!-- .notify --></div>
                                          <?php } ?>

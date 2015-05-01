@@ -38,7 +38,7 @@
 			
 								<div class="field">
 									<input type="text" value="<?php if (isset($editdata['remote_host'])){ echo $editdata['remote_host']; }?>"  name="remote_host" id="remote_host" size="28" class="" />			
-									<label for="remote_host">Connection Host (e.g. ftp.madserve.org)</label></div>
+									<label for="remote_host">Connection Host (e.g. ftp.cmtiads.org)</label></div>
 							</div> <!-- .field-group -->
                             
                              <div class="field-group">
@@ -66,7 +66,7 @@
 			
 								<div class="field">
 									<input type="text" value="<?php if (isset($editdata['server_default_url'])){ echo $editdata['server_default_url']; }?>"  name="server_default_url" id="server_default_url" size="28" class="" />			
-									<label for="server_default_url">Access URL (e.g. http://madserve.org/creatives/)</label></div>
+									<label for="server_default_url">Access URL (e.g. http://cmtiads.org/creatives/)</label></div>
 							</div> <!-- .field-group -->
                             
                         

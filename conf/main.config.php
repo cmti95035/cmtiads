@@ -2,10 +2,10 @@
 ;<?php exit; ?>
 ;*** DO NOT REMOVE THE LINE ABOVE ***
 ;------------------------------------------------------------------------------------------;
-; General mAdserve    Installation Settings                                                      ;
+; General cmtiads    Installation Settings                                                      ;
 ;------------------------------------------------------------------------------------------;
 
-[madserve]
+[cmtiads]
 installed                           = true
 
 ;------------------------------------------------------------------------------------------;
@@ -19,7 +19,7 @@ socket                              =
 port                                =
 username                            = "root"
 password                            = ""
-name                                = "madserve"
+name                                = "cmtiads"
 
 [reportingdatabase]
 useseparatereportingdatabase     = false

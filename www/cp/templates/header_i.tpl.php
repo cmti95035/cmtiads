@@ -5,7 +5,7 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
 <head>
 
-	<title>mAdserve Installation Wizard</title>
+	<title>cmtiads Installation Wizard</title>
 
 	<meta charset="utf-8" />
 	<meta name="description" content="" />
@@ -31,7 +31,7 @@
 <div id="wrapper">
 	
 	<div id="header">
-		<h1><a href="#">mAdserve Installation</a></h1>		
+		<h1><a href="#">cmtiads Installation</a></h1>		
 		
 		<a href="javascript:;" id="reveal-nav">
 			<span class="reveal-bar"></span>
@@ -51,23 +51,23 @@
 		<ul id="mainNav">			
 			<li id="navDashboard" class="nav<?php if ($mad_install['step']==1){echo " active"; } ?>">
 				<span class="icon-heart-fill"></span>
-				<a href="#">Server Check</a>				
+				<a href="#">服务器检查</a>				
 			</li>
             <li id="navDashboard" class="nav<?php if ($mad_install['step']==2){echo " active"; } ?>">
 				<span class="icon-cog"></span>
-				<a href="#">Basic Configuration</a>				
+				<a href="#">基本配置</a>				
 			</li>
             <li id="navDashboard" class="nav<?php if ($mad_install['step']==3){echo " active"; } ?>">
 				<span class="icon-layers"></span>
-				<a href="#">Database Information</a>				
+				<a href="#">数据库信息</a>				
 			</li>
              <li id="navDashboard" class="nav<?php if ($mad_install['step']==4){echo " active"; } ?>">
 				<span class="icon-key-stroke"></span>
-				<a href="#">Activation</a>				
+				<a href="#">激活</a>				
 			</li>
             <li id="navDashboard" class="nav<?php if ($mad_install['step']==5){echo " active"; } ?>">
 				<span class="icon-check-alt"></span>
-				<a href="#">Done!</a>				
+				<a href="#">完成!</a>				
 			</li>
             </ul>
 	

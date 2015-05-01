@@ -1,6 +1,6 @@
 #!/usr/local/bin/php
 <?php
-/* mAdserve Ad Request */
+/* cmtiads Ad Request */
 
 require_once 'init.php';
 

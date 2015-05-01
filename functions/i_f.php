@@ -214,7 +214,7 @@ require_once MAD_PATH . '/modules/http/class.http.php';
 // Instantiate it
 $http = new Http();
 
-$http->execute('http://api.mobfox.com/createAccount/MADSERVE&email_address='.$data['mf_email'].'&password='.$data['mf_password'].'&first_name='.$data['mf_first_name'].'&last_name='.$data['mf_last_name'].'&phone_number='.$data['mf_phone'].'&portal=MADSERVE');
+$http->execute('http://api.mobfox.com/createAccount/cmtiads&email_address='.$data['mf_email'].'&password='.$data['mf_password'].'&first_name='.$data['mf_first_name'].'&last_name='.$data['mf_last_name'].'&phone_number='.$data['mf_phone'].'&portal=cmtiads');
 
 if ($http->error){
 return false;
@@ -308,7 +308,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `md_ad_units` (
   `creativeserver_id` varchar(100) NOT NULL,
   PRIMARY KEY  (`adv_id`),
   KEY `campaign_id` (`campaign_id`,`adv_status`,`adv_height`,`adv_width`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;", $maindb);
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;", $maindb);
 
 mysql_query("CREATE TABLE IF NOT EXISTS `md_campaigns` (
   `campaign_id` int(11) NOT NULL auto_increment,
@@ -338,8 +338,13 @@ mysql_query("CREATE TABLE IF NOT EXISTS `md_campaigns` (
   `channel_target` varchar(1) NOT NULL,
   `device_target` varchar(1) NOT NULL,
   `gender_target` varchar(1) NOT NULL,
+	`income_target` varchar(1) NOT NULL,
+	`interest_target` varchar(1) NOT NULL,		
+	`location_target` varchar(1) NOT NULL, 	
+	`age_target` varchar(1) NOT NULL, 	
+  `chroniccondition_target` varchar(1) NOT NULL,
   PRIMARY KEY  (`campaign_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;", $maindb);
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;", $maindb);
 mysql_query("CREATE TABLE IF NOT EXISTS `md_campaign_limit` (
   `entry_id` int(11) NOT NULL auto_increment,
   `campaign_id` varchar(100) NOT NULL,
@@ -349,13 +354,13 @@ mysql_query("CREATE TABLE IF NOT EXISTS `md_campaign_limit` (
   `last_refresh` varchar(100) NOT NULL,
   PRIMARY KEY  (`entry_id`),
   KEY `campaign_id` (`campaign_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;", $maindb);
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;", $maindb);
 mysql_query("CREATE TABLE IF NOT EXISTS `md_campaign_priorities` (
   `entry_id` int(11) NOT NULL auto_increment,
   `priority_id` varchar(100) NOT NULL,
   `priority_name` varchar(100) NOT NULL,
   PRIMARY KEY  (`entry_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=6 ;", $maindb);
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=6 ;", $maindb);
 mysql_query("INSERT INTO `md_campaign_priorities` (`entry_id`, `priority_id`, `priority_name`) VALUES
 (1, '1', '1 - Lowest'),
 (2, '2', '2 - Low'),
@@ -370,15 +375,13 @@ mysql_query("CREATE TABLE IF NOT EXISTS `md_campaign_targeting` (
   PRIMARY KEY  (`entry_id`),
   KEY `s2` (`campaign_id`),
   KEY `s1` (`targeting_type`,`targeting_code`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;", $maindb);
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;", $maindb);
 mysql_query("CREATE TABLE IF NOT EXISTS `md_channels` (
   `channel_id` int(11) NOT NULL auto_increment,
   `channel_type` varchar(100) NOT NULL,
   `channel_name` varchar(100) NOT NULL,
   PRIMARY KEY  (`channel_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=12 ;", $maindb);
-
-
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=12 ;", $maindb);
 mysql_query("INSERT INTO `md_channels` (`channel_id`, `channel_type`, `channel_name`) VALUES
 (1, '1', 'Finance'),
 (2, '1', 'IT'),
@@ -395,18 +398,96 @@ mysql_query("CREATE TABLE IF NOT EXISTS `md_genders` (
   `gender_id` int(11) NOT NULL auto_increment,
   `gender_name` varchar(100) NOT NULL,
   PRIMARY KEY  (`gender_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;", $maindb);
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;", $maindb);
 
 mysql_query("INSERT INTO `md_genders` (`gender_id`, `gender_name`) VALUES
 (1, 'male'),
 (2, 'female');", $maindb);
+
+mysql_query("CREATE TABLE IF NOT EXISTS `md_incomes` (
+  `income_id` int(11) NOT NULL auto_increment,
+  `income_name` varchar(100) NOT NULL,
+  PRIMARY KEY  (`income_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;", $maindb);
+
+mysql_query("INSERT INTO `md_incomes` (`income_id`, `income_name`) VALUES
+(1, '3百以下'),
+(2, '3百-1千'),
+(3, '1千-3千'),
+(4, '3千-1万'),
+(5, '1万-3万'),
+(6, '3万-10万'),
+(7, '10万－30万'),
+(8, '30万－100万'),
+(9, '100万以上');", $maindb);
+
+mysql_query("CREATE TABLE IF NOT EXISTS `md_interests` (
+  `interest_id` int(11) NOT NULL auto_increment,
+  `interest_name` varchar(100) NOT NULL,
+  PRIMARY KEY  (`interest_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;", $maindb);
+
+mysql_query("INSERT INTO `md_interests` (`interest_id`, `interest_name`) VALUES
+(1, '户外'),
+(2, '游戏'),
+(3, '健身'),
+(4, '美容'),
+(5, '时尚'),
+(6, '汽车'),
+(7, '电影'),
+(8, '阅读'),
+(9, '唱歌');", $maindb);
+
+mysql_query("CREATE TABLE IF NOT EXISTS `md_locations` (
+  `location_id` int(11) NOT NULL auto_increment,
+  `location_name` varchar(100) NOT NULL,
+  PRIMARY KEY  (`location_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;", $maindb);
+
+mysql_query("INSERT INTO `md_locations` (`location_id`, `location_name`) VALUES
+(1, '北京'),
+(2, '上海'),
+(3, '重庆'),
+(4, '天津'),
+(5, '浙江'),
+(6, '江苏'),
+(7, '广东'),
+(8, '四川'),
+(9, '河北');", $maindb);
+
+mysql_query("CREATE TABLE IF NOT EXISTS `md_ages` (
+  `age_id` int(11) NOT NULL auto_increment,
+  `age_name` varchar(100) NOT NULL,
+  PRIMARY KEY  (`age_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;", $maindb);
+
+mysql_query("INSERT INTO `md_ages` (`age_id`, `age_name`) VALUES
+(1, '10以下'),
+(2, '10-20'),
+(3, '20-30'),
+(4, '30-40'),
+(5, '40-50'),
+(6, '50-60'),
+(7, '60-70'),
+(8, '70-80'),
+(9, '80以上');", $maindb);
+
+mysql_query("CREATE TABLE IF NOT EXISTS `md_chroniccondition` (
+  `chroniccondition_id` int(11) NOT NULL auto_increment,
+  `chroniccondition_name` varchar(100) NOT NULL,
+  PRIMARY KEY  (`chroniccondition_id`)
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;", $maindb);
+
+mysql_query("INSERT INTO `md_chroniccondition` (`chroniccondition_id`, `chroniccondition_name`) VALUES
+(1, 'diabetes'),
+(2, 'cancer');", $maindb);
 
 mysql_query("CREATE TABLE IF NOT EXISTS `md_code_snippets` (
   `entry_id` int(11) NOT NULL auto_increment,
   `snippet_name` varchar(100) NOT NULL,
   `snippet_file` varchar(100) NOT NULL,
   PRIMARY KEY  (`entry_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;", $maindb);
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;", $maindb);
 mysql_query("INSERT INTO `md_code_snippets` (`entry_id`, `snippet_name`, `snippet_file`) VALUES
 (1, 'JavaScript', 'javascript.txt'),
 (2, 'PHP cURL', 'phpcurl.txt');", $maindb);
@@ -416,7 +497,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `md_configuration` (
   `var_value` varchar(200) NOT NULL,
   PRIMARY KEY  (`entry_id`),
   UNIQUE KEY `var_name` (`var_name`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;", $maindb);
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;", $maindb);
 mysql_query("CREATE TABLE IF NOT EXISTS `md_creative_servers` (
   `entry_id` int(11) NOT NULL auto_increment,
   `server_type` varchar(255) NOT NULL,
@@ -429,7 +510,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `md_creative_servers` (
   `server_default_url` varchar(255) NOT NULL,
   `server_status` varchar(1) NOT NULL,
   PRIMARY KEY  (`entry_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;", $maindb);
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=2 ;", $maindb);
 mysql_query("INSERT INTO `md_creative_servers` (`entry_id`, `server_type`, `server_name`, `remote_host`, `remote_port`, `remote_user`, `remote_password`, `remote_directory`, `server_default_url`, `server_status`) VALUES
 (1, 'local', 'Local Creative Server', 'n/a', '', '', '', '', '', '');", $maindb);
 mysql_query("CREATE TABLE IF NOT EXISTS `md_log_types` (
@@ -438,10 +519,10 @@ mysql_query("CREATE TABLE IF NOT EXISTS `md_log_types` (
   `log_name` longtext NOT NULL,
   `log_desc` longtext NOT NULL,
   PRIMARY KEY  (`entry_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;", $maindb);
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;", $maindb);
 mysql_query("INSERT INTO `md_log_types` (`entry_id`, `log_id`, `log_name`, `log_desc`) VALUES
-(1, 'daily_cron', 'mAdserve Daily Cron Job', 'Daily cron job ran successfully.'),
-(2, 'system_install', 'mAdserve Installation', 'mAdserve was installed successfully'),
+(1, 'daily_cron', 'cmtiads Daily Cron Job', 'Daily cron job ran successfully.'),
+(2, 'system_install', 'cmtiads Installation', 'cmtiads was installed successfully'),
 (3, 'campaign_limit_update', 'Campaign Limits Reset', 'Daily Campaign Impression Caps have successfully been reset.');", $maindb);
 mysql_query("CREATE TABLE IF NOT EXISTS `md_networks` (
   `entry_id` int(11) NOT NULL auto_increment,
@@ -463,7 +544,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `md_networks` (
   `network_aa_min_cpm` decimal(5,3) NOT NULL,
   PRIMARY KEY  (`entry_id`),
   KEY `network_identifier` (`network_identifier`(6))
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;", $maindb);
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;", $maindb);
 mysql_query("CREATE TABLE IF NOT EXISTS `md_network_config` (
   `entry_id` int(11) NOT NULL auto_increment,
   `config_type` varchar(100) NOT NULL,
@@ -477,7 +558,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `md_network_config` (
   `priority` varchar(100) NOT NULL,
   PRIMARY KEY  (`entry_id`),
   KEY `pub_sel` (`publication_id`,`zone_id`,`network_id`,`priority`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;", $maindb);
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;", $maindb);
 mysql_query("CREATE TABLE IF NOT EXISTS `md_passwordresets` (
   `entry_id` int(11) NOT NULL auto_increment,
   `reset_status` varchar(100) NOT NULL,
@@ -486,13 +567,13 @@ mysql_query("CREATE TABLE IF NOT EXISTS `md_passwordresets` (
   `ip_address` varchar(100) NOT NULL,
   `time_stamp` varchar(100) NOT NULL,
   PRIMARY KEY  (`entry_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;", $maindb);
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;", $maindb);
 mysql_query("CREATE TABLE IF NOT EXISTS `md_pending_actions` (
   `entry_id` int(11) NOT NULL auto_increment,
   `action_id` varchar(100) NOT NULL,
   `action_detail` longtext NOT NULL,
   PRIMARY KEY  (`entry_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;", $maindb);
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;", $maindb);
 mysql_query("CREATE TABLE IF NOT EXISTS `md_publications` (
   `inv_id` int(11) NOT NULL auto_increment,
   `creator_id` varchar(100) NOT NULL,
@@ -504,7 +585,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `md_publications` (
   `inv_defaultchannel` varchar(100) NOT NULL,
   `md_lastrequest` varchar(100) NOT NULL,
   PRIMARY KEY  (`inv_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;", $maindb);
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;", $maindb);
 mysql_query("CREATE TABLE IF NOT EXISTS `md_publication_types` (
   `entry_id` int(11) NOT NULL auto_increment,
   `pub_identification` varchar(100) NOT NULL,
@@ -516,10 +597,10 @@ mysql_query("CREATE TABLE IF NOT EXISTS `md_publication_types` (
   `output_type` varchar(100) NOT NULL,
   `code_type` varchar(100) NOT NULL,
   PRIMARY KEY  (`entry_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=4 ;", $maindb);
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=4 ;", $maindb);
 mysql_query("INSERT INTO `md_publication_types` (`entry_id`, `pub_identification`, `pub_name`, `pub_description`, `pub_sdk_url`, `pub_info_content`, `pub_icon`, `output_type`, `code_type`) VALUES
-(1, 'ios_app', 'iOS Application', 'iOS Application', 'http://www.madserve.org/ios-latest', '', 'ios.png', 'xml', 'sdk'),
-(2, 'android_app', 'Android Application', 'Android Application', 'http://www.madserve.org/android-latest', '', 'android.png', 'xml', 'sdk'),
+(1, 'ios_app', 'iOS Application', 'iOS Application', 'http://www.cmtiads.org/ios-latest', '', 'ios.png', 'xml', 'sdk'),
+(2, 'android_app', 'Android Application', 'Android Application', 'http://www.cmtiads.org/android-latest', '', 'android.png', 'xml', 'sdk'),
 (3, 'mobileweb', 'Mobile Website', 'Mobile Website', '', '', 'web.png', 'html', 'standard_code');", $maindb);
 mysql_query("CREATE TABLE IF NOT EXISTS `md_regional_targeting` (
   `entry_id` int(11) NOT NULL auto_increment,
@@ -532,7 +613,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `md_regional_targeting` (
   `head_city` varchar(100) NOT NULL,
   `entry_status` varchar(100) NOT NULL,
   PRIMARY KEY  (`entry_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=8521 ;", $maindb);
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=8521 ;", $maindb);
 mysql_query("INSERT INTO `md_regional_targeting` (`entry_id`, `targeting_code`, `targeting_type`, `region_code`, `region_name`, `head_country`, `head_region`, `head_city`, `entry_status`) VALUES
 (1, 'AT', 'COUNTRY', 'AT', 'Austria', '', '', '', '1'),
 (2, 'AT_01', 'REGION', '01', 'Burgenland', 'AT', '', '', '1'),
@@ -4953,7 +5034,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `md_reporting` (
   `total_cost` varchar(100) NOT NULL,
   PRIMARY KEY  (`entry_id`),
   UNIQUE KEY `reporting_select` (`publication_id`(6),`zone_id`(6),`campaign_id`(6),`creative_id`(6),`network_id`(6),`date`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;", $maindb);
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;", $maindb);
 mysql_query("CREATE TABLE IF NOT EXISTS `md_syslog` (
   `entry_id` int(11) NOT NULL auto_increment,
   `log_type` varchar(100) NOT NULL,
@@ -4961,7 +5042,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `md_syslog` (
   `status` varchar(100) NOT NULL,
   `details` varchar(100) NOT NULL,
   PRIMARY KEY  (`entry_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;", $maindb);
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;", $maindb);
 mysql_query("CREATE TABLE IF NOT EXISTS `md_trafficrequests` (
   `entry_id` int(11) NOT NULL auto_increment,
   `request_id` varchar(100) NOT NULL,
@@ -4990,14 +5071,14 @@ mysql_query("CREATE TABLE IF NOT EXISTS `md_trafficrequests` (
   `android_version_max` varchar(100) NOT NULL,
   `device_target` varchar(1) NOT NULL,
   PRIMARY KEY  (`entry_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;", $maindb);
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;", $maindb);
 mysql_query("CREATE TABLE IF NOT EXISTS `md_trafficrequests_parameters` (
   `entry_id` int(11) NOT NULL auto_increment,
   `request_id` varchar(100) NOT NULL,
   `parameter_id` varchar(100) NOT NULL,
   `parameter_value` varchar(100) NOT NULL,
   PRIMARY KEY  (`entry_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;", $maindb);
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;", $maindb);
 mysql_query("CREATE TABLE IF NOT EXISTS `md_uaccounts` (
   `user_id` int(11) NOT NULL auto_increment,
   `email_address` varchar(100) NOT NULL,
@@ -5007,8 +5088,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `md_uaccounts` (
   `company_name` varchar(100) NOT NULL,
   `first_name` varchar(100) NOT NULL,
   `last_name` varchar(100) NOT NULL,
-  `gender` varchar(100) NOT NULL,
-  `phone_number` varchar(100) NOT NULL,
+ 	`phone_number` varchar(100) NOT NULL,
   `fax_number` varchar(100) NOT NULL,
   `company_address` varchar(100) NOT NULL,
   `company_city` varchar(100) NOT NULL,
@@ -5019,7 +5099,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `md_uaccounts` (
   `tooltip_setting` varchar(1) NOT NULL,
   `creation_date` varchar(100) NOT NULL,
   PRIMARY KEY  (`user_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;
 ", $maindb);
 mysql_query("CREATE TABLE IF NOT EXISTS `md_user_groups` (
   `entry_id` int(11) NOT NULL auto_increment,
@@ -5027,9 +5107,9 @@ mysql_query("CREATE TABLE IF NOT EXISTS `md_user_groups` (
   `group_description` longtext NOT NULL,
   `group_status` char(1) NOT NULL,
   PRIMARY KEY  (`entry_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;", $maindb);
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=3 ;", $maindb);
 mysql_query("INSERT INTO `md_user_groups` (`entry_id`, `group_name`, `group_description`, `group_status`) VALUES
-(1, 'Administrators', 'This is the Administrator User Group. Users in this group automatically have full administration permissions on the mAdserve ad server.', '1'),
+(1, 'Administrators', 'This is the Administrator User Group. Users in this group automatically have full administration permissions on the cmtiads ad server.', '1'),
 (2, 'Advertisers', 'This is the main Advertiser group. Users in this group can create & manage their own campaigns and can generate reports for campaigns they have originally created.', '1');", $maindb);
 mysql_query("CREATE TABLE IF NOT EXISTS `md_user_rights` (
   `entry_id` int(11) NOT NULL auto_increment,
@@ -5050,7 +5130,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `md_user_rights` (
   `configuration` varchar(1) NOT NULL,
   `traffic_requests` varchar(1) NOT NULL,
   PRIMARY KEY  (`entry_id`)
-) ENGINE=MyISAM  DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;", $maindb);
+) ENGINE=MyISAM  DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;", $maindb);
 mysql_query("INSERT INTO `md_user_rights` (`entry_id`, `user_id`, `group_id`, `view_own_campaigns`, `view_all_campaigns`, `create_campaigns`, `view_publications`, `modify_publications`, `view_advertisers`, `modify_advertisers`, `ad_networks`, `campaign_reporting`, `own_campaign_reporting`, `publication_reporting`, `network_reporting`, `configuration`, `traffic_requests`) VALUES
 (1, '', '2', '1', '0', '1', '0', '0', '0', '0', '0', '0', '1', '0', '0', '0', '0');", $maindb);
 mysql_query("CREATE TABLE IF NOT EXISTS `md_usessions` (
@@ -5064,7 +5144,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `md_usessions` (
   `ip_address` varchar(100) NOT NULL,
   `date_created` varchar(100) NOT NULL,
   PRIMARY KEY  (`entry_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;", $maindb);
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;", $maindb);
 mysql_query("CREATE TABLE IF NOT EXISTS `md_zones` (
   `entry_id` int(11) NOT NULL auto_increment,
   `publication_id` varchar(100) NOT NULL,
@@ -5086,7 +5166,7 @@ mysql_query("CREATE TABLE IF NOT EXISTS `md_zones` (
   `backfill_alt_3` varchar(100) NOT NULL,
   PRIMARY KEY  (`entry_id`),
   KEY `publication_id` (`publication_id`)
-) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;", $maindb);
+) ENGINE=MyISAM DEFAULT CHARSET=utf8 AUTO_INCREMENT=1 ;", $maindb);
 mysql_query("INSERT INTO `md_syslog` (`entry_id`, `log_type`, `time_stamp`, `status`, `details`) VALUES (NULL, 'system_install', '".time()."', '1', '');", $maindb);
 
 
@@ -5099,7 +5179,7 @@ $mobfox_uid=$data['mf_email'];
 $mobfox_pass=md5($data['mf_password']);	
 }
 
-$madserve_udid=md5(uniqid(time()));
+$cmtiads_udid=md5(uniqid(time()));
 
 mysql_query("INSERT INTO `md_configuration` (`entry_id`, `var_name`, `var_value`) VALUES
 (1, 'adserver_name', '".$mad_basic_configuration['server_name']."'),
@@ -5113,7 +5193,7 @@ mysql_query("INSERT INTO `md_configuration` (`entry_id`, `var_name`, `var_value`
 (9, 'server_email', '".$mad_basic_configuration['admin_email']."'),
 (10, 'last_mf_check', ''),
 (11, 'allow_statistical_info', '1'),
-(12, 'installation_id', '".$madserve_udid."'),
+(12, 'installation_id', '".$cmtiads_udid."'),
 (13, 'update_check', '1'),
 (14, 'default_creative_server', '1'),
 (15, 'last_pendingactions_exec', ''),
@@ -5126,10 +5206,10 @@ $configfile_content='
 ;<?php exit; ?>
 ;*** DO NOT REMOVE THE LINE ABOVE ***
 ;------------------------------------------------------------------------------------------;
-; General mAdserve    Installation Settings                                                      ;
+; General cmtiads    Installation Settings                                                      ;
 ;------------------------------------------------------------------------------------------;
 
-[madserve]
+[cmtiads]
 installed                           = true
 
 ;------------------------------------------------------------------------------------------;

@@ -7,7 +7,7 @@
     <networkid>YOCPERFORMANCE</networkid>
     <signuplink>http://www.yoc-performance.com/</signuplink>
     <info_content><![CDATA[
-        <h3>Network Info</h3>YOC Performance is a web-based, self-service marketplace for advertising on mobile phones. Our system not only enables advertisers to create and manage their campaigns but also supports publishers and developers to monetise their mobile traffic. Furthermore, YOC Performance give agencies the opportunity to administrate multi-clients accounts. This mAdserve integration is with YOC's new Mocean Ad Server.<br><br><h3>Ad Formats</h3>YOC Performance supports both Banner Ads, Text Ads and Rich Media Ads.<br><br><h3>Best Countries</h3>UK, Germany, Austria, Switzerland, France, Italy
+        <h3>Network Info</h3>YOC Performance is a web-based, self-service marketplace for advertising on mobile phones. Our system not only enables advertisers to create and manage their campaigns but also supports publishers and developers to monetise their mobile traffic. Furthermore, YOC Performance give agencies the opportunity to administrate multi-clients accounts. This cmtiads integration is with YOC's new Mocean Ad Server.<br><br><h3>Ad Formats</h3>YOC Performance supports both Banner Ads, Text Ads and Rich Media Ads.<br><br><h3>Best Countries</h3>UK, Germany, Austria, Switzerland, France, Italy
     ]]></info_content>
     <banner_support>1</banner_support>
     <interstitial_support>0</interstitial_support>

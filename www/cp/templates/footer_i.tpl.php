@@ -3,7 +3,7 @@
 	
 </div> <!-- #wrapper -->
 
-<div id="footer">mAdserve <?php echo MAD_VERSION; ?> - Server Time: <?php echo date('l jS F Y h:i:s A'); ?>
+<div id="footer">cmtiads <?php echo MAD_VERSION; ?> - Server Time: <?php echo date('l jS F Y h:i:s A'); ?>
 </div>
 
 <?php global $jsload; if ($jsload!=1){?>

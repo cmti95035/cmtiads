@@ -72,7 +72,7 @@ require_once MAD_PATH . '/www/cp/templates/header.tpl.php';
 			
 								<div class="field">
 									<input id="update_check" name="update_check" <?php if (getconfig_var('update_check')==1){ ?>checked="checked"<?php } ?> type="checkbox" value="1" />		
-									<label for="update_check">Check for new versions of mAdserve and inform me on the Administrator Dashboard when a new version is available</label>
+									<label for="update_check">Check for new versions of cmtiads and inform me on the Administrator Dashboard when a new version is available</label>
 								</div>
 							</div> <!-- .field-group -->
                             

@@ -28,8 +28,8 @@ case 'campaign':
 if (!check_permission_simple('own_campaign_reporting', $user_detail['user_id']) && !check_permission_simple('campaign_reporting', $user_detail['user_id'])){
 exit;	
 }
-$report_name='Campaign Reporting';
-$report_name_active='Campaign Report:';
+$report_name='广告活动报表';
+$report_name_active='广告活动报表:';
 break;	
 
 case 'publication':
