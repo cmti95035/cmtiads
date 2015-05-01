@@ -91,8 +91,10 @@ public class FetchAddressIntentService extends IntentService {
             addresses = geocoder.getFromLocation(
                     location.getLatitude(),
                     location.getLongitude(),
-                    // In this sample, we get just a single address.
+                    // we get just the first address returned
                     1);
+            // use 39.880235,116.350708, a address in Beijing to
+            // test China location data
         } catch (IOException ioException) {
             // Catch network or other I/O problems.
             errorMessage = getString(R.string.service_not_available);
@@ -118,14 +120,16 @@ public class FetchAddressIntentService extends IntentService {
             String state = address.getAdminArea();
             String city = address.getSubAdminArea();
 
-            String addressInfo =
-                    (country == null || state == null || city == null) ?
-                    null : country + MainActivity.CONNECTOR +
-                            state + MainActivity.CONNECTOR + city;
+            StringBuilder addressInfo = new StringBuilder()
+                    .append(country == null ? "null" : country)
+                    .append(MainActivity.CONNECTOR)
+                    .append(state == null ? "null" : state)
+                    .append(MainActivity.CONNECTOR)
+                    .append(city == null ? "null": city);
 
             Log.i(TAG, getString(R.string.address_found));
             deliverResultToReceiver(Constants.SUCCESS_RESULT,
-                    addressInfo);
+                    addressInfo.toString());
         }
     }
 

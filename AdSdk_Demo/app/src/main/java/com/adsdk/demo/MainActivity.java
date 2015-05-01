@@ -104,6 +104,7 @@ public class MainActivity extends Activity implements AdListener {
 
         mPublishIdFull = "b1b47070b4fec8545c56e358bf9194da"+ CONNECTOR + mPhoneNumber;
         mPublishIdBanner = "226af592e76f7630018ef0a669ad8b2b" + CONNECTOR + mPhoneNumber;
+        mResultReceiver = new AddressResultReceiver(new Handler());
         setupLocationServiceIfNeeded();
 
         //String idPlus = appendLocationIfNeeded(PUBLISHER_ID_FULL);
