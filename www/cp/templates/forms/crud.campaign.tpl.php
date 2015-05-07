@@ -221,15 +221,7 @@ function checkAll(theForm, cName, status) {
 						value="network">广告网络</option>
 
 				</select> <a style="font-size: 11px;" href="#"
-					onclick="$.modal ({title: 'Campaign Types', html: '<div 
-					
-					
-					
-					
-					
-					
-					
-					style=width:500px;;><h3>直接售出</h3>直接售出的广告活动是固定的，通常优先级较高，收视数量有限.<br>
+					onclick="$.modal ({title: 'Campaign Types', html: '<div style=width:500px;;><h3>直接售出</h3>直接售出的广告活动是固定的，通常优先级较高，收视数量有限.<br>
 					<br>
 					<h3>推广</h3>推广广告活动相互推广其他应用和产品. 一般优先级较低，在没有合适的直接售出广告或广告网络广告的时候显示.<br>
 					<br>
@@ -249,13 +241,6 @@ function checkAll(theForm, cName, status) {
 <?php if (!isset($editdata['campaign_networkid'])){$editdata['campaign_networkid']='';} get_network_dropdown($editdata['campaign_networkid']); ?>							  </select>
 			<a class="tooltip" style="font-size: 11px;" href="#"
 				onclick="$.modal ({title: 'Network Publisher IDs', html: '<div 
-				
-				
-				
-				
-				
-				
-				
 				style=width:500px;;><h3>Ad Networks</h3>In order to start sending
 				mobile traffic to an ad network of your choice, you will have to
 				create an account with the advertising network and then enter the
@@ -264,15 +249,12 @@ function checkAll(theForm, cName, status) {
 				automatically send all your traffic to the respective ad network.
 				Revenue and other Reporting metrics will be reported and visible
 				directly in your account with the ad network. 
-		
 		</div>
 		'});">Publisher ID Info</a> <label for="campaign_networkid">广告网络</label>
 	</div>
 </div>
-<!-- .field-group -->
 
 <div class="field-group">
-
 	<div class="field">
 		<select id="campaign_priority" name="campaign_priority">
 								  <?php if (!isset($editdata['campaign_priority'])){$editdata['campaign_priority']='';}  get_priority_dropdown($editdata['campaign_priority']); ?>
@@ -281,10 +263,8 @@ function checkAll(theForm, cName, status) {
 			for="campaign_priority">活动优先级</label>
 	</div>
 </div>
-<!-- .field-group -->
 
 <div class="field-group">
-
 	<div class="field">
 		<input type="text"
 			value="<?php if (isset($editdata['campaign_name'])){ echo $editdata['campaign_name']; } ?>"
@@ -292,7 +272,24 @@ function checkAll(theForm, cName, status) {
 			for="campaign_name">活动名称</label>
 	</div>
 </div>
-<!-- .field-group -->
+
+<div class="field-group">
+	<div class="field">
+		<input type="text"
+			value="<?php if (isset($editdata['campaign_cpm'])){ echo $editdata['campaign_cpm']; } ?>"
+			name="campaign_cpm" id="campaign_cpm" size="28" class="" /> <label
+			for="campaign_cpm">千次展示费用（元）</label>
+	</div>
+</div>
+
+<div class="field-group">
+	<div class="field">
+		<input type="text"
+			value="<?php if (isset($editdata['campaign_cpc'])){ echo $editdata['campaign_cpc']; } ?>"
+			name="campaign_cpc" id="campaign_cpc" size="28" class="" /> <label
+			for="campaign_cpc">点击费用（元）</label>
+	</div>
+</div>
 
 <div class="field-group">
 
@@ -301,7 +298,6 @@ function checkAll(theForm, cName, status) {
 		<label for="campaign_desc">活动注释</label>
 	</div>
 </div>
-<!-- .field-group -->
 
 <div class="field-group control-group inline">
 

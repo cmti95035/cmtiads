@@ -3,7 +3,6 @@ global $current_section;
 $current_section='reporting';
 $report_active=0;
 
-
 require_once '../../init.php';
 
 // Required files
@@ -14,7 +13,6 @@ require_once MAD_PATH . '/functions/adminredirect.php';
 require_once MAD_PATH . '/www/cp/restricted.php';
 
 require_once MAD_PATH . '/www/cp/admin_functions.php';
-
 
 if (!check_permission('campaign_reporting', $user_detail['user_id'])){
 exit;
@@ -36,16 +34,16 @@ case 'publication':
 if (!check_permission_simple('publication_reporting', $user_detail['user_id'])){
 exit;	
 }
-$report_name='Publication Reporting';
-$report_name_active='Publication Report:';
+$report_name='出版物报表';
+$report_name_active='出版物报表:';
 break;	
 
 case 'network':
 if (!check_permission_simple('network_reporting', $user_detail['user_id'])){
 exit;	
 }
-$report_name='Network Reporting';
-$report_name_active='Network Report:';
+$report_name='广告网络报表';
+$report_name_active='广告网络报表:';
 break;	
 }
 
@@ -60,8 +58,6 @@ $report_active=0;
 }
 
 require_once MAD_PATH . '/www/cp/templates/header.tpl.php';
-
-
 
 ?>
 
@@ -102,36 +98,23 @@ function hideadiv(id) {
 </script>
 
 <div id="content">		
-		
 		<div id="contentHeader">
 			<h1 <?php if ($report_active==1){?> style="top: 26px;"<?php } ?>><?php if ($report_active!=1){ echo $report_name; } else {echo $report_name_active . ' ' . get_report_name($_POST);} ?></h1>
 		</div> <!-- #contentHeader -->	
-		
 		<div class="container">
-			
-				
 			<div class="grid-24">
-			
            <?php if (isset($errormessage)){ ?>
             <div class="box plain"><div class="notify notify-error"><h3>Error</h3><p><?php echo $errormessage; ?></p></div> <!-- .notify --></div>
-            <?php } ?>
-            
-                    
-					
+            <?php } ?>		
 				<?php if ($report_active!=1){ require_once MAD_PATH . '/www/cp/templates/forms/crud.reporting.tpl.php'; } else {
 				 require_once MAD_PATH . '/www/cp/templates/forms/show.report.tpl.php';
 				}
-				
 				?>	
                 <script src='assets/javascripts/all.js'></script>
-                    
-                    
-                   
 				</div> <!-- .grid -->
                			<?php if ($report_active!=1){ ?>
                         <script>
 $(function () { 
-
 	$( "#datepicker" ).datepicker();
 	$( "#startdatepicker" ).datepicker({
   onSelect: function(dateText) {

@@ -184,7 +184,9 @@ function reporting_db_update($publication_id, $zone_id, $campaign_id, $creative_
 	$current_year = date ( "Y" );
 	$current_timestamp = time ();
 	
-	$select_query = "select entry_id from md_reporting where publication_id='" . $publication_id . "' AND zone_id='" . $zone_id . "' AND campaign_id='" . $campaign_id . "' AND creative_id='" . $creative_id . "' AND network_id='" . $network_id . "' AND date='" . $current_date . "' LIMIT 1";
+	$select_query = "select entry_id from md_reporting where publication_id='" . $publication_id . "' AND zone_id='" . $zone_id . 
+	"' AND campaign_id='" . $campaign_id . "' AND creative_id='" . $creative_id . "' AND network_id='" . $network_id . 
+	"' AND date='" . $current_date . "' LIMIT 1";
 	
 	global $repdb_connected;
 	
@@ -214,16 +216,26 @@ function reporting_db_update($publication_id, $zone_id, $campaign_id, $creative_
 			return false;
 		}
 	}
+	$cost_query = "select campaign_cpm, campaign_cpc from md_campaigns where campaign_id='" . $campaign_id . "' LIMIT 1";
+	$cost = simple_query_maindb ( $cost_query, true, 500 );
+	$cpm = $cost['campaign_cpm'];
+	$cpc = $cost['campaign_cpc'];
 	
+	$add_cost = $add_impression * $cpm / 1000.0 + $add_click * $cpc;
+
 	if ($repcard_detail ['entry_id'] > 0) {
 		mysql_query ( "UPDATE md_reporting set total_requests=total_requests+" . $add_request . 
 		", total_requests_sec=total_requests_sec+" . $add_request_sec . 
 		", total_impressions=total_impressions+" . $add_impression . 
 		", total_clicks=total_clicks+" . $add_click . 
+		", total_cost=total_cost+" . $add_cost .
 		" WHERE entry_id='" . $repcard_detail ['entry_id'] . "'", $repdb );
 	} else {
-		mysql_query ( "INSERT INTO md_reporting (type, date, day, month, year, publication_id, zone_id, campaign_id, creative_id, network_id, total_requests, total_requests_sec, total_impressions, total_clicks)
-				VALUES ('1', '" . $current_date . "', '" . $current_day . "', '" . $current_month . "', '" . $current_year . "', '" . $publication_id . "', '" . $zone_id . "', '" . $campaign_id . "', '" . $creative_id . "', '" . $network_id . "', '" . $add_request . "', '" . $add_request_sec . "', '" . $add_impression . "', '" . $add_click . "')", $repdb );
+		mysql_query ( "INSERT INTO md_reporting (type, date, day, month, year, publication_id, zone_id, " . 
+		"campaign_id, creative_id, network_id, total_requests, total_requests_sec, total_impressions, total_clicks, total_cost)".
+		"VALUES ('1', '" . $current_date . "', '" . $current_day . "', '" . $current_month . "', '" . $current_year .
+		"', '" . $publication_id . "', '" . $zone_id . "', '" . $campaign_id . "', '" . $creative_id . "', '" . $network_id . 
+		"', '" . $add_request . "', '" . $add_request_sec . "', '" . $add_impression . "', '" . $add_click . "', '" . $add_cost . "')", $repdb );
 	}
 }
 

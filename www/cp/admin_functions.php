@@ -1752,6 +1752,8 @@ function do_edit($type, $data, $detail) {
 		
 		$data ['campaign_type'] = sanitize ( $data ['campaign_type'] );
 		$data ['campaign_name'] = sanitize ( $data ['campaign_name'] );
+		$data ['campaign_cpm'] = sanitize ( $data ['campaign_cpm'] );
+		$data ['campaign_cpc'] = sanitize ( $data ['campaign_cpc'] );
 		$data ['campaign_desc'] = sanitize ( $data ['campaign_desc'] );
 		$data ['startdate_value'] = sanitize ( $data ['startdate_value'] );
 		$data ['enddate_value'] = sanitize ( $data ['enddate_value'] );
@@ -1779,7 +1781,17 @@ function do_edit($type, $data, $detail) {
 		
 		global $maindb;
 		
-		mysql_query ( "UPDATE md_campaigns set campaign_type='$data[campaign_type]', campaign_name='$data[campaign_name]', campaign_desc='$data[campaign_desc]', " . "campaign_start='$data[startdate_value]', campaign_end='$data[enddate_value]', campaign_networkid='$data[campaign_networkid]', " . "campaign_priority='$data[campaign_priority]', target_iphone='$data[target_iphone]', target_ipod='$data[target_ipod]', " . "target_ipad='$data[target_ipad]', target_android='$data[target_android]', target_other='$data[target_other]', " . "ios_version_min='$data[ios_version_min]', ios_version_max='$data[ios_version_max]', " . "android_version_min='$data[android_version_min]', android_version_max='$data[android_version_max]', " . "country_target='$data[geo_targeting]', publication_target='$data[publication_targeting]', channel_target='$data[channel_targeting]', " . "gender_target='$data[gender_targeting]', income_target='$data[income_targeting]', interest_target='$data[interest_targeting]', " . "location_target='$data[location_targeting]', age_target='$data[age_targeting]', chroniccondition_target='$data[chroniccondition_targeting]', " . "device_target='$data[device_targeting]' where campaign_id='$detail'", $maindb );
+		mysql_query ( "UPDATE md_campaigns set campaign_type='$data[campaign_type]', campaign_name='$data[campaign_name]', " .
+		"campaign_cpm='$data[campaign_cpm]', campaign_cpc='$data[campaign_cpc]', campaign_desc='$data[campaign_desc]', " . 
+		"campaign_start='$data[startdate_value]', campaign_end='$data[enddate_value]', campaign_networkid='$data[campaign_networkid]', " . 
+		"campaign_priority='$data[campaign_priority]', target_iphone='$data[target_iphone]', target_ipod='$data[target_ipod]', " .
+		"target_ipad='$data[target_ipad]', target_android='$data[target_android]', target_other='$data[target_other]', " . 
+		"ios_version_min='$data[ios_version_min]', ios_version_max='$data[ios_version_max]', " . 
+		"android_version_min='$data[android_version_min]', android_version_max='$data[android_version_max]', " . 
+		"country_target='$data[geo_targeting]', publication_target='$data[publication_targeting]', channel_target='$data[channel_targeting]', " . 
+		"gender_target='$data[gender_targeting]', income_target='$data[income_targeting]', interest_target='$data[interest_targeting]', " . 
+		"location_target='$data[location_targeting]', age_target='$data[age_targeting]', chroniccondition_target='$data[chroniccondition_targeting]', " . 
+		"device_target='$data[device_targeting]' where campaign_id='$detail'", $maindb );
 		
 		reset_campaign_targeting ( $detail );
 		
@@ -3015,6 +3027,8 @@ VALUES ('$data[campaign_id]', '$creative_hash', '$data[creative_type]', '1', '$d
 		
 		$data ['campaign_type'] = sanitize ( $data ['campaign_type'] );
 		$data ['campaign_name'] = sanitize ( $data ['campaign_name'] );
+		$data ['campaign_cpm'] = sanitize ( $data ['campaign_cpm'] );
+		$data ['campaign_cpc'] = sanitize ( $data ['campaign_cpc'] );
 		$data ['campaign_desc'] = sanitize ( $data ['campaign_desc'] );
 		$data ['startdate_value'] = sanitize ( $data ['startdate_value'] );
 		$data ['enddate_value'] = sanitize ( $data ['enddate_value'] );
@@ -3041,7 +3055,19 @@ VALUES ('$data[campaign_id]', '$creative_hash', '$data[creative_type]', '1', '$d
 		$data ['chroniccondition_targeting'] = sanitize ( $data ['chroniccondition_targeting'] );
 		
 		// Insert Campaign into DB
-		mysql_query ( "INSERT INTO md_campaigns (campaign_owner, campaign_status, campaign_type, campaign_name, campaign_desc, " . "campaign_start, campaign_end, campaign_creationdate, campaign_networkid, campaign_priority, " . "target_iphone, target_ipod, target_ipad, target_android, target_other, " . "ios_version_min, ios_version_max, android_version_min, android_version_max, " . "country_target, publication_target, channel_target, device_target, gender_target, income_target, interest_target, location_target, age_target, chroniccondition_target) " . "VALUES ('$user_detail[user_id]', '1', '$data[campaign_type]', '$data[campaign_name]', '$data[campaign_desc]', " . "'$data[startdate_value]', '$data[enddate_value]', '$creation_timestamp', '$data[campaign_networkid]', '$data[campaign_priority]', " . "'$data[target_iphone]', '$data[target_ipod]', '$data[target_ipad]', '$data[target_android]', '$data[target_other]', " . "'$data[ios_version_min]', '$data[ios_version_max]', '$data[android_version_min]', '$data[android_version_max]', " . "'$data[geo_targeting]', '$data[publication_targeting]', $data[channel_targeting], '$data[device_targeting]', " . "'$data[gender_targeting]', '$data[income_targeting]', '$data[interest_targeting]', '$data[location_targeting]', '$data[age_targeting]', '$data[chroniccondition_targeting]')", $maindb );
+		mysql_query ( "INSERT INTO md_campaigns (campaign_owner, campaign_status, campaign_type, campaign_name, campaign_cpm, campaign_cpc, campaign_desc, " . 
+		"campaign_start, campaign_end, campaign_creationdate, campaign_networkid, campaign_priority, " . 
+		"target_iphone, target_ipod, target_ipad, target_android, target_other, " . 
+		"ios_version_min, ios_version_max, android_version_min, android_version_max, " . 
+		"country_target, publication_target, channel_target, device_target, ". 
+		"gender_target, income_target, interest_target, location_target, age_target, chroniccondition_target) " . 
+		"VALUES ('$user_detail[user_id]', '1', '$data[campaign_type]', '$data[campaign_name]', '$data[campaign_cpm]', '$data[campaign_cpc]', '$data[campaign_desc]', " . 
+		"'$data[startdate_value]', '$data[enddate_value]', '$creation_timestamp', '$data[campaign_networkid]', '$data[campaign_priority]', " . 
+		"'$data[target_iphone]', '$data[target_ipod]', '$data[target_ipad]', '$data[target_android]', '$data[target_other]', " . 
+		"'$data[ios_version_min]', '$data[ios_version_max]', '$data[android_version_min]', '$data[android_version_max]', " . 
+		"'$data[geo_targeting]', '$data[publication_targeting]', $data[channel_targeting], '$data[device_targeting]', " . 
+		"'$data[gender_targeting]', '$data[income_targeting]', '$data[interest_targeting]', '$data[location_targeting]', " .
+		"'$data[age_targeting]', '$data[chroniccondition_targeting]')", $maindb );
 		
 		global $created_campaign_id;
 		$created_campaign_id = mysql_insert_id ( $maindb );
@@ -5500,28 +5526,25 @@ function print_summary_widget($data) {
 							<div class="pad">
 								<span class="value">' . number_format ( $report_detail ['total_requests'], 0 ) . '</span> 请求数
 							</div> <!-- .pad -->
-						</div>
-							
-						
-						<div class="dashboard_report defaultState">
+					</div>
+					<div class="dashboard_report defaultState">
 							<div class="pad">
 								<span class="value">' . number_format ( $report_detail ['total_impressions'], 0 ) . '</span> 收视数
 							</div> <!-- .pad -->
-						</div>
+					</div>
 						
-						<div class="dashboard_report defaultState">
+					<div class="dashboard_report defaultState">
 							<div class="pad">
 								<span class="value">' . number_format ( $report_detail ['total_clicks'], 0 ) . '</span> 点击数
 							</div> <!-- .pad -->
-						</div>
-						
-						
-						
-						<div  class="dashboard_report defaultState last">
+					</div>
+					<div  class="dashboard_report defaultState last">
 							<div class="pad">
-								<span style="font-size:25px;" class="value">' . number_format ( $report_detail ['ctr'], 2 ) . '% / ' . number_format ( $report_detail ['fillrate'], 2 ) . '%</span> CTR / Fill Rate
+								<span style="font-size:25px;" class="value">' . 
+								number_format ( $report_detail ['ctr'], 2 ) . '% / ' . 
+								number_format ( $report_detail ['fillrate'], 2 ) . '%</span> CTR / Fill Rate
 							</div> <!-- .pad -->
-						</div>
+					</div>
 						
 					</div> <!-- .widget-content -->
 					
@@ -5663,7 +5686,7 @@ function print_detail_widget($data) {
 		global $repdb;
 	}
 	
-	$query = 'SELECT SUM(total_requests) AS total_requests, SUM(total_requests_sec) AS total_requests_sec, SUM(total_impressions) AS total_impressions, SUM(total_clicks) AS total_clicks, date, publication_id, zone_id, campaign_id, creative_id, network_id, DAY(date), MONTH(date), YEAR(date), DATE_FORMAT(date, \'%m-%d-%Y\') AS daydate, DATE_FORMAT(date, \'%m-%Y\') AS monthdate FROM md_reporting ' . get_rep_limitation_query ( $data ) . ' ' . get_rep_date_query ( $data ) . ' ' . get_sorting_query ( $data ) . '';
+	$query = 'SELECT SUM(total_requests) AS total_requests, SUM(total_requests_sec) AS total_requests_sec, SUM(total_impressions) AS total_impressions, SUM(total_clicks) AS total_clicks, SUM(total_cost) AS total_cost, date, publication_id, zone_id, campaign_id, creative_id, network_id, DAY(date), MONTH(date), YEAR(date), DATE_FORMAT(date, \'%m-%d-%Y\') AS daydate, DATE_FORMAT(date, \'%m-%Y\') AS monthdate FROM md_reporting ' . get_rep_limitation_query ( $data ) . ' ' . get_rep_date_query ( $data ) . ' ' . get_sorting_query ( $data ) . '';
 	
 	echo '
 <div class="widget widget-table">
@@ -5684,6 +5707,7 @@ function print_detail_widget($data) {
 	}
 	echo '<th width="17%">Impressions</th>';
 	echo '<th width="15%">Clicks</th>';
+	echo '<th width="15%">Cost</th>';
 	echo '<th width="19%">CTR</th>';
 	if ($data ['report_type'] == 'publication' or $data ['report_type'] == 'network') {
 		echo '<th width="16%">Fill Rate</th>';
@@ -5717,6 +5741,7 @@ function print_detail_widget($data) {
 		
 		echo '<td>' . number_format ( $report_detail ['total_impressions'] ) . '</td>';
 		echo '<td>' . number_format ( $report_detail ['total_clicks'] ) . '</td>';
+		echo '<td>' . number_format ( $report_detail ['total_cost'] ) . '</td>';
 		echo '<td>' . $report_detail ['ctr'] . '%</td>';
 		
 		if ($data ['report_type'] == 'publication' or $data ['report_type'] == 'network') {
