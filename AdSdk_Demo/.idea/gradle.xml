@@ -8,8 +8,8 @@
         <option name="gradleHome" value="$APPLICATION_HOME_DIR$/gradle/gradle-2.2.1" />
         <option name="modules">
           <set>
-            <option value="$PROJECT_DIR$/../../../xamppfiles/htdocs/cmtiads/AdSdk_Demo" />
-            <option value="$PROJECT_DIR$/../../../xamppfiles/htdocs/cmtiads/AdSdk_Demo/app" />
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/app" />
           </set>
         </option>
       </GradleProjectSettings>
