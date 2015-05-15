@@ -1604,12 +1604,7 @@ function check_input($data) {
 	
 	$request_settings ['phone'] = $pieces [1];
 	
-	if (count($pieces) == 3) { 
-		// location from moible takes precedance 
-		$request_settings ['location'] = get_location_id($pieces[2]);
-	} else {
-		$request_settings ['location'] = $userinfo ["location_id"];
-	}
+
 	$response = file_get_contents ( $test_config ['userinfo_server_url'] . $request_settings ['phone'] );
 	
 	$userinfo = json_decode ( $response, true );
@@ -1618,7 +1613,14 @@ function check_input($data) {
 	
 	$request_settings ['income'] = $userinfo ["income_id"];
 	
-	$request_settings ['interest'] = $userinfo ["interest_id"];
+	if (count($pieces) == 3) { 
+		// interest from moible takes precedance 
+		$request_settings ['interest'] = $pieces[2];
+	} else {
+		$request_settings ['interest'] = $userinfo ["interest_id"];
+	}
+	
+	$request_settings ['location'] = $userinfo ["location_id"];
 	
 	$request_settings ['age'] = $userinfo ["age_id"];
 	
@@ -1644,14 +1646,16 @@ function check_input($data) {
 	return true;
 }
 
-function get_location_id($location) {
-	$query = "select location_id from md_locations where location_name= '" . $location . "'";
-	if ($location_id = simple_query_maindb ( $query, true, 2000 )) {
-		return $location_id['location_id'];
+/*
+function get_interest_id($interest) {
+	$query = "select interest_id from md_interests where interest_name= '" . $interest . "'";
+	if ($interest_id = simple_query_maindb ( $query, true, 2000 )) {
+		return $interest_id['interest_id'];
 	} else {
 		return false;
 	}
 }
+*/
 
 function get_mobfox_id() {
 	$query = "select entry_id from md_networks where network_identifier='MOBFOX'";
