@@ -86,7 +86,7 @@ require_once MAD_PATH . '/www/cp/templates/header.tpl.php';
 			
 								<div class="field">
 									<input id="allow_statistical_info" name="allow_statistical_info" <?php if (getconfig_var('allow_statistical_info')==1){ ?>checked="checked"<?php } ?> type="checkbox" value="1" />		
-									<label for="allow_statistical_info">Send anonymous statistical information to madserve.org?</label>
+									<label for="allow_statistical_info">Send anonymous statistical information to cmtiads.org?</label>
 								</div>
 							</div> <!-- .field-group -->
                             
@@ -102,7 +102,7 @@ require_once MAD_PATH . '/www/cp/templates/header.tpl.php';
 			
 								<div class="field">
 									<span style="margin-left:4px;"><?php echo getconfig_var('installation_id'); ?></span>
-									<label for="allow_statistical_info">mAdserve Installation ID</label>
+									<label for="allow_statistical_info">cmtiads Installation ID</label>
 								</div>
 							</div> <!-- .field-group -->
                             
@@ -110,7 +110,7 @@ require_once MAD_PATH . '/www/cp/templates/header.tpl.php';
 			
 								<div class="field">
 									<span style="margin-left:4px;"><?php echo getconfig_var('db_install_version'); ?></span>
-									<label for="db_v">mAdserve Database Version</label>
+									<label for="db_v">cmtiads Database Version</label>
 								</div>
 							</div> <!-- .field-group -->
                             
@@ -118,7 +118,7 @@ require_once MAD_PATH . '/www/cp/templates/header.tpl.php';
 			
 								<div class="field">
 									<span style="margin-left:4px;"><?php echo MAD_VERSION; ?></span>
-									<label for="db_v">mAdserve Code Version</label>
+									<label for="db_v">cmtiads Code Version</label>
 								</div>
 							</div> <!-- .field-group -->
                             

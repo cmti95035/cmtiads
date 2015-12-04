@@ -98,6 +98,4 @@
                 <div class="actions">						
 								<button onclick="window.location='reporting.php<?php echo '?type='.$_POST['report_type'].''; ?>';" class="btn btn-quaternary"><span class="icon-plus"></span>New Report</button>
 								</div>
-              
-                
-					<!--<div class="widget widget-table"><div class="widget-header"><span class="icon-list"></span><h3 class="icon chart">Detailed Statistics</h3></div><div class="widget-content"><table class="table table-bordered table-striped"><thead><tr><th width="17%">Publication</th><th width="16%">Requests</th><th width="17%">Impressions</th><th width="15%">Clicks</th><th width="19%">CTR</th><th width="16%">Fill Rate</th></tr></thead><tbody></tbody></table></div></div> -->
+           

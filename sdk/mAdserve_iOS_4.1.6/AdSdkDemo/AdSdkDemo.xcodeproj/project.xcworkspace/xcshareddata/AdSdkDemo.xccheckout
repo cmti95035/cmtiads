@@ -14,7 +14,7 @@
 		<string>https://github.com/cmti95035/cmtiads.git</string>
 	</dict>
 	<key>IDESourceControlProjectPath</key>
-	<string>sdk/mAdserve_iOS_4.1.6/AdSdkDemo/AdSdkDemo.xcodeproj</string>
+	<string>sdk/cmtiads_iOS_4.1.6/AdSdkDemo/AdSdkDemo.xcodeproj</string>
 	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
 	<dict>
 		<key>78D38CB51DCBE5463F032A31051C6AFD8F28D7C3</key>

@@ -154,7 +154,7 @@ require_once MAD_PATH . '/modules/phpmailer/class.phpmailer.php';
 
 $mail             = new PHPMailer(); // defaults to using php "mail()"
 
-$body="mAdserve Password Recovery<br>----------------------<br>
+$body="cmtiads Password Recovery<br>----------------------<br>
 Username: $requser_detail[email_address]<br>
 Password Reset Link: http://$mad_bsrurl/www/cp/pw_update.php?hash=$request_hash";
 
@@ -165,7 +165,7 @@ $mail->SetFrom(''.$mad_r_adserveremail.'', ''.$mad_r_adservername.'');
 $address = "$requser_detail[email_address]";
 $mail->AddAddress($address, "$requser_detail[first_name] $requser_detail[last_name]");
 
-$mail->Subject    = "mAdserve Password Recovery";
+$mail->Subject    = "cmtiads Password Recovery";
 
 //$mail->AltBody    = "To view the message, please use an HTML compatible email viewer!"; // optional, comment out and test
 

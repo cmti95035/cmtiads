@@ -12,7 +12,7 @@ $httpConfig['timeout']    = '1';
 $http = new Http();
 	  
 if ($request_type=='banner' or $request_type=='interstitial'){
-$request_url='http://adfonic.net/ad/'.$network_ids['p_1'].'?t.markup=0&h.user-agent='.urlencode($request_info['user_agent']).'&t.format=json&r.ip='.$request_info['ip_address'].'&r.client=mAdserve1';
+$request_url='http://adfonic.net/ad/'.$network_ids['p_1'].'?t.markup=0&h.user-agent='.urlencode($request_info['user_agent']).'&t.format=json&r.ip='.$request_info['ip_address'].'&r.client=cmtiads1';
 
 
 if (isset($_GET['o'])){$request_url = $request_url . '&d.dpid=' . sha1($request_info['o']);}

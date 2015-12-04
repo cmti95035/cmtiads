@@ -84,16 +84,16 @@
         
         var adcount = 0;
 
-        return function(madservevariables) {
+        return function(cmtiadsvariables) {
 
             adcount++;
             var id = 'global_ad_id' + adcount;
             
-            if( !madservevariables.s ) return;
+            if( !cmtiadsvariables.s ) return;
 
-            var src = madservevariables.requesturl;
-            if( typeof madservevariables.service != "undefined" ) {
-                src = madservevariables.service;
+            var src = cmtiadsvariables.requesturl;
+            if( typeof cmtiadsvariables.service != "undefined" ) {
+                src = cmtiadsvariables.service;
             }
 
             var cgi = ['p=' + escape(document.location),
@@ -103,8 +103,8 @@
                        'jsvar=' + id,
                        'u=' + navigator.userAgent];
 
-            for( var setting in madservevariables ) {
-                var cgivar = setting + '=' + escape(madservevariables[setting]);
+            for( var setting in cmtiadsvariables ) {
+                var cgivar = setting + '=' + escape(cmtiadsvariables[setting]);
                 cgi[cgi.length] = cgivar;
             }
             src += "?" + cgi.join('&');
@@ -113,11 +113,11 @@
             var container = document.getElementById(id),
                 varscall = document.createElement("script");
 
-            if( madservevariables.backfillhtml ) {
+            if( cmtiadsvariables.backfillhtml ) {
                 container.innerHTML = "<div id= 'm_dcontent" 
                                     + id + "' "
                                     + "style='display:none'>"
-                                    + madservevariables.backfillhtml
+                                    + cmtiadsvariables.backfillhtml
                                     + "</div>";
             }
 
@@ -134,29 +134,29 @@
                 for( iter=0;iter<ads.length;++iter ) {
 
                     var ad = ads[iter];
-                    if( !madservevariables.target ) {
-                        madservevariables.target = '';
+                    if( !cmtiadsvariables.target ) {
+                        cmtiadsvariables.target = '';
                     }
 
                     if( ad.error ) {
-                        if( madservevariables.backfillhtml && madservevariables.reveal ) {
+                        if( cmtiadsvariables.backfillhtml && cmtiadsvariables.reveal ) {
                             container.innerHTML = ad.error;
                         }
                         continue;  
                     }
 
                     if( ad.img ) {
-                        var width = (madservevariables.img_width ? madservevariables.img_width: ''),
-                            height = (madservevariables.img_height ? madservevariables.img_height: ''),
+                        var width = (cmtiadsvariables.img_width ? cmtiadsvariables.img_width: ''),
+                            height = (cmtiadsvariables.img_height ? cmtiadsvariables.img_height: ''),
                             tag = "<a href='" 
                                 + ad.url 
-                                + "' target='" + madservevariables.target + "'>"
+                                + "' target='" + cmtiadsvariables.target + "'>"
                                 + "<img src='" + ad.img + "'"; 
 
-                        if( madservevariables.img_width ) {
+                        if( cmtiadsvariables.img_width ) {
                             tag += " width='" + width + "'";
                         }         
-                        if( madservevariables.img_height ) {
+                        if( cmtiadsvariables.img_height ) {
                             tag += " height='" + height + "'";
                         }         
 
@@ -168,7 +168,7 @@
                         workmedcont(ad.content,container);
                     } else {
                         var tag = "<a href='" + ad.url + "' "
-                                + "target='" + madservevariables.target + "'>"
+                                + "target='" + cmtiadsvariables.target + "'>"
                                 + ad.text
                                 + "</a>";
 
@@ -183,21 +183,21 @@
                     dcont.style.display = "block";
                 }
 
-                if( madservevariables.prependclickcontent ) {
+                if( cmtiadsvariables.prependclickcontent ) {
                     var links = container.getElementsByTagName("a");
                     for( iter=0;iter<links.length;++iter ) {
                         var link = links[iter],
                             original = link.href;
-                        link.href = madservevariables.prependclickcontent + original;
+                        link.href = cmtiadsvariables.prependclickcontent + original;
                     }
                 }
              
-                if( madservevariables.trackingpixelurl ) {
+                if( cmtiadsvariables.trackingpixelurl ) {
                     var cachebust = Math.random(),
-                        join = (madservevariables.trackingpixelurl.indexOf('?') ? '&' : '?'),
+                        join = (cmtiadsvariables.trackingpixelurl.indexOf('?') ? '&' : '?'),
                         img = new Image();
 
-                    img.src = madservevariables.trackingpixelurl + join + cachebust; 
+                    img.src = cmtiadsvariables.trackingpixelurl + join + cachebust; 
                 }
                 if( !isie ) delete this;
             };
