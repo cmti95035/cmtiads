@@ -3,6 +3,11 @@
 global $repdb_connected;
 $repdb_connected=0;
 
+global $test_config;
+$test_config['userinfo_server_url']="http://localhost/cmtiads/userserver/index.php?/mobileuserinfo/json/";
+//$test_config['userinfo_server_url']="http://localhost/cmt220/index.php?/mobileuserinfo/json/";
+$test_config['local_logging_file']="/Users/zhiminhe/logs/cmtiads_internal.log";
+
 function ad_request($data){
 global $request_settings;
 
@@ -1094,14 +1099,12 @@ else {
 $query_part['channel']='';
 }
 
-/* Q ++
 if (isset($request_settings['gender']) && is_numeric($request_settings['gender'])){
-	$query_part['gender']="AND (md_campaigns.gender_target=1 OR (c5.targeting_type='gender' AND c5.targeting_code='".$request_settings['gender']."'))";
+	$query_part['gender']="AND (md_campaigns.gender_target=1 OR (c2.targeting_type='gender' AND c2.targeting_code='".$request_settings['gender']."'))";
 }
 else {
 	$query_part['gender']='';
 }
-*/
 
 $query_part['placement']="AND (md_campaigns.publication_target=1 OR (c3.targeting_type='placement' AND c3.targeting_code='".$zone_detail['entry_id']."'))";
 
@@ -1179,7 +1182,7 @@ if (MAD_IGNORE_DAILYLIMIT_NOCRON && !check_cron_active()){
 $query_part['limit']="AND ((md_campaign_limit.total_amount_left='' OR md_campaign_limit.total_amount_left>=1) OR (md_campaign_limit.cap_type=1))";
 }
 
-$request_settings['campaign_query']="select md_campaigns.campaign_id, md_campaigns.campaign_priority, md_campaigns.campaign_type, md_campaigns.campaign_networkid from md_campaigns LEFT JOIN md_campaign_targeting c1 ON md_campaigns.campaign_id = c1.campaign_id LEFT JOIN md_campaign_targeting c2 ON md_campaigns.campaign_id = c2.campaign_id LEFT JOIN md_campaign_targeting c3 ON md_campaigns.campaign_id = c3.campaign_id LEFT JOIN md_ad_units ON md_campaigns.campaign_id = md_ad_units.campaign_id LEFT JOIN md_campaign_limit ON md_campaigns.campaign_id = md_campaign_limit.campaign_id where (md_campaigns.country_target=1".$query_part['geo']." ".$query_part['channel']." ".$query_part['placement']." ".$query_part['misc']." ".$query_part['device']." ".$query_part['osversion']." ".$query_part['adunit']." ".$query_part['limit']." group by md_campaigns.campaign_id";
+$request_settings['campaign_query']="select md_campaigns.campaign_id, md_campaigns.campaign_priority, md_campaigns.campaign_type, md_campaigns.campaign_networkid from md_campaigns LEFT JOIN md_campaign_targeting c1 ON md_campaigns.campaign_id = c1.campaign_id LEFT JOIN md_campaign_targeting c2 ON md_campaigns.campaign_id = c2.campaign_id LEFT JOIN md_campaign_targeting c3 ON md_campaigns.campaign_id = c3.campaign_id LEFT JOIN md_ad_units ON md_campaigns.campaign_id = md_ad_units.campaign_id LEFT JOIN md_campaign_limit ON md_campaigns.campaign_id = md_campaign_limit.campaign_id where (md_campaigns.country_target=1".$query_part['geo']." ".$query_part['channel']." ".$query_part['gender']." ".$query_part['placement']." ".$query_part['misc']." ".$query_part['device']." ".$query_part['osversion']." ".$query_part['adunit']." ".$query_part['limit']." group by md_campaigns.campaign_id";
 
 
 return true;	
@@ -1537,8 +1540,6 @@ return false;
 }
 	
 
-
-
 function get_placement($data){
 global $request_settings;
 global $errormessage;
@@ -1611,6 +1612,7 @@ return false;
 function check_input($data){
 global $request_settings;
 global $errormessage;
+global $test_config;
 
 prepare_ip($data);
 
@@ -1619,13 +1621,27 @@ if (!isset($request_settings['ip_address']) or !is_valid_ip($request_settings['i
 $errormessage='Invalid IP Address';
 return false;
 }
+// 
+$pieces = explode("+", $data['s']);
+$request_settings['placement_hash'] = $pieces[0];
 
-if (!isset($data['s']) or empty($data['s']) or !validate_md5($data['s'])){
-$errormessage='No valid Integration Placement ID supplied. (Variable "s")';
-return false;
+$request_settings['phone'] = $pieces[1];
+
+$response = file_get_contents($test_config['userinfo_server_url'].$request_settings['phone']);
+
+$userinfo = json_decode($response, true);
+
+$request_settings['gender'] = $userinfo["gender_id"];
+
+file_put_contents( $test_config['local_logging_file'],
+'phone:'.$pieces[1].' response:'.$response.' userinfo:'.implode(' ',$userinfo) .' gender:' .$request_settings['gender'] .PHP_EOL .PHP_EOL, FILE_APPEND);
+
+if (!isset($request_settings['placement_hash']) or empty($request_settings['placement_hash']) or !validate_md5($request_settings['placement_hash'])){
+	$errormessage='No valid Integration Placement ID supplied. (Variable "s")';
+	return false;
 }
 
-$request_settings['placement_hash']=$data['s'];
+//$request_settings['placement_hash']=$data['s'];
 
 prepare_ua($data);
 

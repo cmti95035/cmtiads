@@ -1,0 +1,20 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#ffffff" >
+
+    <!-- This is the container for the Ad View -->
+
+    <com.adsdk.sdk.banner.AdView
+        android:id="@+id/adSdkView"
+		android:layout_width="300dp"
+		android:background="#000000"
+		android:layout_height="50dp"
+		request_url="ENTER_REQUEST_URL_HERE"
+		publisherId="ENTER_PUBLISHER_ID_HERE"
+		location="true"
+		animation="true"
+		/>
+
+</RelativeLayout>
