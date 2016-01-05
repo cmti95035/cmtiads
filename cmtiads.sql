@@ -1,13 +1,13 @@
 # ************************************************************
 # Sequel Pro SQL dump
-# Version 4096
+# Version 4499
 #
 # http://www.sequelpro.com/
-# http://code.google.com/p/sequel-pro/
+# https://github.com/sequelpro/sequelpro
 #
 # Host: 127.0.0.1 (MySQL 5.6.21)
 # Database: cmtiads
-# Generation Time: 2015-05-07 22:11:11 +0000
+# Generation Time: 2015-12-04 21:45:27 +0000
 # ************************************************************
 
 
@@ -52,13 +52,9 @@ LOCK TABLES `md_ad_units` WRITE;
 
 INSERT INTO `md_ad_units` (`adv_id`, `campaign_id`, `unit_hash`, `adv_type`, `adv_status`, `adv_click_url`, `adv_click_opentype`, `adv_chtml`, `adv_mraid`, `adv_bannerurl`, `adv_impression_tracking_url`, `adv_name`, `adv_clickthrough_type`, `adv_creative_extension`, `adv_height`, `adv_width`, `creativeserver_id`)
 VALUES
-	(13,'13','363bf94d5f9c91d77b8088cf44384740','1','1','http://auto.sina.com.cn/','','','','','','car','','png','50','320','1'),
-	(11,'11','831bdb7f3846e84fdfe3afae75388527','1','1','http://www.tiffany.com/','','','','','','female','','jpg','480','320','1'),
-	(12,'12','ebea44372732648cecd306204b9911b8','1','1','http://windows.microsoft.com/en-us/windows/home','','','','','','windows7','','png','50','320','1'),
-	(10,'10','e562a2589a38a11d6c386d5a274107d1','1','1','http://men.sohu.com/','','','','','','male','','jpg','480','320','1'),
-	(14,'14','95d23cf37c5ed3b07e659f62ce125452','1','1','http://luxury.qq.com/zhubao.htm','','','','','','necklace','','jpeg','50','320','1'),
-	(16,'19','6782eb8f5d6a38059a32584d8c28c591','1','1','http://www.10086.cn','','','','','','Creative 1 Diabetes','','jpg','50','320','1'),
-	(18,'21','','2','1','www.google.com','','','','www.google.com','','Creative 1','','','50','320','');
+	(13,'13','95a7a9faafa7aa61756ab3737ff32025','1','1','http://auto.sina.com.cn/','','','','','','car','','png','50','320','1'),
+	(14,'14','37056d66d7c62620b4c07dce19b7fb2a','1','1','http://luxury.qq.com/zhubao.htm','','','','','','necklace','','png','50','320','1'),
+	(16,'19','797543a52a65d5bc74be4cbae3b055f4','1','1','http://www.10086.cn','','','','','','Creative 1 Diabetes','','png','50','320','1');
 
 /*!40000 ALTER TABLE `md_ad_units` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -115,13 +111,9 @@ LOCK TABLES `md_campaign_limit` WRITE;
 
 INSERT INTO `md_campaign_limit` (`entry_id`, `campaign_id`, `cap_type`, `total_amount`, `total_amount_left`, `last_refresh`)
 VALUES
-	(11,'11','1','','',''),
-	(12,'12','1','','',''),
-	(10,'10','1','','',''),
 	(13,'13','1','','',''),
 	(14,'14','1','','',''),
-	(19,'19','1','','',''),
-	(21,'21','1','','','');
+	(19,'19','1','','','');
 
 /*!40000 ALTER TABLE `md_campaign_limit` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -174,10 +166,20 @@ LOCK TABLES `md_campaign_targeting` WRITE;
 
 INSERT INTO `md_campaign_targeting` (`entry_id`, `campaign_id`, `targeting_type`, `targeting_code`)
 VALUES
-	(26,11,'gender','2'),
-	(29,14,'gender','2'),
-	(31,19,'chroniccondition','3'),
-	(41,13,'gender','1');
+	(442,14,'location','2'),
+	(441,14,'interest','3'),
+	(414,19,'chroniccondition','3'),
+	(413,19,'chroniccondition','2'),
+	(439,14,'gender','2'),
+	(421,13,'age','4'),
+	(422,13,'age','5'),
+	(420,13,'income','9'),
+	(419,13,'income','8'),
+	(418,13,'income','7'),
+	(417,13,'income','6'),
+	(416,13,'income','5'),
+	(415,13,'gender','1'),
+	(440,14,'interest','2');
 
 /*!40000 ALTER TABLE `md_campaign_targeting` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -231,13 +233,9 @@ LOCK TABLES `md_campaigns` WRITE;
 
 INSERT INTO `md_campaigns` (`campaign_id`, `campaign_owner`, `campaign_status`, `campaign_type`, `campaign_name`, `campaign_cpm`, `campaign_cpc`, `campaign_desc`, `campaign_start`, `campaign_end`, `campaign_creationdate`, `campaign_networkid`, `campaign_priority`, `campaign_rate_type`, `campaign_rate`, `target_iphone`, `target_ipod`, `target_ipad`, `target_android`, `target_other`, `ios_version_min`, `ios_version_max`, `android_version_min`, `android_version_max`, `country_target`, `publication_target`, `channel_target`, `device_target`, `gender_target`, `income_target`, `interest_target`, `location_target`, `age_target`, `chroniccondition_target`)
 VALUES
-	(12,'2','1','1','all_banner','','','','2015-03-26','2090-12-12','1425666750','','5','','','','','','','','','','','','1','1','1','1','1','1','','','','1'),
-	(13,'2','1','1','male_banner','','','','2015-03-07','2090-12-12','1425683714','','5','','','','','','','','','','','','1','1','1','1','2','1','','','','1'),
-	(11,'2','1','1','female_fullpage','','','','2015-02-10','2090-12-12','1423529532','','5','','','','','','','','','','','','1','1','1','1','2','1','','','','1'),
-	(10,'2','1','1','male_fullpage','1000','5','cc22','2015-03-26','2090-12-12','1423529377','','5','','','','','','','','','','','','1','1','1','1','1','1','1','1','1','1'),
-	(14,'2','1','1','female_banner','','','','2015-03-07','2090-12-12','1425684466','','5','','','','','','','','','','','','1','1','1','1','2','1','','','','1'),
-	(19,'1','1','1','Diabetes Ads','','','','2015-04-09','2090-12-12','1428535626','','5','','','','','','','','','','','','1','1','1','1','1','1','','','','2'),
-	(21,'2','1','1','cpc','','10','','2015-05-06','2090-12-12','1430865579','','1','','','','','','','','','','','','1','1','1','1','1','1','1','1','1','1');
+	(13,'2','1','1','car_banner','','','','2015-03-07','2090-12-12','1425683714','','5','','','','','','','','','','','','1','1','1','1','2','2','1','1','2','1'),
+	(14,'2','1','1','paris_banner','1000','5','','2015-03-07','2090-12-12','1425684466','','5','','','','','','','','','','','','1','1','1','1','2','1','2','2','1','1'),
+	(19,'1','1','1','healthy_food_banner','','','','2015-04-09','2090-12-12','1428535626','','5','','','','','','','','','','','','1','1','1','1','1','1','1','1','1','2');
 
 /*!40000 ALTER TABLE `md_campaigns` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -354,12 +352,12 @@ VALUES
 	(7,'last_trafficrequest_update','1427150180'),
 	(8,'last_limit_update',''),
 	(9,'server_email','qingfenghuang@chinamobile.com'),
-	(10,'last_mf_check','1431022950'),
+	(10,'last_mf_check','1449264250'),
 	(11,'allow_statistical_info','1'),
 	(12,'installation_id','bc6d64f849fbf3704806c4e1c3e949d0'),
 	(13,'update_check','1'),
 	(14,'default_creative_server','1'),
-	(15,'last_pendingactions_exec','1431034761'),
+	(15,'last_pendingactions_exec','1449263192'),
 	(16,'last_cron_job','');
 
 /*!40000 ALTER TABLE `md_configuration` ENABLE KEYS */;
@@ -412,8 +410,8 @@ LOCK TABLES `md_genders` WRITE;
 
 INSERT INTO `md_genders` (`gender_id`, `gender_name`)
 VALUES
-	(1,'male'),
-	(2,'female');
+	(1,'男'),
+	(2,'女');
 
 /*!40000 ALTER TABLE `md_genders` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -465,15 +463,14 @@ LOCK TABLES `md_interests` WRITE;
 
 INSERT INTO `md_interests` (`interest_id`, `interest_name`)
 VALUES
-	(1,'户外'),
-	(2,'游戏'),
-	(3,'健身'),
-	(4,'美容'),
-	(5,'时尚'),
-	(6,'汽车'),
-	(7,'电影'),
-	(8,'阅读'),
-	(9,'唱歌');
+	(1,'租车'),
+	(2,'航班'),
+	(3,'旅店'),
+	(8,'服务'),
+	(7,'购物'),
+	(6,'景点'),
+	(4,'计程车'),
+	(5,'饭店');
 
 /*!40000 ALTER TABLE `md_interests` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -558,13 +555,8 @@ LOCK TABLES `md_mobile_users` WRITE;
 
 INSERT INTO `md_mobile_users` (`id`, `name`, `phone`, `gender_id`, `chroniccondition_id`, `income_id`, `interest_id`, `location_id`, `age_id`)
 VALUES
-	(1,'zhimin','14086803612',2,0,1,1,1,1),
-	(2,'oneplus','14086801111',1,0,0,1,0,0),
-	(3,'emulator','15555215554',1,0,0,1,0,0),
-	(4,'verizon','14084380883',2,0,0,1,0,0),
-	(5,'tmobile','16508899498',2,0,0,1,0,0),
-	(6,'verizon','4084380882',1,0,0,1,0,0),
-	(7,'zhimin','4086803612',1,3,1,2,1,4);
+	(1,'black','4084380882',1,2,5,8,1,5),
+	(2,'white','4083945791',2,3,4,5,2,4);
 
 /*!40000 ALTER TABLE `md_mobile_users` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -777,7 +769,7 @@ LOCK TABLES `md_publications` WRITE;
 
 INSERT INTO `md_publications` (`inv_id`, `creator_id`, `inv_status`, `inv_type`, `inv_name`, `inv_description`, `inv_address`, `inv_defaultchannel`, `md_lastrequest`)
 VALUES
-	(1,'2','1','1','Demo','','http://','1','1431036192'),
+	(1,'2','1','1','Demo','','http://','1','1447370018'),
 	(2,'11','1','2','Test','test-example','http://www.baidu.com','2','');
 
 /*!40000 ALTER TABLE `md_publications` ENABLE KEYS */;
@@ -5356,7 +5348,34 @@ VALUES
 	(116,'1','','2015-05-05','05','05','2015','1','3','','','18',9,9,9,0,0),
 	(117,'1','','2015-05-07','07','05','2015','1','3','','','18',17,17,17,0,0),
 	(118,'1','','2015-05-07','07','05','2015','1','3','10','10','',19,0,19,0,28.5),
-	(119,'1','','2015-05-08','08','05','2015','1','3','10','10','',6,0,6,0,2);
+	(119,'1','','2015-05-08','08','05','2015','1','3','10','10','',6,0,6,0,2),
+	(120,'1','','2015-05-15','15','05','2015','1','1','21','18','',7,0,7,0,0),
+	(121,'1','','2015-05-15','15','05','2015','1','1','13','13','',9,0,9,0,0),
+	(122,'1','','2015-05-15','15','05','2015','1','1','','','18',7,7,7,0,0),
+	(123,'1','','2015-05-15','15','05','2015','1','1','19','16','',1,0,1,0,0),
+	(124,'1','','2015-05-15','15','05','2015','1','1','14','14','',4,0,4,0,0),
+	(125,'1','','2015-05-18','18','05','2015','1','1','','','18',5,5,5,0,0),
+	(126,'1','','2015-05-18','18','05','2015','1','1','13','13','',4,0,4,0,0),
+	(127,'1','','2015-05-18','18','05','2015','1','1','14','14','',3,0,3,0,0),
+	(128,'1','','2015-10-29','29','10','2015','1','1','13','13','',47,0,47,0,0),
+	(129,'1','','2015-10-29','29','10','2015','1','3','','','18',2,2,2,0,0),
+	(130,'1','','2015-10-29','29','10','2015','1','1','19','16','',6,0,6,0,0),
+	(131,'1','','2015-10-29','29','10','2015','1','1','14','14','',104,0,104,0,104),
+	(132,'1','','2015-10-30','30','10','2015','1','1','14','14','',277,0,277,1,282),
+	(133,'1','','2015-10-30','30','10','2015','1','1','19','16','',38,0,38,0,0),
+	(134,'1','','2015-10-30','30','10','2015','1','1','13','13','',12,0,12,0,0),
+	(135,'1','','2015-11-04','04','11','2015','1','1','19','16','',48,0,48,0,0),
+	(136,'1','','2015-11-04','04','11','2015','1','1','14','14','',9,0,9,0,9),
+	(137,'1','','2015-11-10','10','11','2015','1','1','14','14','',7,0,7,0,7),
+	(138,'1','','2015-11-10','10','11','2015','1','1','19','16','',10,0,10,0,0),
+	(139,'1','','2015-11-11','11','11','2015','1','1','13','13','',2,0,2,0,0),
+	(140,'1','','2015-11-11','11','11','2015','1','1','19','16','',1,0,1,0,0),
+	(141,'1','','2015-11-12','12','11','2015','1','1','19','16','',12,0,12,0,0),
+	(142,'1','','2015-11-12','12','11','2015','1','1','13','13','',5,0,5,0,0),
+	(143,'1','','2015-11-12','12','11','2015','1','1','14','14','',2,0,2,0,2),
+	(144,'1','','2015-11-13','13','11','2015','1','1','14','14','',1,0,1,0,1),
+	(145,'1','','2015-11-13','13','11','2015','1','1','19','16','',3,0,3,1,0),
+	(146,'1','','2015-11-13','13','11','2015','1','1','13','13','',2,0,2,0,0);
 
 /*!40000 ALTER TABLE `md_reporting` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -5682,7 +5701,24 @@ VALUES
 	(96,'92475fc3a5b1cd35856f9c0cf0aa11bd','1430790295','1','zhiminhe@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','','1430784407'),
 	(97,'a81c36654926942f47b1c2f7d1f6a4e7','1430869721','1','zhiminhe@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','','1430864963'),
 	(98,'42a0422850c13c7d221f71209ec2bf87','1431030204','1','zhiminhe@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','','1431022950'),
-	(99,'f9c295d616842c7a0785e25f6b0d62cc','1431040138','1','zhiminhe@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','','1431030964');
+	(99,'f9c295d616842c7a0785e25f6b0d62cc','1431041731','1','zhiminhe@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','','1431030964'),
+	(100,'40ce4f2b7fcdc54d7381fe4f70168b26','1431655951','1','zhiminhe@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','','1431648003'),
+	(101,'01666d878d8f77e1e39f5107e7d871dc','1431654668','1','zhiminhe@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','','1431651068'),
+	(102,'7438eccb76e36d602e139477c954a506','1431972641','1','zhiminhe@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','','1431968858'),
+	(103,'1a18dd5e79369590e4b8d5ad0d89302e','1432345935','1','zhiminhe@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','','1432342028'),
+	(104,'a123792cc4483eda5ccfad834a9db462','1432687943','1','zhiminhe@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','','1432684337'),
+	(105,'5f27f23d3846b89897b021128e2fca75','1435869749','1','zhiminhe@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','','1435866136'),
+	(106,'71d662232a00df4578adbb9206fa5baa','1436814622','1','zhiminhe@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','','1436811021'),
+	(107,'7ec8ecc3cc25e0857c51689a18423c05','1445474219','1','zhiminhe@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','','1445470396'),
+	(108,'054c68d66320d853ebdcb76c1a01118c','1446077107','0','zhiminhe@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','','1446070465'),
+	(109,'6ede781beb93697488da4c7518e2b551','1446078130','1','zhiminhe@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','','1446074203'),
+	(110,'8820bd7a49698bdf485597644b0c3473','1446159326','1','zhiminhe@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','','1446155446'),
+	(111,'1d50bcb45a939b19c58f173125fd8d50','1446169620','1','zhiminhe@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','','1446166020'),
+	(112,'3fe95dde88e87aa11a0d1cf829bc05c0','1446235237','1','zhiminhe@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','','1446222150'),
+	(113,'3d1751b6144a333f9551274c150a7c8d','1446245627','1','zhiminhe@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','','1446239431'),
+	(114,'b1fa49699fd424c2880c15d47be4aed3','1446670066','1','zhiminhe@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','','1446663709'),
+	(115,'7511ac22bf1ac1377120b288f55605e4','1447293196','1','zhiminhe@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','','1447289589'),
+	(116,'5945b482dd5d4feaacf0e96766079011','1449267850','1','zhiminhe@chinamobile.com','b0cda560dfb07267da65855a8d4f4bfa','1','','1449264250');
 
 /*!40000 ALTER TABLE `md_usessions` ENABLE KEYS */;
 UNLOCK TABLES;
@@ -5721,8 +5757,8 @@ LOCK TABLES `md_zones` WRITE;
 
 INSERT INTO `md_zones` (`entry_id`, `publication_id`, `zone_hash`, `zone_name`, `zone_type`, `zone_width`, `zone_height`, `zone_refresh`, `zone_channel`, `zone_lastrequest`, `zone_description`, `mobfox_backfill_active`, `mobfox_min_cpc_active`, `min_cpc`, `min_cpm`, `backfill_alt_1`, `backfill_alt_2`, `backfill_alt_3`)
 VALUES
-	(1,'1','226af592e76f7630018ef0a669ad8b2b','Banner','banner','320','50','30','1','1429125227','','1','',0.100,2.500,'','',''),
-	(3,'1','b1b47070b4fec8545c56e358bf9194da','FullPage','interstitial','','','30','1','1431036192','','1','0',0.100,2.500,'','',''),
+	(1,'1','226af592e76f7630018ef0a669ad8b2b','Banner','banner','320','50','30','1','1447370018','','1','',0.100,2.500,'','',''),
+	(3,'1','b1b47070b4fec8545c56e358bf9194da','FullPage','interstitial','','','30','1','1446154763','','1','0',0.100,2.500,'','',''),
 	(4,'2','6946048cd2f8c5979d7bc6cc8bc9e167','Main Placement','interstitial','','','30','2','','test-AD Unit','1','0',0.100,2.500,'','','');
 
 /*!40000 ALTER TABLE `md_zones` ENABLE KEYS */;
